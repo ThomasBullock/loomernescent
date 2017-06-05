@@ -1,0 +1,10 @@
+extends layout
+
+include mixins/_bandCard
+
+block content
+	.inner
+		h2= title
+		.bands
+			each band in bands
+				+bandCard(band)

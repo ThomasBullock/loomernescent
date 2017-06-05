@@ -8,13 +8,15 @@ body {
   &:before {
     content: '';
     display: block;
-    background: $grad;
+    // background: $grad;
+    // background: rgba(17, 17, 17, .5);
     height: 10px;
     width: 100%;
   }
 }
 
 .inner {
+  position: relative;
   max-width:900px;
   margin: 0 auto;
   @media all and (max-width: 900px) {

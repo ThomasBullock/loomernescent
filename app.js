@@ -12,9 +12,11 @@ const expressValidator = require('express-validator');
 const routes = require('./routes/index');
 const helpers = require('./helpers');
 const errorHandlers = require('./handlers/errorHandlers');
+// const SpotifyWebApi = require('spotify-web-api-node');
 
 // create our Express app
 const app = express();
+
 
 // view engine setup
 app.set('views', path.join(__dirname, 'views')); // this is the folder where we keep our pug files

@@ -1,5 +1,10 @@
+.add-band {
+  // display: flex;
+}
+
 input, textarea {
   width:100%;
+  flex: 1 1 100%;
   padding:10px;
   border: 1px solid $grey;
   &.input {
@@ -7,6 +12,12 @@ input, textarea {
       border-color: red;
     }
   }
+}
+
+.half {
+  display: inline-block;
+  width: 50%;
+  flex: 1 1 50%;
 }
 
 label {

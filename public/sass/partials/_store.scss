@@ -1,18 +1,17 @@
-.stores {
+.bands {
   display:flex;
   flex-wrap:wrap;
   justify-content:space-between;
 }
 
-.store {
+.band {
   background:white;
   margin: 10px 0;
   width:30%;
-  box-shadow: $shad;
-  &--wide {
+  @include mod('edit') {
     width: 100%;
   }
-  &__details {
+  @include elem('details') {
     padding: 2rem;
     p {
       line-height: 1.2;
@@ -25,37 +24,49 @@
   @media all and (max-width: 550px) {
     width: 100%;
   }
-}
 
-.store__actions {
-  position: relative;
-  z-index: 2;
-  border-bottom: 1px solid rgba(0,0,0,0.2);
-  box-shadow: 0 1px 0 rgba(0,0,0,0.2), 0 1px 0 rgba(255,255,255,0.2);
-  margin-bottom: 50px;
-  padding-top: 10px;
-  padding-bottom: 20px;
-  display: flex;
-  color: white;
-  align-items: center;
-  justify-content: space-around;
-}
-
-.store__action {
-  font-size: 10px;
-  svg {
-    width: 25px;
-    fill: white
+  @include elem('actions') {
+    position: relative;
+    z-index: 2;
+    border-bottom: 1px solid rgba(0,0,0,0.2);
+    box-shadow: 0 1px 0 rgba(0,0,0,0.2), 0 1px 0 rgba(255,255,255,0.2);
+    margin-bottom: 50px;
+    padding-top: 10px;
+    padding-bottom: 20px;
+    display: flex;
+    color: white;
+    align-items: center;
+    justify-content: space-around;    
   }
-  &--edit {
-    a {
-      border-bottom: 0;
+
+  @include elem('action') {
+    font-size: 10px;
+    svg {
+      width: 25px;
+      fill: white
     }
+
+    @include mod('edit') {
+      a {
+        border-bottom: 0;
+      }
+    }    
   }
 }
 
+// .store__actions {
 
-.store__hero {
+// }
+
+// .store__action {
+
+//   &--edit {
+
+//   }
+// }
+
+
+.band__hero {
   position: relative;
   padding: 0 10px 0 10px;
   text-align: right;

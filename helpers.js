@@ -21,7 +21,7 @@ exports.icon = (name) => fs.readFileSync(`./public/images/icons/${name}.svg`);
 exports.siteName = `Loomernescent | Shoegazer Portal`;
 
 exports.menu = [
-  { slug: '/stores', title: 'Bands', icon: 'store', },
+  { slug: '/bands', title: 'Bands', icon: 'store', },
   { slug: '/top', title: 'Pedals', icon: 'top', },  
   { slug: '/tags', title: 'Tags', icon: 'tag', },
   { slug: '/add', title: 'Add', icon: 'add', }

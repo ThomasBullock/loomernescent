@@ -1,0 +1,76 @@
+.hero {
+	position: relative;
+
+
+	@include elem('link-wrapper') {
+ 		position: absolute;
+ 		z-index: -5; 		
+		display: flex;
+		flex-wrap: wrap;
+		width: 100%;
+		height: auto;
+	  background: linear-gradient(#ffa949,transparent 90%),
+	              linear-gradient(0deg, $red, transparent 30%),
+	              #ffa949 url('/images/Lava_00334.jpg') no-repeat center;
+	  background-size: cover;			 				
+	}
+
+	@include elem('link') {
+		flex: 1 1 16.66%;
+
+		img {
+			@include img-responsive();
+			position: relative;
+			z-index: 5;
+			filter: grayscale(100%);
+			transition: all .5s;
+			opacity: .15;
+
+			&:hover {
+				opacity: 1;
+				filter: grayscale(0%);				
+			}
+		}
+	}
+
+ 	@include elem('background') {
+ 		z-index: -1;
+ 		position: absolute;
+		display: flex;
+		width: 100%;
+		min-height: 100%;
+	  // background: linear-gradient(#ffa949,transparent 90%),
+	  //             linear-gradient(0deg, $red, transparent 30%),
+	  //             #ffa949 url('/images/Lava_00334.jpg') no-repeat center;
+	  // background-size: cover;	
+ 	}
+
+
+
+
+ 	@include elem('layer') {
+
+ 		
+ 		@include mod('left') {
+ 			// position: absolute;
+ 			min-height: 100%;
+ 			z-index: 0;
+ 			flex: 1 1 33%;
+ 			background: linear-gradient(90deg, $black,transparent 90%);
+ 		}
+
+ 		@include mod('center') {
+ 			// position: absolute;		
+ 			z-index: 0; 			
+ 			flex: 1 1 33%; 			
+ 		}
+
+ 		@include mod('right') {
+ 			// position: absolute;
+ 			z-index: 0; 			
+ 			flex: 1 1 33%; 
+ 			background: linear-gradient(270deg, $black,transparent 90%); 						
+ 		} 		 		
+ 	}
+
+}

@@ -1,0 +1,12 @@
+mixin bandCard(band = {})
+	.band
+		.band__hero
+			.band__actions
+				.band__action.band__action--edit
+					a(href=`/bands/${band._id}/edit`)
+						!= h.icon('pencil')
+			img(src=`/uploads/${band.photoSmall || 'store.png'}`)
+			h2.title
+				a(href=`/band/${band.slug}`) #{band.name}
+		.band__details
+			p= band.description.split(' ').slice(0, 25).join(' ')

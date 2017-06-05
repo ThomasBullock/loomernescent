@@ -3,19 +3,34 @@
   list-style: none;
   margin: 0;
   padding: 0;
+  z-index: 99;
   justify-content: space-between;
-  background: $black;
-  &__section {
-    display: flex;
-    &--search {
-      flex: 1 1 auto;
-    }
+  border-bottom: solid 1px transparentize($ebony, .3);
+
+  h1 {
+    font-family: 'nexarust', sans-serif;
+    font-weight: normal;
+    text-shadow: 0 2px 2px rgba(0, 0, 0, .8);
   }
-  &__item {
+  // background: $black;
+  @include elem('section') {
+    display: flex;
+
+    @include mod('search') {
+      flex: 1 1 auto;      
+    }    
+  }
+  // &__section {
+
+  //   &--search {
+  //     flex: 1 1 auto;
+  //   }
+  // }
+  @include elem('item') {
     display: flex;
   }
-  &__link {
-    background: $black;
+  @include elem('link') {
+    background: $jet;
     color: white;
     border-right: 1px solid rgba(255,255,255,0.1);
     text-transform: uppercase;
@@ -39,10 +54,10 @@
       svg {
         transform: scale(1.2)
       }
-      background: linear-gradient(90deg, #48ded4 0%, #a026bf 20%, #e82c75 60%, $yellow 85%, #48ded4 95%) fixed;
-      // background: none;
+      // background: linear-gradient(90deg, #48ded4 0%, #a026bf 20%, #e82c75 60%, $yellow 85%, #48ded4 95%) fixed;
+      background: none;
     }
-    &--logo {
+  @include elem('logo') {
       &:hover {
         svg {
           transform: none;
@@ -56,16 +71,19 @@
   }
 }
 
+/* ================================= 
+  DESKTOP
+==================================== */ 
 
 @media all and (max-width: 1200px) {
   .nav {
-    &__link {
+  @include elem('link') {
       padding-left: 1rem;
       padding-right: 1rem;
       svg {
         width: 30px;
       }
-      &--logo {
+  @include elem('logo') {
         svg {
           width: 100px;
         }
@@ -74,12 +92,18 @@
   }
 }
 
+
+
+/* ================================= 
+  TABLET
+==================================== */ 
+
 @media all and (max-width: 900px) {
   .nav {
     flex-wrap:wrap;
-    &__section {
+  @include elem('section') {
       order: 1;
-      &--search {
+    @include mod('search') {
         border-top: 1px solid rgba(255,255,255,0.1);
         order: 2;
         width: 100%;
@@ -88,11 +112,15 @@
   }
 }
 
+/* ================================= 
+  MOBILE
+==================================== */
+
 @media all and (max-width: 650px) {
   .nav {
-    &__section {
+  @include elem('section') {
       width: 100%;
-      &--user {
+    @include mod('user') {
         order: -1;
         border-bottom: 1px solid rgba(255,255,255,0.1);
         .avatar {
@@ -104,16 +132,16 @@
         }
       }
     }
-    &__item {
+  @include elem('item') {
       width: 33.333333%;
     }
-    &__link {
+  @include elem('link') {
       width: 100%;
       svg {
         // width: 5px;
         max-width: 100%;
       }
-      &--logo {
+    @include mod('logo') {
         svg {
           width:100%;
         }
@@ -124,4 +152,31 @@
     content: '♥️';
     margin-right: 1rem;
   }
+}
+
+
+
+video {
+    position: absolute; 
+    right: 0; 
+    top: 0;
+    min-width: 100%; 
+    min-height: 161px;
+    width: auto; 
+    height: 161px; 
+    z-index: -100;
+    background-size: cover;
+    overflow: hidden;
+    object-fit: fill;
+
+  @media all and (max-width: 900px) {
+        min-height: 252px;
+        height: 252px; 
+  }    
+  // position: fixed;
+  // min-width: 100%;
+  // // min-height: 100%;
+  // width: 1000px;
+  // height: 251px;
+  // z-index: 1;  
 }

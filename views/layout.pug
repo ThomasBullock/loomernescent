@@ -7,7 +7,9 @@ html
     meta(name="viewport" content="width=device-width, initial-scale=1")
   body
     block header
-      header.top
+      header
+        video#bgvid(autoplay='', loop='')
+          source(src='/video/background.mp4', type='video/mp4')
         nav.nav
           .nav__section.nav__section--pages
             li.nav__item
@@ -20,7 +22,7 @@ html
                   span #{item.title}
           .nav__section.nav__section--search
             .search
-              input.search__input(type="text" placeholder="Coffee, beer..." name="search")
+              input.search__input(type="text" placeholder="Bands, Pedals..." name="search")
               .search__results
           .nav__section.nav__section--user
             if user
@@ -36,16 +38,7 @@ html
               li.nav__item: a.nav__link(href="/register", class=(currentPath.startsWith('/register') ? 'nav__link--active' : '')) Register
               li.nav__item: a.nav__link(href="/login", class=(currentPath.startsWith('/login') ? 'nav__link--active' : '')) Log In
 
-    block messages
-      if locals.flashes
-        .inner
-          .flash-messages
-            - const categories = Object.keys(locals.flashes)
-            each category in categories
-              each message in flashes[category]
-                .flash(class=`flash--${category}`)
-                  p.flash__text!= message
-                  button.flash__remove(onClick="this.parentElement.remove()") &times;
+ 
     .content
       block content
 
