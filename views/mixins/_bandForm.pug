@@ -1,0 +1,43 @@
+mixin bandForm(band = {})
+	form.add-band(action=`/add/${band._id || ''}` method="post" class="card" enctype="multipart/form-data")
+		label(for="name") Name
+		input(type="text" id="band-name" name="name" value=band.name)
+		label(for="description") Description
+		textarea(name="description")= band.description
+		//- Image upload
+		label(for="photo") Square Photo
+		input(type="file" name="photos" id="photo" accept="image/png, image/jpeg")
+		if band.photoSmall
+			img(src=`/uploads/${band.photoSmall}` alt=band.name width=200)
+		label(for="photoGallery1") Galery Photo 1
+		input(type="file" name="photos" id="photoGallery1" accept="image/png, image/jpeg")
+		label(for="photoGallery2") Galery Photo 2
+		input(type="file" name="photos" id="photoGallery2" accept="image/png, image/jpeg")
+		//- address lng lat
+		label(for="address") Origin
+		input(type="text" id="address" name="location[address]" value=(band.location && band.location.address))
+		label(for="lng") Origin Lng
+		input.half(type="text" id="lng" name="location[coordinates][0]" value=(band.location && band.location.coordinates[0]) required)
+		label(for="lat") Origin Lat
+		input.half(type="text" id="lat" name="location[coordinates][1]" value=(band.location && band.location.coordinates[1]) required)
+		label(for="personnel") Personnel
+		input(type="text" name="personnel" placeholder="list personnel seperated bt comma" value=(band.personnel && band.personnel.join(',')))
+		label(for="pastPersonnel") Former Personnel
+		input(type="text" name="pastPersonnel" placeholder="list personnel seperated bt comma" value=(band.personnel && band.personnel.join(',')))
+		label(for="yearsActive") Years Active
+		input(type="text" name="yearsActive" placeholder="list years seperated bt comma" value=(band.yearsActive && band.yearsActive.join(',')))
+		label(for="labels") Labels
+		input(type="text" name="labels" placeholder="list labels seperated bt comma" value=(band.labels && band.labels.join(',')) )
+		label(for="spotifyID") Spotify Id
+		input(type="text" id="spotifyID" name="spotifyID" value=band.spotifyID)
+		label(for="spotifyURL") Spotify URL
+		input(type="text" id="spotifyURL" name="spotifyURL" value=band.spotifyURL)
+		-const choices = ['Ethereal', 'Dissonant', 'Dreamy', 'Heavy', 'Soft', 'Languid', 'Druggy', 'Extended Jams', 'Female Vox', 'Male Vox']
+		-const tags = band.tags || []
+		ul.tags
+			each tag in choices
+				.tag.tag__choice
+					input(type="checkbox" id=tag value=tag name="tags" checked=(tags.includes(tag)))
+					label(for=tag) #{tag}
+		input(type="submit" value="Save -<" class="button")
+
