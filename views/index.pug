@@ -1,4 +1,14 @@
 extends layout
 
 block content
-	h2 title
+	- const links = ['Art Of Fighting', 'The Jesus and Mary Chain', 'Lush', 'Swervedriver', 'Loveless', 'MBV', 'Lush', 'Swervedriver', 'Loveless', 'Art Of Fighting', 'The Jesus and Mary Chain', 'Pychocandy']
+	.hero
+		.hero__link-wrapper
+			each link in links
+				a.hero__link(href=`${link}`)
+					img(src=`/images/photos/${link} Sq Md.jpg`)
+			.hero__background
+				.hero__layer--left
+				.hero__layer--center
+				.hero__layer--right
+
