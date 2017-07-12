@@ -3,14 +3,17 @@ extends layout
 block content
 	.single
 		.single__hero
-			img.single__image(src=`/uploads/${band.photoLarge || 'Band.jpg' }`)
+			img.single__image(src=`/uploads/${band.photos.gallery[0] || 'Band.jpg' }`)
 			h2.title.title--single
 				a(href=`/bands/${band.slug}`) #{band.name}
 				
-	.single__details.inner
+	.single__details
 		p.single__location= band.location.address
 		p= band.description
-		
+		p
+			strong Years Active: 
+			//- != h.moment.(band.yearsActive[0].format('YYYY'))
+			!= h.buildDatesString(band.yearsActive)
 		if band.tags
 			ul.tags
 				each tag in band.tags

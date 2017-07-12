@@ -1,0 +1,19 @@
+.discover {
+
+	width: 100%;
+	position: relative;
+	min-height: 100vh;
+  // background: linear-gradient(#ffa949,transparent 90%),
+  //             linear-gradient(0deg, $red, transparent 30%),
+  //             #ffa949;
+
+	@include elem('slogan-wrapper') {
+
+		display: flex;
+		justify-content: center;
+	}
+
+	@include elem('slogan') {
+
+	}
+}

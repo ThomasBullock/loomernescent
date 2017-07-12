@@ -37,3 +37,11 @@
 		@return $smoke;
 	}
 } 
+
+@mixin center($vertical: 50%) {
+		text-align: center;
+    position: absolute;
+    left: 50%;
+    top: $vertical;
+    transform: translate(-50%, -50%);	
+}

@@ -26,3 +26,19 @@ exports.menu = [
   { slug: '/tags', title: 'Tags', icon: 'tag', },
   { slug: '/add', title: 'Add', icon: 'add', }
 ];
+
+exports.buildDatesString = (string) => {
+	console.log(string);
+	const datesString = string.reduce((accum, next, index, arr)=> {
+		if(arr.length === 1 || arr.length === 3 && arr.length - 1 == index) {
+			return accum += exports.moment(next).format('YYYY') + "-present";
+		} else if(index === 1 && arr.length - 1 !== index) {
+			return accum += "-" + exports.moment(next).format('YYYY') + ", ";
+		} else if(index === 1) {
+			return accum += "-" + exports.moment(next).format('YYYY');
+		} else if(index === 0) {
+			return accum += exports.moment(next).format('YYYY');
+		}
+	}, "")
+	return datesString;
+}

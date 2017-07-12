@@ -12,6 +12,7 @@ const expressValidator = require('express-validator');
 const routes = require('./routes/index');
 const helpers = require('./helpers');
 const errorHandlers = require('./handlers/errorHandlers');
+require ('./handlers/passport');
 // const SpotifyWebApi = require('spotify-web-api-node');
 
 // create our Express app

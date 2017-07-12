@@ -1,10 +1,13 @@
 .hero {
 	position: relative;
 
+	@include elem('spacer') {
+		clear: both;
+	}
 
 	@include elem('link-wrapper') {
  		position: absolute;
- 		z-index: -5; 		
+ 		// z-index: -5; 		
 		display: flex;
 		flex-wrap: wrap;
 		width: 100%;
@@ -12,7 +15,8 @@
 	  background: linear-gradient(#ffa949,transparent 90%),
 	              linear-gradient(0deg, $red, transparent 30%),
 	              #ffa949 url('/images/Lava_00334.jpg') no-repeat center;
-	  background-size: cover;			 				
+	  background-size: cover;
+	  border-bottom: solid 1px transparentize($ebony, .3);			 				
 	}
 
 	@include elem('link') {
@@ -50,7 +54,6 @@
 
  	@include elem('layer') {
 
- 		
  		@include mod('left') {
  			// position: absolute;
  			min-height: 100%;
@@ -71,6 +74,12 @@
  			flex: 1 1 33%; 
  			background: linear-gradient(270deg, $black,transparent 90%); 						
  		} 		 		
+ 	}
+
+ 	@include elem('slogan') {
+ 		// z-index: 5;
+ 		width: 250px;
+ 		@include center(40%);
  	}
 
 }

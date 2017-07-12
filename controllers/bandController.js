@@ -8,7 +8,7 @@ const request = require('request'); // "Request" library
 const multerOptions = {
 	storage: multer.memoryStorage(),
 	fileFilter: function(req, file, next) {
-		console.log(req);
+		// console.log(req);
 		// console.log(file);
 		const isPhoto = file.mimetype.startsWith('image/');
 		if(isPhoto) {
@@ -33,48 +33,80 @@ exports.addBand = (req, res) => {
 	res.render('editBand', { title: 'Add Band'})
 };
 
-exports.upload = multer(multerOptions).array('photos', 3); 
+exports.upload = multer(multerOptions).array('photos', 4); 
+
+exports.processPhotos = (req, res, next) => {
+	if(req.files.length === 0) {
+		next(); // skip to the next middleware
+		return
+	}	
+	console.log('we process files')
+	req.files.forEach((file)=> {
+		console.log(file);
+	})
+	next();
+}
+
+
 
 exports.resize = async(req, res, next) =>  {  // 
-	console.log(req.files);
+	console.log('there are' + req.files.length);
 	// check if there is no new file to resize
-	// console.log(req.file)
-	if(!req.files) {
+	// console.log(req.files)
+	if(req.files.length === 0) {
 		next(); // skip to the next middleware
 		return
 	}
-	const extension = req.files[0].mimetype.split('/')[1];
-	req.body.photoLarge = `${uuid.v4()} Lg.${extension}`;
-	//now we resize
-	const photoLarge = await jimp.read(req.files[0].buffer);
-	await photoLarge.resize(800, jimp.AUTO);
-	await photoLarge.quality(30);
-	await photoLarge.write(`./public/uploads/${req.body.photoLarge}`);
 
-	req.body.photoSmall = `${uuid.v4()} Sm.${extension}`;
-	//now we resize
-	const photoSmall = await jimp.read(req.files[0].buffer);
-	await photoSmall.resize(300, jimp.AUTO);
-	await photoSmall.quality(20);
-	await photoSmall.greyscale(); 
-	await photoSmall.write(`./public/uploads/${req.body.photoSmall}`);
 
-	req.body.gallery = [];
-	req.body.gallery.push(`${uuid.v4()} Lg.${extension}`);
-	const gallery1 = await jimp.read(req.files[1].buffer);
-	await gallery1.resize(1000, jimp.AUTO);
-	await gallery1.quality(40);
-	await gallery1.write(`./public/uploads/${req.body.gallery[0]}`);
+	req.body.photos = {
+		gallery: [],
+		galleryThumbs: []
+	};
 
-	req.body.galleryThumb = [];
-	req.body.galleryThumb.push(`${uuid.v4()} Sm.${extension}`);
-	const thumb1 = await jimp.read(req.files[1].buffer);
-	await thumb1.resize(400, jimp.AUTO);
-	await thumb1.quality(30);
-	await thumb1.write(`./public/uploads/${req.body.galleryThumb[0]}`);					
-	// once we have written the photo to our filesystem, keep going
+	//now we resize for large
+
+	for(let i = 0; i < req.files.length; i++) {
+		// get file extension
+		const extension = req.files[i].mimetype.split('/')[1];
+
+		// check if photo is square
+		const checkDimensions = await jimp.read(req.files[i].buffer);
+		if(checkDimensions.bitmap.width === checkDimensions.bitmap.height) {
+			console.log('Its square!');
+			const uniqueID = uuid.v4();
+			req.body.photos.squareLg = `${uniqueID}_Lg.${extension}`;
+			const photoLarge = await jimp.read(req.files[i].buffer);			
+			await photoLarge.resize(800, jimp.AUTO);
+			await photoLarge.quality(30);
+			await photoLarge.write('./public/uploads/' + req.body.photos.squareLg);
+
+			req.body.photos.squareSm = `${uniqueID}_Sm.${extension}`;
+			const photoSmall = await jimp.read(req.files[i].buffer);			
+			await photoSmall.resize(300, jimp.AUTO);
+			await photoSmall.quality(20);
+			await photoSmall.write('./public/uploads/' + req.body.photos.squareSm);
+
+		} else {
+			const uniqueID = uuid.v4();
+			req.body.photos.gallery.push(`${uniqueID}_Lg.${extension}`);
+			const gallery = await jimp.read(req.files[i].buffer);
+			await gallery.resize(1000, jimp.AUTO);
+			await gallery.quality(40);
+			await gallery.write(`./public/uploads/${req.body.photos.gallery[req.body.photos.gallery.length - 1]}`);
+
+			req.body.photos.galleryThumbs.push(`${uniqueID}_Sm.${extension}`);
+			const thumb = await jimp.read(req.files[i].buffer);
+			await thumb.resize(500, jimp.AUTO);
+			await thumb.quality(30);
+			await thumb.write(`./public/uploads/${req.body.photos.galleryThumbs[req.body.photos.galleryThumbs.length - 1]}`);			
+		}
+
+
+			// req.body.photos[`Square${index}-Lg`] = `${uuid.v4()}_Lg.${extension}`;			
+
+	}
 	next();
-
 }
 
 exports.getSpotifyData = async(req, res, next) => {
@@ -83,7 +115,7 @@ exports.getSpotifyData = async(req, res, next) => {
 		console.log('skip spotify!')
 		next();
 		return;
-	}
+	} 
 
 	const client_id = process.env.SPOT_KEY; // Your client id
 	const client_secret = process.env.SPOT_SECRET; // Your secret
@@ -101,7 +133,7 @@ exports.getSpotifyData = async(req, res, next) => {
 	};
 
 	request.post(authOptions, function(error, response, body) {
-	  if (!error && response.statusCode === 200) {
+	  if (!error && response.statusCode === 200 && req.body.name) { // no point checking spotify if no name in form
 
 	    // use the access token to access the Spotify Web API
 	    var token = body.access_token;
@@ -113,36 +145,56 @@ exports.getSpotifyData = async(req, res, next) => {
 	      json: true
 	    };
 	request.get(options, function(error, response, body) {
-				if(body.artists.items[0]) {
+		// console.log(body.artists);
+				if(body.artists && body.artists.items[0]) {
 					req.body.spotifyID = body.artists.items[0].id;		
 					req.body.spotifyURL = body.artists.items[0].external_urls.spotify;							
 				}
 				console.log(error);
 				next();
 	    });
+	  } else {
+	  	next();
 	  }
 	});
 }
 
-exports.createBand = async (req, res) => {
-	// Record labels are comma seperated
+exports.processBandData = (req, res, next) => {
 	const recordLabels = req.body.labels.split(',').map( (item) => item.trim() );
 	req.body.labels = recordLabels;
-
 	const personnel = req.body.personnel.split(',').map( (item) => item.trim() );
-	req.body.personnel = personnel;	
+	req.body.personnel = personnel;
 	const pastPersonnel = req.body.pastPersonnel.split(',').map( (item) => item.trim() );
-	req.body.pastPersonnel = pastPersonnel;	
-
-
+	req.body.pastPersonnel = pastPersonnel;
 	const cleanArray = req.body.yearsActive.split(',').map( (year) => year.trim() );
 	req.body.yearsActive = cleanArray.map( (year) => {
-		if(year === "present") {
-			return "present"
-		} else {
 			return new Date(year);
-		}		
-	})	
+	})					
+	next();
+}
+
+exports.createBand = async (req, res) => {
+	// console.log(req.body.labels)
+	// Record labels are comma seperated
+
+	// console.log(recordLabels)
+	// recordLabels.map(item) => {
+	// 	console.log(item)
+	// }
+
+
+	// console.log(req.body.labels)
+
+	// console.log(req.body.personnel)
+
+	// console.log(personnel)
+	
+	// console.log(req.body.personnel)
+
+
+
+
+
 
 	// console.log(yearsActive);
 
@@ -191,7 +243,18 @@ exports.getBandBySlug = async (req, res, next) => {
 	if(!band) {
 		return next();
 	}
-
 	res.render('band', { band: band, title: band.name})
+}
 
+exports.getBandsByTag = async (req, res) => {
+	const tag = req.params.tag;
+	const tagQuery = tag || { $exists: true };
+	const tagsPromise = Band.getTagsList();
+	const bandPromise = Band.find({ tags: tagQuery });
+	// wait for multiple promises to come back
+	const [tags, bands] = await Promise.all([tagsPromise, bandPromise]);
+	// var tags = result[0];  // because above we use destructuring these two lines are not needed
+	// var bands = result[1];
+	// console.log(Object.keys(tag))
+	res.render('tags', {tags : tags, title: 'Tags', tag: tag, bands: bands});
 }

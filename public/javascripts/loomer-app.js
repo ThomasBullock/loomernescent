@@ -1,7 +1,9 @@
 import '../sass/style.scss';
 
-import { $, $$ } from './modules/bling';
+// import { $, $$ } from './modules/bling';
 import autocomplete from './modules/autocomplete';
+import autoHeightHero from './modules/autoHeightHero';
+
 // import getSpotifyData from './modules/spotify';
 
 // import request from 'request';
@@ -17,3 +19,8 @@ const longitude = document.getElementById('lng');
 autocomplete( address, latitude, longitude );
 // getSpotifyData( bandName, spotifyID, spotifyURL );
 
+// document.onload = autoHeightHero();
+
+// window.addEventListener('resize', () => {
+// 	autoHeightHero();
+// });

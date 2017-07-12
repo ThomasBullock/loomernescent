@@ -76,6 +76,30 @@
 Object.defineProperty(exports, "__esModule", {
 	value: true
 });
+function autoHeightHero() {
+
+	var hero = document.querySelector('.hero');
+	var heroWrapper = document.querySelector('.hero__link-wrapper');
+	if (!hero) {
+		return;
+	}
+	console.dir(heroWrapper);
+	console.dir(hero);
+	hero.style.height = heroWrapper.offsetHeight + 'px';
+}
+
+exports.default = autoHeightHero;
+
+/***/ }),
+/* 1 */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+
+Object.defineProperty(exports, "__esModule", {
+	value: true
+});
 function autocomplete(input, latInput, lngInput) {
 	if (!input) {
 		return;
@@ -104,36 +128,6 @@ function autocomplete(input, latInput, lngInput) {
 exports.default = autocomplete;
 
 /***/ }),
-/* 1 */
-/***/ (function(module, exports, __webpack_require__) {
-
-"use strict";
-
-
-Object.defineProperty(exports, "__esModule", {
-  value: true
-});
-// based on https://gist.github.com/paulirish/12fb951a8b893a454b32
-
-var $ = document.querySelector.bind(document);
-var $$ = document.querySelectorAll.bind(document);
-
-Node.prototype.on = window.on = function (name, fn) {
-  this.addEventListener(name, fn);
-};
-
-NodeList.prototype.__proto__ = Array.prototype; // eslint-disable-line
-
-NodeList.prototype.on = NodeList.prototype.addEventListener = function (name, fn) {
-  this.forEach(function (elem) {
-    elem.on(name, fn);
-  });
-};
-
-exports.$ = $;
-exports.$$ = $$;
-
-/***/ }),
 /* 2 */
 /***/ (function(module, exports) {
 
@@ -148,11 +142,13 @@ exports.$$ = $$;
 
 __webpack_require__(2);
 
-var _bling = __webpack_require__(1);
-
-var _autocomplete = __webpack_require__(0);
+var _autocomplete = __webpack_require__(1);
 
 var _autocomplete2 = _interopRequireDefault(_autocomplete);
+
+var _autoHeightHero = __webpack_require__(0);
+
+var _autoHeightHero2 = _interopRequireDefault(_autoHeightHero);
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
@@ -160,6 +156,7 @@ function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { de
 
 // import request from 'request';
 
+// import { $, $$ } from './modules/bling';
 var address = document.getElementById('address');
 var latitude = document.getElementById('lat');
 var longitude = document.getElementById('lng');
@@ -170,6 +167,12 @@ var longitude = document.getElementById('lng');
 
 (0, _autocomplete2.default)(address, latitude, longitude);
 // getSpotifyData( bandName, spotifyID, spotifyURL );
+
+// document.onload = autoHeightHero();
+
+// window.addEventListener('resize', () => {
+// 	autoHeightHero();
+// });
 
 /***/ })
 /******/ ]);

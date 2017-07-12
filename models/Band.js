@@ -19,7 +19,7 @@ const bandSchema = new mongoose.Schema({
 	personnel: [String],
 	pastPersonnel: [String],
 	tags: [String], 
-	yearsActive: [String],
+	yearsActive: [Date],
 	created: {
 		type: Date,
 		default: Date.now
@@ -38,10 +38,12 @@ const bandSchema = new mongoose.Schema({
 			required: 'You must supply a city!'
 		}
 	},
-	photoLarge: String,
-	photoSmall: String,
-	gallery: [String],
-	galleryThumb: [String],
+	photos: {
+		squareLg: String,
+		squareSm: String,
+		gallery: [String],
+		galleryThumbs: [String],		
+	},
 	spotifyID: String,
 	spotifyURL: String
 });
@@ -60,5 +62,13 @@ bandSchema.pre('save', async function(next) {
 	}
 	next();
 });
+
+bandSchema.statics.getTagsList = function() {  // do not use an arrow function we need this!
+	return this.aggregate([
+		{ $unwind: '$tags'},
+		{ $group: { _id: '$tags', count: { $sum: 1 } }},
+		{ $sort: { count: -1 }}
+	]);
+}
 
 module.exports = mongoose.model('Band', bandSchema);
