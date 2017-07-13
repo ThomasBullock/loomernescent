@@ -8,7 +8,7 @@ const { catchErrors } = require('../handlers/errorHandlers');
 // Do work here
 router.get('/', bandController.homePage);
 router.get('/bands', catchErrors(bandController.getBands));
-router.get('/add', bandController.addBand);
+router.get('/add', authController.isLoggedIn, bandController.addBand); // it will not make it passed isLogged if not logged in
 
 router.post('/add', 
 	bandController.upload,
@@ -32,6 +32,7 @@ router.get('/tags', catchErrors(bandController.getBandsByTag));
 router.get('/tags/:tag', catchErrors(bandController.getBandsByTag));
 
 router.get('/login', userController.loginForm);
+router.post('/login', authController.login);
 router.get('/register', userController.registerForm);
 
 //1. Validate the registration
@@ -42,5 +43,7 @@ router.post('/register',
 	userController.register,
 	authController.login 
 	);
+
+router.get('/logout', authController.logout);
 
 module.exports = router;
