@@ -9,11 +9,23 @@ block content
 				
 	.single__details
 		p.single__location= band.location.address
-		p= band.description
-		p
-			strong Years Active: 
-			//- != h.moment.(band.yearsActive[0].format('YYYY'))
-			!= h.buildDatesString(band.yearsActive)
+		p.single__lead= band.description
+		.single__body 
+			.single__col
+				p.single__detail
+					strong Years Active: 
+					!= h.buildDatesString(band.yearsActive)
+				p.single__detail 
+					strong Personnel: 
+					!= band.personnel.join(' ')
+				p.single__detail 
+					strong Past Personnel: 
+					!= band.pastPersonnel.join(' ')	
+				p.single__detail 
+					strong Record Labels: 
+					!= band.labels.join(' ')
+			.single__img-col
+				img.single__detail-img(src=`/uploads/${band.photos.squareSm || 'Band.jpg' }`)
 		if band.tags
 			ul.tags
 				each tag in band.tags
