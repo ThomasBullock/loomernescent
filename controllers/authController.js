@@ -23,6 +23,7 @@ exports.isLoggedIn = (req, res, next) => {
 
 	if(req.isAuthenticated()) {  // this method that is available to us via passport
 		next(); /// carry on the are logged
+		return;
 	}
 	req.flash('error', 'Ooops you must be logged in to do that ')
 	res.redirect('/login');

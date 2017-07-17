@@ -160,6 +160,7 @@ exports.getSpotifyData = async(req, res, next) => {
 }
 
 exports.processBandData = (req, res, next) => {
+	console.log(req.body.yearsActive)		
 	const recordLabels = req.body.labels.split(',').map( (item) => item.trim() );
 	req.body.labels = recordLabels;
 	const personnel = req.body.personnel.split(',').map( (item) => item.trim() );
@@ -167,9 +168,15 @@ exports.processBandData = (req, res, next) => {
 	const pastPersonnel = req.body.pastPersonnel.split(',').map( (item) => item.trim() );
 	req.body.pastPersonnel = pastPersonnel;
 	const cleanArray = req.body.yearsActive.split(',').map( (year) => year.trim() );
-	req.body.yearsActive = cleanArray.map( (year) => {
-			return new Date(year);
-	})					
+	if(req.body.yearsActive) {
+		req.body.yearsActive = cleanArray.map( (year) => {
+				return new Date(year);
+		});
+	} else {
+		req.body.yearsActive = null;
+	}
+
+	console.log(req.body.yearsActive)					
 	next();
 }
 
