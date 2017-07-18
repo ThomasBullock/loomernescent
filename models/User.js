@@ -21,7 +21,11 @@ const userSchema = new Schema({
 		 trim: true
 	},
 	resetPasswordToken: String,
-	resetPasswordExpires: Date
+	resetPasswordExpires: Date,
+	admin: {
+		type: Boolean,
+		default: false
+	}
 });
 
 userSchema.virtual('gravatar').get(function(){

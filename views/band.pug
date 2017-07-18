@@ -3,6 +3,7 @@ extends layout
 include icons/_youtube
 
 block content
+	//- pre= h.dump(band)
 	.single
 		.single__hero
 			img.single__image(src=`/uploads/${band.photos.gallery[0] || 'Band.jpg' }`)

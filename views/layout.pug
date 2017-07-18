@@ -26,6 +26,9 @@ html
               .search__results
           .nav__section.nav__section--user
             if user
+              if user.admin
+                li.nav__item: a.nav__link(href="/add", class=(currentPath.startsWith('/add') ? 'nav__link--active' : ''))
+                  != h.icon('add')                                
               li.nav__item: a.nav__link(href="/hearts", class=(currentPath.startsWith('/hearts') ? 'nav__link--active' : ''))
                 != h.icon('heart')
                 span.heart-count #{user.hearts && user.hearts.length}

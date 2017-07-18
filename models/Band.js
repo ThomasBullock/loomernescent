@@ -51,7 +51,12 @@ const bandSchema = new mongoose.Schema({
 	},
 	youtubePL: String,
 	spotifyID: String,
-	spotifyURL: String
+	spotifyURL: String,
+	author: {
+		type: mongoose.Schema.ObjectId,
+		ref: 'User',
+		required: 'You must supply an author'
+	}
 });
 
 bandSchema.pre('save', async function(next) {
