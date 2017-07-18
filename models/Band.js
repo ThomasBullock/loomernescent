@@ -5,7 +5,8 @@ const slug = require('slugs');
 const bandSchema = new mongoose.Schema({
 	name: {
 		type: String,
-		trim: true
+		trim: true,
+		required: 'You must supply a band name'
 	},
 	slug: String,
 	description: {
@@ -19,7 +20,11 @@ const bandSchema = new mongoose.Schema({
 	personnel: [String],
 	pastPersonnel: [String],
 	tags: [String], 
-	yearsActive: [Date],
+	yearsActive: {
+		type: [Date],
+		default: Date.now,
+		required: 'You must supply a year!'		
+	}, 
 	created: {
 		type: Date,
 		default: Date.now
@@ -44,6 +49,7 @@ const bandSchema = new mongoose.Schema({
 		gallery: [String],
 		galleryThumbs: [String],		
 	},
+	youtubePL: String,
 	spotifyID: String,
 	spotifyURL: String
 });

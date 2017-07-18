@@ -41,3 +41,23 @@ exports.register = async (req, res, next) => {
 	next(); 
 }
 
+exports.account = (req, res) => {
+	res.render('account', {title: 'Edit Your Account'});
+}
+
+exports.updateAccount = async (req, res) => {
+	const updates ={
+		name: req.body.name,
+		email: req.body.email
+	}
+
+	const user = await User.findOneAndUpdate(
+		{ _id: req.user._id },  // import you get the id from the request so it can be fiddled with
+		{ $set: updates },      // take updates and set it on top of what already exists in user
+		{ new: true, runValidators: true, context: 'query' } /// context is required by mongoose
+	);
+
+	req.flash('success', 'Updated the profile!')
+	res.redirect('back')
+}
+
