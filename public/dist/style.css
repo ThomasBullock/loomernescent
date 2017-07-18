@@ -1064,6 +1064,32 @@ video {
   height: auto;
   display: block; }
 
+.single__video {
+  padding: 1.5em;
+  width: 100%;
+  margin: 0 auto; }
+  .single__video embed,
+  .single__video object,
+  .single__video iframe {
+    position: absolute;
+    top: 0;
+    left: 0;
+    height: 100%;
+    width: 100%; }
+
+.single__fullwidth {
+  margin-top: -1.5em;
+  width: 100%;
+  padding: 3em 1.5em; }
+  .single__fullwidth--black {
+    background: #111111; }
+
+.single__video-wrapper {
+  height: 0;
+  overflow: hidden;
+  padding-bottom: 56.25%;
+  position: relative; }
+
 .single__map {
   width: calc(100% + 6rem);
   max-width: none;

@@ -49,6 +49,7 @@ const bandSchema = new mongoose.Schema({
 		gallery: [String],
 		galleryThumbs: [String],		
 	},
+	youtubePL: String,
 	spotifyID: String,
 	spotifyURL: String
 });

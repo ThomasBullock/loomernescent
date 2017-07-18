@@ -242,7 +242,7 @@ exports.updateBand = async (req, res) => {
 	}).exec();
 	req.flash('success', `Successfully updated <strong>${band.name}</strong>. <a href="/bands/${band.slug}">View Band</a>`)
 	// Redirect them to the band and tell them it worked
-	res.redirect(`/bands/${band._id}/edit`);
+	res.redirect(`/band/${band._id}/edit`);
 }
 
 exports.getBandBySlug = async (req, res, next) => {
