@@ -181,29 +181,8 @@ exports.processBandData = (req, res, next) => {
 }
 
 exports.createBand = async (req, res) => {
-	// console.log(req.body.labels)
-	// Record labels are comma seperated
 
-	// console.log(recordLabels)
-	// recordLabels.map(item) => {
-	// 	console.log(item)
-	// }
-
-
-	// console.log(req.body.labels)
-
-	// console.log(req.body.personnel)
-
-	// console.log(personnel)
-	
-	// console.log(req.body.personnel)
-
-
-
-
-
-
-	// console.log(yearsActive);
+	req.body.author = req.user._id;
 
 
 	const band = await (new Band(req.body)).save(); // we do it all in one go so we can acces the slug which is generated when saved
@@ -221,11 +200,17 @@ exports.getBands = async (req, res) => {
 	res.render('bands', { title: 'Bands', bands: bands });
 }
 
+const confirmOwner = (store, user) => {
+	if(!user.admin) {
+		throw Error('You must own a store in order to edit it')
+	} 
+}
+
 exports.editBand = async (req, res) => {
 	// 1. Find the store given the ID (params)
 	const band = await Band.findOne({ _id: req.params.id });
 	// 2. confirm they are the owner of the store
-
+	confirmOwner(band, req.user);
 	// 3. Render out the edit form so the user can update their store
 	res.render('editBand', { title: `Edit ${band.name}`,  band: band } );
 
@@ -240,13 +225,13 @@ exports.updateBand = async (req, res) => {
 		new: true, // return the new band instead of the old one
 		runValidators: true
 	}).exec();
-	req.flash('success', `Successfully updated <strong>${band.name}</strong>. <a href="/bands/${band.slug}">View Band</a>`)
+	req.flash('success', `Successfully updated <strong>${band.name}</strong>. <a href="/band/${band.slug}">View Band</a>`)
 	// Redirect them to the band and tell them it worked
-	res.redirect(`/band/${band._id}/edit`);
+	res.redirect(`/bands/${band._id}/edit`);
 }
 
 exports.getBandBySlug = async (req, res, next) => {
-	const band = await Band.findOne({ slug: req.params.slug})
+	const band = await Band.findOne({ slug: req.params.slug}).populate('author');
 	if(!band) {
 		return next();
 	}
