@@ -5,6 +5,23 @@
 /* ================================= 
     UTILITIES
   ==================================== */
+.icon {
+  fill: #F6F6F6; }
+  .icon__facebook {
+    fill: #3b5998; }
+  .icon__spotify {
+    fill: #2ebd59; }
+  .icon__soundcloud {
+    fill: #ff8800; }
+  .icon__twitter {
+    fill: #1da1f2; }
+  .icon__vimeo {
+    fill: #45bbff; }
+  .icon__www {
+    fill: #F6F6F6; }
+  .icon__youtube {
+    fill: #b31217; }
+
 html {
   font-size: 10px; }
 
@@ -1063,6 +1080,32 @@ video {
   max-width: 100%;
   height: auto;
   display: block; }
+
+.single__video {
+  padding: 1.5em;
+  width: 100%;
+  margin: 0 auto; }
+  .single__video embed,
+  .single__video object,
+  .single__video iframe {
+    position: absolute;
+    top: 0;
+    left: 0;
+    height: 100%;
+    width: 100%; }
+
+.single__fullwidth {
+  margin-top: -1.5em;
+  width: 100%;
+  padding: 3em 1.5em; }
+  .single__fullwidth--black {
+    background: #111111; }
+
+.single__video-wrapper {
+  height: 0;
+  overflow: hidden;
+  padding-bottom: 56.25%;
+  position: relative; }
 
 .single__map {
   width: calc(100% + 6rem);

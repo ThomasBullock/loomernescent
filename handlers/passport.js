@@ -1,3 +1,5 @@
+// this code is invoked by require ('./handlers/passport'); in app.js
+
 const passport = require('passport');
 const mongoose = require('mongoose');
 const User = mongoose.model('User');

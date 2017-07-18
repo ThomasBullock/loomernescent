@@ -1,5 +1,7 @@
 extends layout
 
+include icons/_youtube
+
 block content
 	.single
 		.single__hero
@@ -17,10 +19,10 @@ block content
 					!= h.buildDatesString(band.yearsActive)
 				p.single__detail 
 					strong Personnel: 
-					!= band.personnel.join(' ')
+					!= band.personnel.join(' | ')
 				p.single__detail 
 					strong Past Personnel: 
-					!= band.pastPersonnel.join(' ')	
+					!= band.pastPersonnel.join(' | ')	
 				p.single__detail 
 					strong Record Labels: 
 					!= band.labels.join(' ')
@@ -32,3 +34,9 @@ block content
 					li.tag
 						a.tag__link(href=`/tags/${tag}`)
 							span.tag__text ##{tag}
+	if band.youtubePL
+		.single__fullwidth.single__fullwidth--black
+			.single__video
+				+youtube()
+				.single__video-wrapper
+					iframe(src=band.youtubePL frameborder="0" allowfullscreen)
