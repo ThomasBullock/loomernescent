@@ -83,6 +83,36 @@
     @include img-responsive();
   }
 
+  @include elem('video') {
+    padding: $base-spacing;
+    width: 100%;
+    margin: 0 auto;
+
+    embed,
+    object,
+    iframe {
+      @include position(absolute, 0 null null 0);
+      @include size(100%);
+    }
+  }
+
+  @include elem('fullwidth') {
+    margin-top: -$base-spacing;
+    width: 100%;
+    padding: $base-spacing * 2 $base-spacing;
+
+    @include mod('black') {
+      background: $ebony;
+    }
+  }
+
+  @include elem('video-wrapper') {
+    height: 0;
+    overflow: hidden;
+    padding-bottom: 56.25%; // For ratio 16:9. 75% if ratio is 4:3
+    position: relative;    
+  }
+
   &__map {
     width: calc(100% + 6rem);
     max-width: none;
