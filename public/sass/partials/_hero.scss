@@ -43,10 +43,6 @@
 		display: flex;
 		width: 100%;
 		min-height: 100%;
-	  // background: linear-gradient(#ffa949,transparent 90%),
-	  //             linear-gradient(0deg, $red, transparent 30%),
-	  //             #ffa949 url('/images/Lava_00334.jpg') no-repeat center;
-	  // background-size: cover;	
  	}
 
 
@@ -82,4 +78,34 @@
  		@include center(40%);
  	}
 
-}
+	/* ================================= 
+	  MOBILE
+	==================================== */
+	@media all and (max-width: 767px) {
+
+		@include elem('link') {
+			flex: 1 1 33.3%;			
+		}
+
+	}
+
+	/* ================================= 
+	  TABLET
+	==================================== */
+	@media all and (min-width : 768px) and (max-width : 1024px) {  
+
+		@include elem('link') {
+			flex: 1 1 25%;			
+		}
+
+	}
+
+	/* ================================= 
+	  DESKTOP
+	==================================== */
+	@media all and (min-width : 1025px) { 
+
+	}
+
+
+} // end hero

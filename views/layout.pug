@@ -12,7 +12,7 @@ html
           source(src='/video/background.mp4', type='video/mp4')
         nav.nav
           .nav__section.nav__section--pages
-            li.nav__item
+            li.nav__item.nav__item--home
               a.nav__link.nav__link--logo(href="/")
                 h1 Loomernescent
             each item in h.menu
@@ -26,11 +26,11 @@ html
               .search__results
           .nav__section.nav__section--user
             if user
-              if user.admin
-                li.nav__item: a.nav__link(href="/add", class=(currentPath.startsWith('/add') ? 'nav__link--active' : ''))
-                  != h.icon('add')                                
-              li.nav__item: a.nav__link(href="/hearts", class=(currentPath.startsWith('/hearts') ? 'nav__link--active' : ''))
-                != h.icon('heart')
+              //- if user.admin
+              //-   li.nav__item: a.nav__link(href="/add", class=(currentPath.startsWith('/add') ? 'nav__link--active' : ''))
+              //-     != h.icon('add')                                
+              //- li.nav__item: a.nav__link(href="/hearts", class=(currentPath.startsWith('/hearts') ? 'nav__link--active' : ''))
+              //-   != h.icon('heart')
                 span.heart-count #{user.hearts && user.hearts.length}
               li.nav__item: a.nav__link(href="/logout", class=(currentPath.startsWith('/logout') ? 'nav__link--active' : ''))
                 != h.icon('logout')
