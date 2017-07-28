@@ -146,12 +146,37 @@
   ==================================== */
   @media all and (min-width : 768px) and (max-width : 1024px) {  
 
+    @include elem('video') {
+      padding: $base-spacing 0;
+      // width: 95%;
+      // margin: 0 auto;
+
+      embed,
+      object,
+      iframe {
+        @include position(absolute, 0 null null 0);
+        @include size(100%);
+      }
+    }
   }
 
   /* ================================= 
     DESKTOP
   ==================================== */
   @media all and (min-width : 1025px) { 
+
+    @include elem('video') {
+      padding: $base-spacing 0;
+      width: 900px;
+      margin: 0 auto;
+
+      embed,
+      object,
+      iframe {
+        @include position(absolute, 0 null null 0);
+        @include size(100%);
+      }
+    }
 
   }
 

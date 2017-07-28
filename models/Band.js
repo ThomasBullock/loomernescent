@@ -50,6 +50,7 @@ const bandSchema = new mongoose.Schema({
 		galleryThumbs: [String],		
 	},
 	youtubePL: String,
+	vimeoPL: String,	
 	spotifyID: String,
 	spotifyURL: String,
 	author: {

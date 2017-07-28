@@ -1204,6 +1204,30 @@ video {
     @media all and (max-width: 850px) {
       .single__location {
         margin-right: 0; } }
+  @media all and (min-width: 768px) and (max-width: 1024px) {
+    .single__video {
+      padding: 1.5em 0; }
+      .single__video embed,
+      .single__video object,
+      .single__video iframe {
+        position: absolute;
+        top: 0;
+        left: 0;
+        height: 100%;
+        width: 100%; } }
+  @media all and (min-width: 1025px) {
+    .single__video {
+      padding: 1.5em 0;
+      width: 900px;
+      margin: 0 auto; }
+      .single__video embed,
+      .single__video object,
+      .single__video iframe {
+        position: absolute;
+        top: 0;
+        left: 0;
+        height: 100%;
+        width: 100%; } }
 
 .heart__button {
   background: none;
