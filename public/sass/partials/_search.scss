@@ -2,7 +2,7 @@
   position: relative;
   width: 100%;
   display: flex;
-  &__results {
+  @include elem('results') {
     background: white;
     position: absolute;
     width: 100%;
@@ -10,18 +10,18 @@
     box-shadow: 0 0 10px rgba(0,0,0,0.2);
     z-index: 5;
   }
-  &__input {
+  @include elem('input') {
     font-size: 30px;
     background: $jet;
     color: white;
     outline: 0;
     border: 0;
   }
-  &__result {
+  @include elem('result') {
     padding: 10px;
     display: block;
     border-bottom: 1px solid #ececec;
-    &--active {
+    @include mod('active') {
       background: #f1f1f1;
     }
   }

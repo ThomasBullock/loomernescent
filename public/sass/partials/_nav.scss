@@ -1,5 +1,6 @@
 .nav {
   display: flex;
+  flex-wrap: wrap;
   list-style: none;
   margin: 0;
   padding: 0;
@@ -8,6 +9,7 @@
   border-bottom: solid 1px transparentize($ebony, .3);
 
   h1 {
+    font-size: modular-scale(3);
     font-family: 'nexarust', sans-serif;
     font-weight: normal;
     text-shadow: 0 2px 2px rgba(0, 0, 0, .8);
@@ -16,8 +18,22 @@
   @include elem('section') {
     display: flex;
 
+
+    @include mod('pages') {
+      flex-wrap: wrap;
+      flex: 0 1 auto;
+    }
+
+
+    @include mod('user') {
+      justify-content: flex-end;
+      background: $jet;
+      flex: 1 1 auto;
+      order: -1;      
+    }
     @include mod('search') {
-      flex: 1 1 auto;      
+      flex: 1 1 auto;
+      order: 12;      
     }    
   }
   // &__section {
@@ -28,6 +44,10 @@
   // }
   @include elem('item') {
     display: flex;
+
+    @include mod('home') {
+      flex: 1 1 100%;
+    }
   }
   @include elem('link') {
     background: $jet;
@@ -75,8 +95,27 @@
   DESKTOP
 ==================================== */ 
 
-@media all and (max-width: 1200px) {
+// @media all and (max-width: 1200px) {
+@media all and (min-width : 1025px) { 
   .nav {
+    flex-wrap: nowrap;
+
+    h1 {
+      font-size: modular-scale(4);
+    }    
+
+  @include elem('section') {
+      order: 1;
+
+    @include mod('pages') {
+      flex-wrap: nowrap;
+    }
+
+    @include mod('user') {
+      // flex: 1 1 100%;
+      order: 1;      
+    }       
+  }    
   @include elem('link') {
       padding-left: 1rem;
       padding-right: 1rem;
@@ -98,11 +137,25 @@
   TABLET
 ==================================== */ 
 
-@media all and (max-width: 900px) {
+// @media all and (max-width: 900px) {
+@media all and (min-width : 768px) and (max-width : 1024px) {  
   .nav {
-    flex-wrap:wrap;
+    flex-wrap: wrap;
+
+    h1 {
+      font-size: modular-scale(2);
+    }
+
   @include elem('section') {
       order: 1;
+
+    @include mod('pages') {
+      flex-wrap: nowrap;
+    }  
+    @include mod('user') {
+      // flex: 1 1 100%;
+      order: 1;      
+    }    
     @include mod('search') {
         border-top: 1px solid $charcoal;
         order: 2;
@@ -116,17 +169,18 @@
   MOBILE
 ==================================== */
 
-@media all and (max-width: 650px) {
+@media all and (max-width: 767px) {
   .nav {
   @include elem('section') {
       width: 100%;
     @include mod('user') {
+        justify-content: center;
         order: -1;
         // border-bottom: 1px solid rgba(255,255,255,0.1);
         border-bottom: 1px solid $charcoal;
         .avatar {
-          min-width: 20px;
-          height: 20px;
+          min-width: 25px;
+          height: 25px;
         }
         svg {
           display: none;
@@ -162,18 +216,23 @@ video {
     right: 0; 
     top: 0;
     min-width: 100%; 
-    min-height: 161px;
+    // min-height: 161px;
     width: auto; 
-    height: 161px; 
+    height: 296px; 
     z-index: -100;
     background-size: cover;
     overflow: hidden;
     object-fit: fill;
 
-  @media all and (max-width: 900px) {
-        min-height: 252px;
-        height: 252px; 
-  }    
+  // @media all and (max-width: 900px) {
+  @media all and (min-width : 768px) and (max-width : 1024px) {      
+        // min-height: 150px;
+        height: 155px; 
+  }
+
+  @media all and (min-width : 1025px) { 
+    height: 129px; 
+  }      
   // position: fixed;
   // min-width: 100%;
   // // min-height: 100%;

@@ -25,7 +25,28 @@ body {
   position: relative;
   max-width:900px;
   margin: 0 auto;
-  @media all and (max-width: 900px) {
-    padding: 2rem;
-  }
 }
+
+/* ================================= 
+  MOBILE
+==================================== */
+@media all and (max-width: 767px) {
+
+}
+
+/* ================================= 
+  TABLET
+==================================== */
+@media all and (min-width : 768px) and (max-width : 1024px) {  
+
+}
+
+/* ================================= 
+  DESKTOP
+==================================== */
+@media all and (min-width : 1025px) { 
+
+}
+
+
+
