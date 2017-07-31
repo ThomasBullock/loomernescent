@@ -1,0 +1,83 @@
+[{
+	"_id": "596da47db376ae2ebb24c572",
+	"slug": "slowdive",
+	"name": "Slowdive",
+	"description": "Dreamy quintet from Reading, UK that was prominent in the first wave of shoegaze bands.",
+	"youtubePL": "https://www.youtube.com/embed/videoseries?list=PLTMsUFwFkdocUjiVeOZAATboEVK0_FKq0",
+	"spotifyID": "72X6FHxaShda0XeQw3vbeF",
+	"spotifyURL": "https://open.spotify.com/artist/72X6FHxaShda0XeQw3vbeF",
+	"author": "5966f1b5d2852d0bbeee0247",
+	"photos": {
+		"squareLg": "0a564179-2cd4-4075-9994-93807cbfb635_Lg.jpeg",
+		"squareSm": "0a564179-2cd4-4075-9994-93807cbfb635_Sm.jpeg",
+		"galleryThumbs": ["c86ee0a3-36e2-46a8-b0d9-f5d3f815a794_Sm.jpeg", "b2016bcc-9ec1-4a10-8b32-c83f97dd71b7_Sm.jpeg"],
+		"gallery": ["c86ee0a3-36e2-46a8-b0d9-f5d3f815a794_Lg.jpeg", "b2016bcc-9ec1-4a10-8b32-c83f97dd71b7_Lg.jpeg"]
+	},
+	"location": {
+		"type": "Point",
+		"coordinates": [-0.9781302999999753, 51.4542645],
+		"address": "Reading, United Kingdom"
+	},
+	"created": "2017-07-18T06:02:37.925Z",
+	"yearsActive": ["1989-01-01T00:00:00.000Z", "1995-01-01T00:00:00.000Z", "2014-01-01T00:00:00.000Z"],
+	"tags": ["Female Vox", "Male Vox"],
+	"pastPersonnel": ["Adrian Sell", "Neil Carter", "Ian McCutcheon"],
+	"personnel": ["Rachel Goswell", "Neil Halstead", "Nick Chaplin", "Christian Savill", "Simon Scott"],
+	"labels": ["Creation", "SBK", "Dead Oceans"],
+	"__v": 0
+}, {
+	"_id": "596f6628253f654c87441432",
+	"slug": "my-bloody-valentine",
+	"name": "My Bloody Valentine",
+	"description": "The founders of the 'Shoegaze' movement and the band all others are measured against.",
+	"youtubePL": "https://www.youtube.com/embed/videoseries?list=PLTMsUFwFkdoeQ27g31smqAy6SqGuHLIdr",
+	"spotifyID": "3G3Gdm0ZRAOxLrbyjfhii5",
+	"spotifyURL": "https://open.spotify.com/artist/3G3Gdm0ZRAOxLrbyjfhii5",
+	"author": "596da83c4a6d5b31cd18446c",
+	"photos": {
+		"squareLg": "d248b8c7-b957-4a16-818a-35897df36cd0_Lg.jpeg",
+		"squareSm": "d248b8c7-b957-4a16-818a-35897df36cd0_Sm.jpeg",
+		"galleryThumbs": ["a42b6599-a46c-449e-9791-d65ffb0ac761_Sm.jpeg", "11c2793c-5437-4dd4-b1e8-3475cbe0380e_Sm.jpeg"],
+		"gallery": ["a42b6599-a46c-449e-9791-d65ffb0ac761_Lg.jpeg", "11c2793c-5437-4dd4-b1e8-3475cbe0380e_Lg.jpeg"]
+	},
+	"location": {
+		"type": "Point",
+		"coordinates": [-6.260309699999993, 53.3498053],
+		"address": "Dublin, Ireland"
+	},
+	"created": "2017-07-19T14:01:12.411Z",
+	"yearsActive": ["1983-01-01T00:00:00.000Z", "1997-01-01T00:00:00.000Z", "2007-01-01T00:00:00.000Z"],
+	"tags": ["Ethereal", "Dissonant", "Female Vox", "Male Vox"],
+	"pastPersonnel": ["David Conway", "Joe Byfield", "Tina Durkin", "Stephen Ivers", "Paul Murtagh", "Mark Ross"],
+	"personnel": ["Kevin Shields", "Bilinda Butcher", "Debbie Gouge", "Colm Ó Cíosóig"],
+	"labels": ["Creation", "Tycoon", "Fever", "Kaleidoscope", "Sound", "Lazy", "Sire", "Island", "Sony", "mbv"],
+	"__v": 0,
+	"vimeoPL": "https://vimeo.com/album/4684772"
+}, {
+	"_id": "5971f94982f70d4ca2214542",
+	"slug": "ride",
+	"name": "Ride",
+	"description": "Oxford quartet that was at the forefront of the 'Shoegaze' movement in the early 90's.",
+	"youtubePL": "https://www.youtube.com/embed/videoseries?list=PLTMsUFwFkdoc1YAh9DvOQOc-z_5vIEOqx",
+	"spotifyID": "0WPY9nnBy01s5QOt4o4oQX",
+	"spotifyURL": "https://open.spotify.com/artist/0WPY9nnBy01s5QOt4o4oQX",
+	"author": "596da83c4a6d5b31cd18446c",
+	"photos": {
+		"squareLg": "49bfbfac-bd0c-4564-86d6-af5159c88c23_Lg.jpeg",
+		"squareSm": "49bfbfac-bd0c-4564-86d6-af5159c88c23_Sm.jpeg",
+		"galleryThumbs": ["c444f85c-4756-416e-ab1c-ae01d377761b_Sm.jpeg", "88f85906-0287-4f79-b120-2711ead44874_Sm.jpeg", "a25b7077-3ac8-451e-88a9-cd667fea094d_Sm.jpeg"],
+		"gallery": ["c444f85c-4756-416e-ab1c-ae01d377761b_Lg.jpeg", "88f85906-0287-4f79-b120-2711ead44874_Lg.jpeg", "a25b7077-3ac8-451e-88a9-cd667fea094d_Lg.jpeg"]
+	},
+	"location": {
+		"address": "Oxford, United Kingdom",
+		"coordinates": [-1.2577263000000585, 51.7520209],
+		"type": "Point"
+	},
+	"created": "2017-07-21T12:53:29.123Z",
+	"yearsActive": ["1988-01-01T00:00:00.000Z", "1996-01-01T00:00:00.000Z", "2014-01-01T00:00:00.000Z"],
+	"tags": ["Ethereal", "Dreamy", "Male Vox"],
+	"pastPersonnel": [""],
+	"personnel": ["Andy Bell", "Laurence Colbert", "Mark Gardener", "Steve Queralt"],
+	"labels": ["Creation", "Warner", "Sire", "The First Time", "Wichita"],
+	"__v": 0
+}]
