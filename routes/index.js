@@ -55,4 +55,8 @@ router.post('/account/reset/:token',
 	catchErrors(authController.update)
 );
 
+// API ///
+
+router.get('/api/v1/search', catchErrors(bandController.searchBands));
+
 module.exports = router;
