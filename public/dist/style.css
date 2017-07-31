@@ -813,6 +813,7 @@ label {
     border-bottom: 5px solid transparent; }
     .nav__link svg {
       width: 40px;
+      height: auto;
       transition: all 0.2s;
       fill: white;
       margin-bottom: 1rem; }
