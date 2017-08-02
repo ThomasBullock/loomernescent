@@ -269,3 +269,23 @@ exports.searchBands = async (req, res) => {
 	.limit(10);
 	res.json(bands)
 }
+
+exports.mapBands = async (req, res) => {
+	const coordinates = [req.query.lng, req.query.lat].map(parseFloat); // change string to numbers
+
+	const q = {
+		location: {
+			$near: {
+				$geometry: {
+					type: 'Point',
+					coordinates
+				},
+				$maxDistance: 20000
+			}
+		}
+	}
+	// const projection
+	
+	const bands = await Band.find(q).select('slug name description location photos').limit(10);
+	res.json(bands)
+};
