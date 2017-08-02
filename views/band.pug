@@ -3,6 +3,7 @@ extends layout
 include icons/_youtube
 
 block content
+	//- pre= h.dump(band)
 	.single
 		.single__hero
 			img.single__image(src=`/uploads/${band.photos.gallery[0] || 'Band.jpg' }`)
@@ -34,9 +35,15 @@ block content
 					li.tag
 						a.tag__link(href=`/tags/${tag}`)
 							span.tag__text ##{tag}
-	if band.youtubePL
+	if band.vimeoPL || band.youtubePL						
 		.single__fullwidth.single__fullwidth--black
-			.single__video
-				+youtube()
-				.single__video-wrapper
-					iframe(src=band.youtubePL frameborder="0" allowfullscreen)
+			//- if band.vimeoPL
+			//- 	.single__video
+			//- 		+youtube()
+			//- 		.single__video-wrapper
+			//- 			iframe(src=band.vimeoPL frameborder="0" allowfullscreen)
+			if band.youtubePL
+				.single__video
+					//- +youtube()
+					.single__video-wrapper
+						iframe(src=band.youtubePL frameborder="0" allowfullscreen)

@@ -30,8 +30,10 @@ mixin bandForm(band = {})
 		input(type="text" name="yearsActive" placeholder="list years seperated by a comma" value=(band.yearsActive && band.yearsActive.join(',')))
 		label(for="labels") Labels
 		input(type="text" name="labels" placeholder="list labels seperated bt comma" value=(band.labels && band.labels.join(',')) )
-		label(for="spotifyID") Youtube Playlist
+		label(for="youtubePL") Youtube Playlist
 		input(type="text" id="youtubePL" name="youtubePL" value=band.youtubePL)
+		label(for="spotifyID") Vimeo Playlist
+		input(type="text" id="vimeoPL" name="vimeoPL" value=band.vimeoPL)
 		label(for="spotifyID") Spotify Id
 		input(type="text" id="spotifyID" name="spotifyID" value=band.spotifyID)
 		label(for="spotifyURL") Spotify URL

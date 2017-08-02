@@ -50,9 +50,26 @@ const bandSchema = new mongoose.Schema({
 		galleryThumbs: [String],		
 	},
 	youtubePL: String,
+	vimeoPL: String,	
 	spotifyID: String,
-	spotifyURL: String
+	spotifyURL: String,
+	author: {
+		type: mongoose.Schema.ObjectId,
+		ref: 'User',
+		required: 'You must supply an author'
+	}
 });
+
+// Define our indexes
+bandSchema.index({
+	name: 'text',
+	personnel: 'text',
+	pastPersonnel: 'text'
+});
+
+bandSchema.index({
+	location: '2dsphere'
+})
 
 bandSchema.pre('save', async function(next) {
 	if(!this.isModified('name')) {  // only when the band name is changed!
