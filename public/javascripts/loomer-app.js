@@ -4,6 +4,7 @@ import '../sass/style.scss';
 import autocomplete from './modules/autocomplete';
 import autoHeightHero from './modules/autoHeightHero';
 import modal from './modules/modal';
+import typeAhead from './modules/typeAhead';
 
 // import getSpotifyData from './modules/spotify';
 
@@ -18,6 +19,7 @@ const longitude = document.getElementById('lng');
 // const spotifyURL = document.getElementById('spotifyURL');
 
 autocomplete( address, latitude, longitude );
+typeAhead( (document.querySelector('.search')));
 // getSpotifyData( bandName, spotifyID, spotifyURL );
 
 // document.onload = autoHeightHero();
