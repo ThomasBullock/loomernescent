@@ -5,6 +5,7 @@ import autocomplete from './modules/autocomplete';
 import autoHeightHero from './modules/autoHeightHero';
 import modal from './modules/modal';
 import typeAhead from './modules/typeAhead';
+import makeMap from './modules/map';
 
 // import getSpotifyData from './modules/spotify';
 
@@ -28,4 +29,8 @@ typeAhead( (document.querySelector('.search')));
 // 	autoHeightHero();
 // });
 
+
+makeMap( document.getElementById('map') );
+
 modal();
+

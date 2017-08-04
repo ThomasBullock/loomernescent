@@ -23,8 +23,8 @@ exports.siteName = `Loomernescent | Shoegazer Portal`;
 exports.menu = [
   { slug: '/bands', title: 'Bands', icon: 'store', },
   { slug: '/top', title: 'Pedals', icon: 'top', },  
-  { slug: '/tags', title: 'Tags', icon: 'tag', }
-  // { slug: '/add', title: 'Add', icon: 'add', }
+  { slug: '/tags', title: 'Tags', icon: 'tag', },
+  { slug: '/map', title: 'Map', icon: 'map', }
 ];
 
 exports.buildDatesString = (string) => {

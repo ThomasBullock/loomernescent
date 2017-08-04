@@ -289,3 +289,7 @@ exports.mapBands = async (req, res) => {
 	const bands = await Band.find(q).select('slug name description location photos').limit(10);
 	res.json(bands)
 };
+
+exports.mapPage = (req, res) => {
+	res.render('map', { title: 'Map'});
+}
