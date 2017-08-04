@@ -3,6 +3,9 @@ import '../sass/style.scss';
 // import { $, $$ } from './modules/bling';
 import autocomplete from './modules/autocomplete';
 import autoHeightHero from './modules/autoHeightHero';
+import modal from './modules/modal';
+import typeAhead from './modules/typeAhead';
+import makeMap from './modules/map';
 
 // import getSpotifyData from './modules/spotify';
 
@@ -17,6 +20,7 @@ const longitude = document.getElementById('lng');
 // const spotifyURL = document.getElementById('spotifyURL');
 
 autocomplete( address, latitude, longitude );
+typeAhead( (document.querySelector('.search')));
 // getSpotifyData( bandName, spotifyID, spotifyURL );
 
 // document.onload = autoHeightHero();
@@ -24,3 +28,9 @@ autocomplete( address, latitude, longitude );
 // window.addEventListener('resize', () => {
 // 	autoHeightHero();
 // });
+
+
+makeMap( document.getElementById('map') );
+
+modal();
+

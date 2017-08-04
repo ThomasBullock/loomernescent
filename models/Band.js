@@ -60,6 +60,17 @@ const bandSchema = new mongoose.Schema({
 	}
 });
 
+// Define our indexes
+bandSchema.index({
+	name: 'text',
+	personnel: 'text',
+	pastPersonnel: 'text'
+});
+
+bandSchema.index({
+	location: '2dsphere'
+})
+
 bandSchema.pre('save', async function(next) {
 	if(!this.isModified('name')) {  // only when the band name is changed!
 		next(); // skip it

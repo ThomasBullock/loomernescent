@@ -28,4 +28,8 @@
 	@include elem('youtube') {
 		fill: $youtube;
 	}
+
+	@include elem('cross') {
+		// fill: $base;
+	}	
 }
