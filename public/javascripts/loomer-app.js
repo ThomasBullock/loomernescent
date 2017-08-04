@@ -4,6 +4,7 @@ import '../sass/style.scss';
 import autocomplete from './modules/autocomplete';
 import autoHeightHero from './modules/autoHeightHero';
 import typeAhead from './modules/typeAhead';
+import makeMap from './modules/map';
 // import getSpotifyData from './modules/spotify';
 
 // import request from 'request';
@@ -25,3 +26,5 @@ typeAhead( (document.querySelector('.search')));
 // window.addEventListener('resize', () => {
 // 	autoHeightHero();
 // });
+
+makeMap( document.getElementById('map') );

@@ -1052,9 +1052,9 @@ function typeAhead(search) {
 		console.log(items);
 		if (e.keyCode === 40 && current) {
 			// they press down and there is a current selected
-			next = current.nextElementSibling || items[0];
+			next = current.nextElementSibling || items[0]; // go to nextSibling and if there isn't one goto 0
 		} else if (e.keyCode === 38 && current) {
-			next = current.previousElementSibling || items[items.length - 1];
+			next = current.previousElementSibling || items[items.length - 1]; // go to prevSibling and if there isn't one goto end
 		} else if (e.keyCode === 40) {
 			next = items[0];
 		} else if (e.keyCode === 38) {
@@ -2712,16 +2712,18 @@ var _typeAhead = __webpack_require__(10);
 
 var _typeAhead2 = _interopRequireDefault(_typeAhead);
 
+var _map = __webpack_require__(38);
+
+var _map2 = _interopRequireDefault(_map);
+
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
 // import getSpotifyData from './modules/spotify';
 
 // import request from 'request';
 
-var address = document.getElementById('address');
-
 // import { $, $$ } from './modules/bling';
-
+var address = document.getElementById('address');
 var latitude = document.getElementById('lat');
 var longitude = document.getElementById('lng');
 
@@ -2738,6 +2740,299 @@ var longitude = document.getElementById('lng');
 // window.addEventListener('resize', () => {
 // 	autoHeightHero();
 // });
+
+(0, _map2.default)(document.getElementById('map'));
+
+/***/ }),
+/* 32 */,
+/* 33 */,
+/* 34 */,
+/* 35 */,
+/* 36 */,
+/* 37 */,
+/* 38 */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+
+Object.defineProperty(exports, "__esModule", {
+	value: true
+});
+
+var _slicedToArray = function () { function sliceIterator(arr, i) { var _arr = []; var _n = true; var _d = false; var _e = undefined; try { for (var _i = arr[Symbol.iterator](), _s; !(_n = (_s = _i.next()).done); _n = true) { _arr.push(_s.value); if (i && _arr.length === i) break; } } catch (err) { _d = true; _e = err; } finally { try { if (!_n && _i["return"]) _i["return"](); } finally { if (_d) throw _e; } } return _arr; } return function (arr, i) { if (Array.isArray(arr)) { return arr; } else if (Symbol.iterator in Object(arr)) { return sliceIterator(arr, i); } else { throw new TypeError("Invalid attempt to destructure non-iterable instance"); } }; }();
+
+var _axios = __webpack_require__(12);
+
+var _axios2 = _interopRequireDefault(_axios);
+
+var _mapStyles = __webpack_require__(39);
+
+var _mapStyles2 = _interopRequireDefault(_mapStyles);
+
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+var mapOptions = {
+	center: { lat: 43.2, lng: 0 },
+	zoom: 6,
+	styles: _mapStyles2.default
+};
+
+console.log(_mapStyles2.default);
+
+function loadBands(map) {
+	var lat = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : 51.454;
+	var lng = arguments.length > 2 && arguments[2] !== undefined ? arguments[2] : -0.978;
+
+	_axios2.default.get('/api/v1/bands/near?lat=' + lat + '&lng=' + lng).then(function (res) {
+		var places = res.data;
+		console.log(places);
+		if (!places.length) {
+			alert('no places found!');
+			return;
+		}
+
+		// create bounds
+		var bounds = new google.maps.LatLngBounds();
+		var infoWindow = new google.maps.InfoWindow();
+
+		var markers = places.map(function (band) {
+			var _band$location$coordi = _slicedToArray(band.location.coordinates, 2),
+			    bandLng = _band$location$coordi[0],
+			    bandLat = _band$location$coordi[1]; // destructuring
+
+
+			var position = { lat: bandLat, lng: bandLng };
+			bounds.extend(position);
+			var marker = new google.maps.Marker({
+				map: map,
+				position: position
+			});
+			marker.band = band;
+			console.log(marker);
+			return marker;
+		});
+
+		// when somone clicks on a marker, show the details of the band
+		markers.forEach(function (marker) {
+			marker.addListener('click', function () {
+				var html = '<div class="popup">\n\t\t\t\t\t\t\t\t\t\t\t\t\t<a href="/band/' + this.band.slug + '">\n\t\t\t\t\t\t\t\t\t\t\t\t\t\t<img src="/uploads/' + (this.band.photos.squareSm || 'band.jpg') + '" alt="' + this.band.name + '" />\n\t\t\t\t\t\t\t\t\t\t\t\t\t\t<p><strong>' + this.band.name + '</strong></p>\n\t\t\t\t\t\t\t\t\t\t\t\t\t</a>\n\t\t\t\t\t\t\t\t\t\t\t\t</div>';
+				infoWindow.setContent(html);
+				infoWindow.open(map, this); // popup infowindow on this which the marker clicked on 
+			});
+		});
+
+		// zoom the map to fit all the markers perfectly
+		map.setCenter(bounds.getCenter());
+		map.fitBounds(bounds);
+		if (markers.length === 1) {
+			map.setZoom(map.getZoom() - 10);
+		} else {
+			map.setZoom(map.getZoom() - 1);
+		}
+	});
+}
+
+function makeMap(mapDiv) {
+	console.log(mapDiv);
+	if (!mapDiv) return; // dont run on pages without map!
+
+	// make our map
+	var map = new google.maps.Map(mapDiv, mapOptions);
+	loadBands(map);
+	var input = document.querySelector('[name="geolocate"]');
+	var autocomplete = new google.maps.places.Autocomplete(input);
+	autocomplete.addListener('place_changed', function () {
+		var place = autocomplete.getPlace();
+		console.log(place);
+		loadBands(map, place.geometry.location.lat(), place.geometry.location.lng());
+	});
+}
+
+exports.default = makeMap;
+// navigator.geolocation.getCurrentPosition
+
+/***/ }),
+/* 39 */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+
+Object.defineProperty(exports, "__esModule", {
+    value: true
+});
+exports.default = [{
+    "featureType": "all",
+    "elementType": "labels.text.fill",
+    "stylers": [{
+        "saturation": 36
+    }, {
+        "color": "#000000"
+    }, {
+        "lightness": 40
+    }]
+}, {
+    "featureType": "all",
+    "elementType": "labels.text.stroke",
+    "stylers": [{
+        "visibility": "on"
+    }, {
+        "color": "#000000"
+    }, {
+        "lightness": 16
+    }]
+}, {
+    "featureType": "all",
+    "elementType": "labels.icon",
+    "stylers": [{
+        "visibility": "off"
+    }]
+}, {
+    "featureType": "administrative",
+    "elementType": "geometry.fill",
+    "stylers": [{
+        "color": "#000000"
+    }, {
+        "lightness": 20
+    }]
+}, {
+    "featureType": "administrative",
+    "elementType": "geometry.stroke",
+    "stylers": [{
+        "color": "#000000"
+    }, {
+        "lightness": 17
+    }, {
+        "weight": 1.2
+    }]
+}, {
+    "featureType": "administrative.province",
+    "elementType": "labels.text.fill",
+    "stylers": [{
+        "lightness": "65"
+    }]
+}, {
+    "featureType": "administrative.locality",
+    "elementType": "labels.icon",
+    "stylers": [{
+        "visibility": "off"
+    }]
+}, {
+    "featureType": "landscape",
+    "elementType": "geometry",
+    "stylers": [{
+        "color": "#000000"
+    }, {
+        "lightness": 20
+    }]
+}, {
+    "featureType": "landscape",
+    "elementType": "geometry.fill",
+    "stylers": [{
+        "saturation": "-28"
+    }, {
+        "lightness": "0"
+    }]
+}, {
+    "featureType": "landscape.natural.terrain",
+    "elementType": "geometry.fill",
+    "stylers": [{
+        "lightness": "0"
+    }]
+}, {
+    "featureType": "poi",
+    "elementType": "geometry",
+    "stylers": [{
+        "color": "#000000"
+    }, {
+        "lightness": 21
+    }]
+}, {
+    "featureType": "road.highway",
+    "elementType": "geometry.fill",
+    "stylers": [{
+        "color": "#000000"
+    }, {
+        "lightness": 17
+    }]
+}, {
+    "featureType": "road.highway",
+    "elementType": "geometry.stroke",
+    "stylers": [{
+        "color": "#000000"
+    }, {
+        "lightness": 29
+    }, {
+        "weight": 0.2
+    }]
+}, {
+    "featureType": "road.arterial",
+    "elementType": "geometry",
+    "stylers": [{
+        "color": "#000000"
+    }, {
+        "lightness": 18
+    }]
+}, {
+    "featureType": "road.local",
+    "elementType": "geometry",
+    "stylers": [{
+        "color": "#000000"
+    }, {
+        "lightness": 16
+    }]
+}, {
+    "featureType": "transit",
+    "elementType": "geometry",
+    "stylers": [{
+        "color": "#000000"
+    }, {
+        "lightness": 19
+    }]
+}, {
+    "featureType": "water",
+    "elementType": "all",
+    "stylers": [{
+        "color": "#612ef2"
+    }, {
+        "visibility": "on"
+    }]
+}, {
+    "featureType": "water",
+    "elementType": "geometry",
+    "stylers": [{
+        "color": "#612ef2"
+    }, {
+        "lightness": "5"
+    }, {
+        "visibility": "on"
+    }, {
+        "gamma": "0.94"
+    }, {
+        "saturation": "13"
+    }]
+}, {
+    "featureType": "water",
+    "elementType": "geometry.fill",
+    "stylers": [{
+        "visibility": "on"
+    }, {
+        "color": "#9151be"
+    }]
+}, {
+    "featureType": "water",
+    "elementType": "labels.text.fill",
+    "stylers": [{
+        "color": "#eadfea"
+    }]
+}, {
+    "featureType": "water",
+    "elementType": "labels.text.stroke",
+    "stylers": [{
+        "color": "#ffffff"
+    }]
+}];
 
 /***/ })
 /******/ ]);
