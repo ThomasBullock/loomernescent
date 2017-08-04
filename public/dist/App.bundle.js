@@ -63,7 +63,7 @@
 /******/ 	__webpack_require__.p = "";
 /******/
 /******/ 	// Load entry module and return exports
-/******/ 	return __webpack_require__(__webpack_require__.s = 3);
+/******/ 	return __webpack_require__(__webpack_require__.s = 4);
 /******/ })
 /************************************************************************/
 /******/ ([
@@ -129,18 +129,75 @@ exports.default = autocomplete;
 
 /***/ }),
 /* 2 */
-/***/ (function(module, exports) {
-
-// removed by extract-text-webpack-plugin
-
-/***/ }),
-/* 3 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
 
 
-__webpack_require__(2);
+Object.defineProperty(exports, "__esModule", {
+	value: true
+});
+function modal() {
+	var modal = document.getElementById('galleryModal');
+
+	function closeModal() {
+		modal.style.display = "none";
+		modalTitle.textContent = '';
+		modalBody.innerHTML = '';
+	}
+
+	if (!modal) {
+		return;
+	}
+
+	var galleryBtns = Array.from(document.querySelectorAll('.single__gallery-thumb img'));
+	var modalBody = document.querySelector('.modal__body');
+	var modalTitle = document.querySelector('.modal__title');
+	// const modalFooter = document.querySelector('.modal__footer');        
+	var close = document.querySelector('.modal__close');
+
+	console.log(galleryBtns);
+
+	galleryBtns.forEach(function (btn, index) {
+		btn.addEventListener('click', function (e) {
+			var imgString = e.target.src.split('/').pop();
+			var imgAlt = e.target.alt;
+			// imgString = imgStringArray
+			var imgStringLg = imgString.split('_')[0] + '_Lg.jpeg';
+			console.log(imgStringLg);
+			var modalImg = document.createElement('img');
+
+			modalImg.src = '/uploads/' + imgStringLg;
+			modalTitle.textContent = imgAlt;
+			modalBody.appendChild(modalImg);
+			modal.style.display = "block";
+		});
+	});
+
+	close.addEventListener('click', closeModal);
+	window.addEventListener('click', function (e) {
+		if (event.target == modal) {
+			closeModal();
+		}
+	});
+}
+
+exports.default = modal;
+
+/***/ }),
+/* 3 */
+/***/ (function(module, exports) {
+
+// removed by extract-text-webpack-plugin
+
+/***/ }),
+/* 4 */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+
+__webpack_require__(3);
 
 var _autocomplete = __webpack_require__(1);
 
@@ -150,14 +207,20 @@ var _autoHeightHero = __webpack_require__(0);
 
 var _autoHeightHero2 = _interopRequireDefault(_autoHeightHero);
 
+var _modal = __webpack_require__(2);
+
+var _modal2 = _interopRequireDefault(_modal);
+
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
 // import getSpotifyData from './modules/spotify';
 
 // import request from 'request';
 
-// import { $, $$ } from './modules/bling';
 var address = document.getElementById('address');
+
+// import { $, $$ } from './modules/bling';
+
 var latitude = document.getElementById('lat');
 var longitude = document.getElementById('lng');
 
@@ -173,6 +236,8 @@ var longitude = document.getElementById('lng');
 // window.addEventListener('resize', () => {
 // 	autoHeightHero();
 // });
+
+(0, _modal2.default)();
 
 /***/ })
 /******/ ]);

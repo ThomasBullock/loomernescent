@@ -3,6 +3,7 @@ import '../sass/style.scss';
 // import { $, $$ } from './modules/bling';
 import autocomplete from './modules/autocomplete';
 import autoHeightHero from './modules/autoHeightHero';
+import modal from './modules/modal';
 
 // import getSpotifyData from './modules/spotify';
 
@@ -24,3 +25,5 @@ autocomplete( address, latitude, longitude );
 // window.addEventListener('resize', () => {
 // 	autoHeightHero();
 // });
+
+modal();

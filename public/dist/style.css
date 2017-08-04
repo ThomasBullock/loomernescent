@@ -1145,7 +1145,7 @@ video {
     margin: 0 auto;
     position: relative;
     margin-top: -10rem;
-    box-shadow: 0 0 10px 2px rgba(0, 0, 0, 0.15); }
+    box-shadow: 0 0 10px 2px rgba(0, 0, 0, 0.3); }
   .single__body {
     display: -ms-flexbox;
     display: flex;
@@ -1183,6 +1183,8 @@ video {
     width: 100%;
     padding: 3em 1.5em; }
     .single__fullwidth--black {
+      background: #000000; }
+    .single__fullwidth--ebony {
       background: #111111; }
   .single__video-wrapper {
     height: 0;
@@ -1204,6 +1206,19 @@ video {
     @media all and (max-width: 850px) {
       .single__location {
         margin-right: 0; } }
+  .single__gallery {
+    display: -ms-flexbox;
+    display: flex;
+    -ms-flex-pack: center;
+        justify-content: center; }
+  .single__gallery-thumb {
+    text-align: center; }
+  .single__gallery-thumb-img {
+    max-height: 200px;
+    box-shadow: 0 0 10px 2px rgba(0, 0, 0, 0.3);
+    border: solid 1px #000000; }
+    .single__gallery-thumb-img:hover {
+      cursor: pointer; }
   @media all and (min-width: 768px) and (max-width: 1024px) {
     .single__video {
       padding: 1.5em 0; }
@@ -1228,6 +1243,61 @@ video {
         left: 0;
         height: 100%;
         width: 100%; } }
+
+.modal {
+  display: none;
+  /* Hidden by default */
+  position: fixed;
+  /* Stay in place */
+  z-index: 1;
+  /* Sit on top */
+  top: 0;
+  right: 0;
+  bottom: 0;
+  left: 0;
+  width: 100%;
+  /* Full width */
+  height: 100%;
+  /* Full height */
+  overflow: auto;
+  /* Enable scroll if needed */
+  background-color: #111111;
+  /* Fallback color */
+  background-color: rgba(17, 17, 17, 0.8);
+  /* Black w/ opacity */ }
+  .modal__container {
+    z-index: 99999;
+    display: table;
+    margin: 100px auto;
+    padding: 1.5em;
+    border: 1px solid #111111;
+    width: auto;
+    /* Could be more or less, depending on screen size */
+    overflow-y: auto;
+    overflow-x: auto;
+    width: auto;
+    background: linear-gradient(0, #48ded4 0%, #a026bf 20%, #e82c75 60%, #FFC40E 85%, #48ded4 95%); }
+  .modal__title {
+    color: #222222;
+    text-align: center;
+    margin: 0; }
+  .modal__header {
+    position: relative; }
+  .modal__body {
+    width: auto;
+    padding: 1.5em; }
+    .modal__body img {
+      border: solid 1px #000000; }
+  .modal__close {
+    cursor: pointer;
+    line-height: 20px;
+    position: absolute;
+    top: 2px;
+    right: 2px;
+    color: #aaa;
+    float: right;
+    font-size: 28px;
+    font-weight: bold; }
 
 .heart__button {
   background: none;
