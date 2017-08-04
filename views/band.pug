@@ -1,6 +1,7 @@
 extends layout
 
 include icons/_youtube
+include icons/_cross
 
 block content
 	//- pre= h.dump(band)
@@ -47,3 +48,17 @@ block content
 					//- +youtube()
 					.single__video-wrapper
 						iframe(src=band.youtubePL frameborder="0" allowfullscreen)
+	if band.photos.gallery
+		.single__fullwidth.single__fullwidth--ebony
+			.single__gallery
+				each photo in band.photos.galleryThumbs
+					.single__gallery-thumb
+						img.single__gallery-thumb-img(src=`/uploads/${photo}` alt=band.name)
+	#galleryModal.modal
+		.modal__container
+			.modal__header
+				h3.modal__title
+				span.modal__close
+					+cross() 
+			.modal__body
+			.modal__footer
