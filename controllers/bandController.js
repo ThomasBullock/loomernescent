@@ -1,5 +1,6 @@
 const mongoose = require('mongoose');
 const Band = mongoose.model('Band');
+const User = mongoose.model('User');
 const multer = require('multer');
 const jimp = require('jimp');
 const uuid = require('uuid'); 
@@ -292,4 +293,18 @@ exports.mapBands = async (req, res) => {
 
 exports.mapPage = (req, res) => {
 	res.render('map', { title: 'Map'});
+}
+
+exports.loveBand = async (req, res) => {
+	// have they already loved the band??
+	const loves = req.user.loves.map(obj => obj.toString());
+	// if the users loves array includes the band.id from the post request we remove it ($pull) 
+	// otherwise add it to the array $addtoset
+	const operator = loves.includes(req.params.id) ? '$pull' : '$addToSet'; 
+	const user = await User
+		.findByIdAndUpdate(req.user._id, 
+			{ [operator]: { loves: req.params.id }},
+			{ new: true }
+		);
+		res.json(user)
 }

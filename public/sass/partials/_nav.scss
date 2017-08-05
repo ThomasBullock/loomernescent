@@ -18,12 +18,10 @@
   @include elem('section') {
     display: flex;
 
-
     @include mod('pages') {
       flex-wrap: wrap;
       flex: 0 1 auto;
     }
-
 
     @include mod('user') {
       justify-content: flex-end;
@@ -44,6 +42,7 @@
   // }
   @include elem('item') {
     display: flex;
+    // flex: 1 1 25%;
 
     @include mod('home') {
       flex: 1 1 100%;
@@ -189,7 +188,7 @@
       }
     }
   @include elem('item') {
-      width: 33.333333%;
+      width: 25%;
     }
   @include elem('link') {
       width: 100%;

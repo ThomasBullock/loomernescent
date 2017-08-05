@@ -17,15 +17,12 @@ function modal() {
   // const modalFooter = document.querySelector('.modal__footer');        
   const close = document.querySelector('.modal__close');
 
-	console.log(galleryBtns);	
-
 	galleryBtns.forEach( (btn, index) => {
 		btn.addEventListener('click', (e) => {
 			const imgString = e.target.src.split('/').pop();
 			const imgAlt = e.target.alt; 
 			// imgString = imgStringArray
 			const imgStringLg = `${imgString.split('_')[0]}_Lg.jpeg`;
-			console.log(imgStringLg)
 			const modalImg = document.createElement('img');
 
 			modalImg.src = `/uploads/${imgStringLg}`;

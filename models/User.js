@@ -22,6 +22,9 @@ const userSchema = new Schema({
 	},
 	resetPasswordToken: String,
 	resetPasswordExpires: Date,
+	loves: [
+		{ type: mongoose.Schema.ObjectId, ref: 'Band'}
+	],
 	admin: {
 		type: Boolean,
 		default: false
