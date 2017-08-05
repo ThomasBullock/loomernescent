@@ -2,6 +2,14 @@ mixin bandCard(band = {})
 	.band
 		.band__hero
 			.band__actions
+				if user
+					.band__action.band__action--heart
+						form.heart(method="POST" action=`/api/v1/bands/${band.id}/loves`)
+							- const heartStrings = user.loves.map(obj => obj.toString())
+							- const heartClass = heartStrings.includes(band._id.toString()) ? 'heart__button--hearted' : ''
+							//- pre= h.dump(heartStrings)
+							button.heart__button(type="submit" name="heart" class=heartClass)
+								!= h.icon('heart')
 				//- user && band.author.equals(user._id)
 				if user && user.admin 
 					.band__action.band__action--edit

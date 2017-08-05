@@ -55,9 +55,10 @@ router.post('/account/reset/:token',
 	catchErrors(authController.update)
 );
 router.get('/map', bandController.mapPage);
+
 // API ///
 
 router.get('/api/v1/search', catchErrors(bandController.searchBands));
 router.get('/api/v1/bands/near', catchErrors(bandController.mapBands));
-
+router.post('/api/v1/bands/:id/loves', catchErrors(bandController.loveBand))
 module.exports = router;
