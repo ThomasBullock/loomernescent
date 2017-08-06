@@ -308,3 +308,13 @@ exports.loveBand = async (req, res) => {
 		);
 		res.json(user)
 }
+
+exports.getFavourites = async (req, res) => {
+	// we could query the current user and call .populate on their loves
+	
+	// or we could query a bunch of bands and find those bands whose ID is in our current love array
+	const bands = await Band.find({
+		_id: { $in: req.user.loves } // it will find any bands where their ID is in an array (req.user.loves)
+	});
+	res.render('bands', {title: 'My Favourites', bands });
+}

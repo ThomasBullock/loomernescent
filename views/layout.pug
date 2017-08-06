@@ -29,7 +29,7 @@ html
 							if user.admin
 								li.nav__item: a.nav__link(href="/add", class=(currentPath.startsWith('/add') ? 'nav__link--active' : ''))
 									!= h.icon('add')                                
-							li.nav__item: a.nav__link(href="/hearts", class=(currentPath.startsWith('/hearts') ? 'nav__link--active' : ''))
+							li.nav__item: a.nav__link(href="/favourites", class=(currentPath.startsWith('/hearts') ? 'nav__link--active' : ''))
 								!= h.icon('heart')
 								span.heart-count #{user.loves && user.loves.length}
 							li.nav__item: a.nav__link(href="/logout", class=(currentPath.startsWith('/logout') ? 'nav__link--active' : ''))

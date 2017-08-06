@@ -56,6 +56,8 @@ router.post('/account/reset/:token',
 );
 router.get('/map', bandController.mapPage);
 
+router.get('/favourites', authController.isLoggedIn, catchErrors(bandController.getFavourites));
+
 // API ///
 
 router.get('/api/v1/search', catchErrors(bandController.searchBands));
