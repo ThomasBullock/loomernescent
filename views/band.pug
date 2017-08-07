@@ -2,6 +2,7 @@ extends layout
 
 include icons/_youtube
 include icons/_cross
+include mixins/_addAlbum
 
 block content
 	//- pre= h.dump(band)
@@ -54,6 +55,8 @@ block content
 				each photo in band.photos.galleryThumbs
 					.single__gallery-thumb
 						img.single__gallery-thumb-img(src=`/uploads/${photo}` alt=band.name)
+	//- if user.admin
+	//- 	+addAlbum(band)
 	#galleryModal.modal
 		.modal__container
 			.modal__header

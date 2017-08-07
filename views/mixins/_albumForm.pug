@@ -1,0 +1,23 @@
+mixin albumForm(album = {})
+	form.add-band(action=`/addalbum/${album._id || ''}` method="post" class="card" enctype="multipart/form-data")
+		label(for="title") Title
+		input(type="text" id="title" name="title")
+		label(for="artist") Artist
+		input(type="text" id="artist" name="artist")
+		label(for="comments") Comments
+		textarea(name="comments")= album.comments
+		//- Image upload
+		label(for="cover") Cover
+		input(type="file" name="cover" id="cover" accept="image/png, image/jpeg")
+		if album.cover
+			img(src=`/uploads/${album.cover}` alt=album.title width=200)
+		label(for="producer") Producer
+		input(type="text" name="producer" placeholder="list personnel seperated bt comma" value=(album.producer && album.producer.join(',')))
+		label(for="releaseDate") Release Date
+		input(type="text" name="releaseDate" placeholder="date" value=(album.released))
+		label(for="label") Label
+		input(type="text" name="label" placeholder="label" value=(album.label))
+		input(type="submit" value="Save -<" class="button")
+
+
+				

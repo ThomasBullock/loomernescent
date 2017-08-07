@@ -1025,6 +1025,18 @@ video {
     -webkit-clip-path: polygon(0 0, 100% 0, 100% 90%, 0% 100%);
             clip-path: polygon(0 0, 100% 0, 100% 90%, 0% 100%); }
 
+.addPage__title {
+  text-align: center; }
+
+.addPage__links {
+  display: -ms-flexbox;
+  display: flex;
+  -ms-flex-pack: center;
+      justify-content: center; }
+
+.addPage__link {
+  margin: 1.5em; }
+
 .tags {
   margin: 0;
   padding: 0;
