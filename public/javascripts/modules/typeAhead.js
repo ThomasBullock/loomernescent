@@ -63,7 +63,7 @@ function typeAhead(search) {
 		const current = searchResults.querySelector(`.${activeClass}`);
 		const items = search.querySelectorAll('.search__result')
 		let next;
-		console.log(items);
+		// console.log(items);
 		if(e.keyCode === 40 && current) { // they press down and there is a current selected
 			next = current.nextElementSibling || items[0]; // go to nextSibling and if there isn't one goto 0
 		} else if (e.keyCode === 38 && current) {

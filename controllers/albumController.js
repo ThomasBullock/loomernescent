@@ -22,11 +22,24 @@ const multerOptions = {
 	}
 };
 
-const spotifyOptions = () => {
+const spotifyOptions = (endpoint, token) => {
+	const baseUrl = 'https://api.spotify.com/v1/';
 	return {
-		
+	      url: `${baseUrl}${endpoint}`,
+	      headers: {
+	        'Authorization': 'Bearer ' + token
+	      },
+	      json: true		
 	}
 };
+
+
+exports.getAlbums = async(req, res) => {
+	console.log('getting albums')
+	const albums = await Album.find();
+	// console.log(albums);
+	res.render('albums', {title: 'Albums', albums: albums});
+}
 
 exports.addAlbum = (req, res) => {
 	res.render('editAlbum', { title: 'Add Album'})
@@ -37,10 +50,11 @@ exports.upload = multer(multerOptions).single('cover');
 exports.resize = async(req, res, next) => {
 	// check if there is no new file to resize (no new file in form means multer will not pass us anything)
 	if(!req.file) {
+		console.log('no new file @ resize');
 		next()
 		return;
 	}
-	// console.log(req.file)
+	console.log(req.file)
 	const extension = req.file.mimetype.split('/')[1];
 	req.body.cover = `${uuid.v4()}.${extension}`;
 	// now we resize
@@ -54,11 +68,11 @@ exports.resize = async(req, res, next) => {
 
 exports.getArtistData = async(req, res, next) => {
 	console.log('we are in getArtistData')
-	console.log(req.body.artist)
+	// console.log(req.body.artist)
 	const band = await Band.findOne( { name: req.body.artist } )
 	
-	console.log(band);
-	req.body.artist = band._id;
+	// console.log(band);
+	req.body.bandID = band._id;
 	req.body.artistSpotifyID = band.spotifyID	
 	next();
 }
@@ -88,34 +102,41 @@ exports.getSpotifyData = async(req, res, next) => {
 	
 	request.post(authOptions, function(error, response, body) {
 		// console.log(response)
-		if (!error && response.statusCode === 200) {
-			console.log('in post request')
+		if (!error && response.statusCode === 200) {  // inefficient will do the request un edit album?
+			console.log('in post request');
 	    var token = body.access_token;
-	    var options = {
-	      url: `https://api.spotify.com/v1/artists/${req.body.artistSpotifyID}/albums`,
-	      headers: {
-	        'Authorization': 'Bearer ' + token
-	      },
-	      json: true
-	    };
+	    var options = spotifyOptions(`artists/${req.body.artistSpotifyID}/albums`, token);
+	    // console.log(options);
 	    request.get(options, function(error, response, body) {
-				// console.log(body.items);
-				console.log(req.body.title);
+	    	console.log(response.statusCode)
 				let album;
 				for(var i = 0; i < body.items.length; i++) {
+					console.log(i, body.items[i])
 					if(body.items[i].name === req.body.title) {
 						album = body.items[i];
+						console.log(album);
 					}
 				}
-				// const album = body.items.filter((album) => {
-				// 	console.log(album.name);
-				// 	return album.name === req.body.title
-				// })
-				console.log(album.id)
-				req.body.spotifyURL = album.external_urls.spotify;
-				req.body.spotifyAlbumID = album.id;
-				next();
-			});			
+				// console.log(req.body.title);
+				/// so this is callback hell!!!!!
+		    if(album) { // if still undefined spotify return no results and we can next();
+		    	req.body.spotifyURL = album.external_urls.spotify;
+					req.body.spotifyAlbumID = album.id;
+
+		    	console.log('making tracks request');
+			    var options = spotifyOptions(`albums/${req.body.spotifyAlbumID}/tracks`, token);
+			    request.get(options, (error, response, body) => {
+			    	// console.log(body)
+			    	req.body.tracks = body.items.map( (track) => {
+			    		console.log(track.name)
+			    		return track.name
+			    	})
+			    next(); 
+			    })
+			  }	else {
+			  	next();
+			  }
+			});
 		} else {
 			next();
 		}
@@ -123,12 +144,9 @@ exports.getSpotifyData = async(req, res, next) => {
 }
 
 exports.createAlbum = async (req, res) => {
-
 	const album = await (new Album(req.body)).save();
-	
 	req.flash('success', `Successfully Created ${album.title}`);
-	res.redirect(`/album/${album.slug}`);
-	album			
+	res.redirect(`/album/${album.slug}`);	
 }
 
 exports.editAlbum = async (req, res) => {
@@ -136,5 +154,15 @@ exports.editAlbum = async (req, res) => {
 	res.render('editAlbum', { title: `Edit ${album.title}`,  album: album } );	
 }
 
+exports.updateAlbum = async (req, res) => {
+	console.log('we are in update!')
+	const album = await Album.findOneAndUpdate({ _id: req.params.id }, req.body, {
+		new: true,
+		runValidators: true
+	}).exec();
+	console.log(album);
+	req.flash('success', `Successfully updated <strong>${album.title}</strong>. <a href="/albums/${album.slug}">View Album</a>`)
+	res.redirect('/albums');
+}
 
 

@@ -1,0 +1,11 @@
+extends layout
+
+include mixins/_albumCard
+
+block content
+	.inner
+		h2=title
+		.bands
+			each album in albums
+				+albumCard(album)
+

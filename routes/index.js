@@ -30,15 +30,26 @@ router.get('/bands/:id/edit', catchErrors(bandController.editBand));
 
 router.get('/band/:slug', catchErrors(bandController.getBandBySlug));
 
-/// Add Album
+/// Albums
 
-router.get('/addalbum', authController.isLoggedIn, albumController.addAlbum)
+router.get('/albums', catchErrors(albumController.getAlbums)); 
+
+router.get('/addalbum', authController.isLoggedIn, albumController.addAlbum);
+
 router.post('/addalbum', 
 	albumController.upload,
 	catchErrors(albumController.resize),
 	albumController.getArtistData,
 	albumController.getSpotifyData,
 	catchErrors(albumController.createAlbum)				
+	);
+// update an album
+router.post('/addalbum/:id',
+	albumController.upload,
+	catchErrors(albumController.resize),
+	albumController.getArtistData,
+	albumController.getSpotifyData,
+	catchErrors(albumController.updateAlbum)				
 	);
 
 router.get('/albums/:id/edit', catchErrors(albumController.editAlbum));
