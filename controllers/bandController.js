@@ -84,7 +84,7 @@ exports.resize = async(req, res, next) =>  {  //
 			req.body.photos.squareSm = `${uniqueID}_Sm.${extension}`;
 			const photoSmall = await jimp.read(req.files[i].buffer);			
 			await photoSmall.resize(300, jimp.AUTO);
-			await photoSmall.quality(20);
+			await photoSmall.quality(25);
 			await photoSmall.write('./public/uploads/' + req.body.photos.squareSm);
 		} else {
 			const uniqueID = uuid.v4();

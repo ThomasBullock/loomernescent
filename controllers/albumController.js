@@ -60,7 +60,8 @@ exports.resize = async(req, res, next) => {
 	// now we resize
 	const cover = await jimp.read(req.file.buffer);
 	await cover.resize(800, jimp.AUTO);
-	await cover.write(`./public/uploads/${req.body.cover}`);
+	await cover.quality(35);
+	await cover.write(`./public/uploads/covers/${req.body.cover}`);
 	// once we have written the photo to our filesystem keep going!
 	// console.log(req.body.cover);
 	next();
@@ -110,11 +111,17 @@ exports.getSpotifyData = async(req, res, next) => {
 	    request.get(options, function(error, response, body) {
 	    	console.log(response.statusCode)
 				let album;
-				for(var i = 0; i < body.items.length; i++) {
-					console.log(i, body.items[i])
+				console.log(body.items);	
+				for(let i = 0; i < body.items.length; i++) {
+					console.log(body.items[i].album_type)
+					// console.log(i, body.items[i])
+					// console.log(body.items[i].name);	
 					if(body.items[i].name === req.body.title) {
 						album = body.items[i];
-						console.log(album);
+
+						// console.log(album);
+					} else {
+						// console.log('')
 					}
 				}
 				// console.log(req.body.title);
@@ -130,10 +137,23 @@ exports.getSpotifyData = async(req, res, next) => {
 			    	req.body.tracks = body.items.map( (track) => {
 			    		console.log(track.name)
 			    		return track.name
-			    	})
+			    	});
 			    next(); 
 			    })
 			  }	else {
+			  	// PERHAPS redundant???
+			  	
+			  	// console.log('album not found attempting search');
+			   //  var options = spotifyOptions(`search?q=${req.body.title}&type=album`, token); //search?q=tania%20bowra&type=artist
+			   //  request.get(options, (error, response, body) => {
+			   //  	// console.log(body)
+						// for(let i = 0; i < body.albums.items.length; i++) {
+						// 	// console.log(i, body.albums.items[i])
+						// 	// if(body.items[i].name === req.body.title) {
+						// 	// 	album = body.items[i];
+						// 	// }
+						// }			    	
+			   //  });			    			  	
 			  	next();
 			  }
 			});
