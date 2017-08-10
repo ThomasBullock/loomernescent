@@ -174,6 +174,14 @@ exports.editAlbum = async (req, res) => {
 	res.render('editAlbum', { title: `Edit ${album.title}`,  album: album } );	
 }
 
+exports.getAlbumBySlug = async (req, res) => {
+	console.log(req.params.slug)
+	const album = await Album.findOne( { slug: req.params.slug } );
+	const band = await Band.findOne( { _id: album.bandID } );
+
+	res.render('album', {album: album, band: band});
+}
+
 exports.updateAlbum = async (req, res) => {
 	console.log('we are in update!')
 	const album = await Album.findOneAndUpdate({ _id: req.params.id }, req.body, {

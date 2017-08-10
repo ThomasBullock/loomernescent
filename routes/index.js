@@ -54,6 +54,9 @@ router.post('/addalbum/:id',
 
 router.get('/albums/:id/edit', catchErrors(albumController.editAlbum));
 
+router.get('/album/:slug', catchErrors(albumController.getAlbumBySlug))
+
+
 router.get('/tags', catchErrors(bandController.getBandsByTag));
 router.get('/tags/:tag', catchErrors(bandController.getBandsByTag));
 

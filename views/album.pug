@@ -1,0 +1,12 @@
+extends layout
+
+include icons/_youtube
+include icons/_cross
+
+block content
+	//- pre= h.dump(band)
+	.single
+		.single__hero
+			img.single__image(src=`/uploads/${band.photos.gallery[0] || 'Band.jpg' }`)
+			h2.title.title--single
+				a(href=`/bands/${band.slug}`) #{band.name}

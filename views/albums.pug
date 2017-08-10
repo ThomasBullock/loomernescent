@@ -3,9 +3,9 @@ extends layout
 include mixins/_albumCard
 
 block content
-	.inner
+	.outer
 		h2=title
-		.bands
+		.albums
 			each album in albums
 				+albumCard(album)
 
