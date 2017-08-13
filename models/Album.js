@@ -34,6 +34,7 @@ const albumSchema = new mongoose.Schema({
 		trim: true
 	},
 	spotifyURL: String,
+	bandcampURL: String,
 	comments: String
 })
 
