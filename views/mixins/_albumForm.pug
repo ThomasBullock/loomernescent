@@ -17,6 +17,8 @@ mixin albumForm(album = {})
 		input(type="text" name="producer" placeholder="list personnel seperated by comma" value=(album.producer && album.producer.join(',')))
 		label(for="mixedBy") mixed By
 		input(type="text" name="mixedBy" placeholder="list personnel seperated by comma" value=(album.mixedBy && album.mixedBy.join(',')))
+		label(for="engineer") Engineers
+		input(type="text" name="engineer" placeholder="list personnel seperated by comma" value=(album.engineer && album.engineer.join(',')))
 		label(for="tracks") Track Listing (Fallback if not on spotify)
 		input(type="text" name="tracks" placeholder="list tracks seperated by comma" value=(album.tracks && album.tracks.join(',')))
 		- const date = h.moment(album.releaseDate).format("YYYY-MM-DD")
@@ -24,6 +26,10 @@ mixin albumForm(album = {})
 		input(type="date" name="releaseDate" value=(date))
 		label(for="label") Label
 		input(type="text" name="label" placeholder="label" value=(album.label) )
+		label(for="spotifyURL") Spotify URL
+		input(type="text" id="spotifyURL" name="spotifyURL" value=(album.spotifyURL) )
+		label(for="bandcampURL") Bandcamp URL
+		input(type="text" id="bandcampURL" name="bandcampURL" value=(album.bandcampURL) )
 		input(type="submit" value="Save -<" class="button")
 
 
