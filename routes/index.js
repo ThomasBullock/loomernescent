@@ -41,6 +41,7 @@ router.post('/addalbum',
 	catchErrors(albumController.resize),
 	albumController.getArtistData,
 	albumController.getSpotifyData,
+	albumController.processAlbumData,
 	catchErrors(albumController.createAlbum)				
 	);
 // update an album
@@ -49,10 +50,11 @@ router.post('/addalbum/:id',
 	catchErrors(albumController.resize),
 	albumController.getArtistData,
 	albumController.getSpotifyData,
+	albumController.processAlbumData,
 	catchErrors(albumController.updateAlbum)				
 	);
 
-router.get('/albums/:id/edit', catchErrors(albumController.editAlbum));
+router.get('/album/:id/edit', catchErrors(albumController.editAlbum));
 
 router.get('/album/:slug', catchErrors(albumController.getAlbumBySlug))
 

@@ -74,7 +74,7 @@ exports.getArtistData = async(req, res, next) => {
 	
 	// console.log(band);
 	req.body.bandID = band._id;
-	req.body.artistSpotifyID = band.spotifyID	
+	req.body.artistSpotifyID = band.spotifyID
 	next();
 }
 
@@ -111,9 +111,9 @@ exports.getSpotifyData = async(req, res, next) => {
 	    request.get(options, function(error, response, body) {
 	    	console.log(response.statusCode)
 				let album;
-				console.log(body.items);	
+				// console.log(body.items);	
 				for(let i = 0; i < body.items.length; i++) {
-					console.log(body.items[i].album_type)
+					// console.log(body.items[i].album_type)
 					// console.log(i, body.items[i])
 					// console.log(body.items[i].name);	
 					if(body.items[i].name === req.body.title) {
@@ -135,7 +135,7 @@ exports.getSpotifyData = async(req, res, next) => {
 			    request.get(options, (error, response, body) => {
 			    	// console.log(body)
 			    	req.body.tracks = body.items.map( (track) => {
-			    		console.log(track.name)
+			    		// console.log(track.name)
 			    		return track.name
 			    	});
 			    next(); 
@@ -163,6 +163,27 @@ exports.getSpotifyData = async(req, res, next) => {
 	}); 
 }
 
+exports.processAlbumData = (req, res, next) => {
+	if(req.body.producer) {
+		const producers = req.body.producer.split(',').map( (item) => item.trim() );
+		req.body.producer = producers;		
+	}
+	if(req.body.engineer)	{
+		const engineers = req.body.engineer.split(',').map( (item) => item.trim() );
+		req.body.engineer = engineers;		
+	}	 
+	if(req.body.mixedBy)	{
+		const mixed = req.body.mixedBy.split(',').map( (item) => item.trim() );
+		req.body.mixedBy = mixed;		
+	}
+
+	if (typeof req.body.tracks === 'string') {
+		const trackList = req.body.tracks.split(',').map( (item) => item.trim() );
+		req.body.tracks = trackList
+	}
+	next();	
+}
+
 exports.createAlbum = async (req, res) => {
 	const album = await (new Album(req.body)).save();
 	req.flash('success', `Successfully Created ${album.title}`);
@@ -175,7 +196,7 @@ exports.editAlbum = async (req, res) => {
 }
 
 exports.getAlbumBySlug = async (req, res) => {
-	console.log(req.params.slug)
+	// console.log(req.params.slug)
 	const album = await Album.findOne( { slug: req.params.slug } );
 	const band = await Band.findOne( { _id: album.bandID } );
 
@@ -188,8 +209,8 @@ exports.updateAlbum = async (req, res) => {
 		new: true,
 		runValidators: true
 	}).exec();
-	console.log(album);
-	req.flash('success', `Successfully updated <strong>${album.title}</strong>. <a href="/albums/${album.slug}">View Album</a>`)
+	// console.log(album);
+	req.flash('success', `Successfully updated <strong>${album.title}</strong>. <a href="/album/${album.slug}">View Album</a>`)
 	res.redirect('/albums');
 }
 

@@ -1,5 +1,6 @@
 const mongoose = require('mongoose');
 const Band = mongoose.model('Band');
+const Album = mongoose.model('Album');
 const User = mongoose.model('User');
 const multer = require('multer');
 const jimp = require('jimp');
@@ -48,8 +49,6 @@ exports.processPhotos = (req, res, next) => {
 	})
 	next();
 }
-
-
 
 exports.resize = async(req, res, next) =>  {  // 
 	console.log('there are' + req.files.length);
@@ -221,10 +220,11 @@ exports.updateBand = async (req, res) => {
 
 exports.getBandBySlug = async (req, res, next) => {
 	const band = await Band.findOne({ slug: req.params.slug}).populate('author');
+	const albums = await Album.find( { bandID: band._id } );
 	if(!band) {
 		return next();
 	}
-	res.render('band', { band: band, title: band.name})
+	res.render('band', { band: band, albums: albums, title: band.name})
 }
 
 exports.getBandsByTag = async (req, res) => {

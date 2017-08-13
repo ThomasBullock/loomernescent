@@ -1040,7 +1040,14 @@ video {
 
 .album {
   width: 50%;
-  margin-bottom: 1.5em; }
+  margin-bottom: 1.5em;
+  position: relative; }
+  .album__edit {
+    width: 100%; }
+  .album__actions {
+    position: absolute; }
+  .album__action {
+    fill: #F6F6F6; }
   .album__cover {
     max-width: 100%;
     height: auto;
@@ -1053,6 +1060,61 @@ video {
   @media all and (min-width: 1025px) {
     .album {
       width: 25%; } }
+
+.album-info {
+  display: -ms-flexbox;
+  display: flex;
+  -ms-flex-wrap: wrap;
+      flex-wrap: wrap; }
+  .album-info__title {
+    -ms-flex: 1 1 45%;
+        flex: 1 1 45%;
+    font-size: 36px;
+    margin-right: 1.5em; }
+  .album-info__artist {
+    font-size: 36px;
+    position: relative;
+    text-align: right; }
+    .album-info__artist:before {
+      position: absolute;
+      left: -27px;
+      top: 15px;
+      content: 'by';
+      font-size: 20px;
+      color: #333333;
+      margin-right: 10px; }
+  .album-info__hr {
+    width: 100%;
+    color: #AAAAAA;
+    margin-bottom: 1.5em; }
+  .album-info__tracklist {
+    -ms-flex: 1 1 40%;
+        flex: 1 1 40%;
+    margin-top: 0; }
+  .album-info__credits {
+    display: -ms-flexbox;
+    display: flex;
+    -ms-flex: 1 1 60%;
+        flex: 1 1 60%;
+    -ms-flex-wrap: wrap;
+        flex-wrap: wrap; }
+  .album-info__date {
+    -ms-flex: 1 1 100%;
+        flex: 1 1 100%; }
+  .album-info__label {
+    -ms-flex: 1 1 100%;
+        flex: 1 1 100%; }
+  .album-info__credit {
+    -ms-flex: 1 1 100%;
+        flex: 1 1 100%; }
+  .album-info__link {
+    display: -ms-flexbox;
+    display: flex;
+    -ms-flex-align: center;
+        align-items: center; }
+    .album-info__link a {
+      margin-left: 0.75em;
+      margin-right: 0.75em; }
 
 .addPage__title {
   text-align: center; }
