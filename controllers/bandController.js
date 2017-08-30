@@ -220,7 +220,7 @@ exports.updateBand = async (req, res) => {
 
 exports.getBandBySlug = async (req, res, next) => {
 	const band = await Band.findOne({ slug: req.params.slug}).populate('author');
-	const albums = await Album.find( { bandID: band._id } );
+	const albums = await Album.find( { bandID: band._id } ).sort( {"releaseDate": 1} );
 	if(!band) {
 		return next();
 	}

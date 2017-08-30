@@ -1040,7 +1040,6 @@ video {
 
 .album {
   width: 50%;
-  margin-bottom: 1.5em;
   position: relative; }
   .album__edit {
     width: 100%; }
@@ -1272,6 +1271,14 @@ video {
     max-width: 100%;
     height: auto;
     display: block; }
+  .single__fullwidth {
+    margin-top: -1.5em;
+    width: 100%;
+    padding: 3em 1.5em; }
+    .single__fullwidth--black {
+      background: #000000; }
+    .single__fullwidth--ebony {
+      background: #111111; }
   .single__video {
     padding: 1.5em;
     width: 100%;
@@ -1284,19 +1291,26 @@ video {
       left: 0;
       height: 100%;
       width: 100%; }
-  .single__fullwidth {
-    margin-top: -1.5em;
-    width: 100%;
-    padding: 3em 1.5em; }
-    .single__fullwidth--black {
-      background: #000000; }
-    .single__fullwidth--ebony {
-      background: #111111; }
   .single__video-wrapper {
     height: 0;
     overflow: hidden;
     padding-bottom: 56.25%;
     position: relative; }
+  .single__albums {
+    max-width: 900px;
+    margin: 0 auto;
+    margin-top: 1.5em;
+    display: -ms-flexbox;
+    display: flex;
+    -ms-flex-wrap: wrap;
+        flex-wrap: wrap;
+    -ms-flex-pack: center;
+        justify-content: center; }
+  .single__album {
+    padding: 1.5em;
+    -ms-flex: 1 1 33.3%;
+        flex: 1 1 33.3%;
+    max-width: 300px; }
   .single__map {
     width: calc(100% + 6rem);
     max-width: none;

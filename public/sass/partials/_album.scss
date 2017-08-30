@@ -7,7 +7,7 @@
 
 .album {
   width:50%;
-  margin-bottom: $base-spacing;	
+  // margin-bottom: $base-spacing;	
   position: relative;
    
   @include elem('edit') {

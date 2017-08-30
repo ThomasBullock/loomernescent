@@ -48,14 +48,20 @@ block content
 					//- +youtube()
 					.single__video-wrapper
 						iframe(src=band.youtubePL frameborder="0" allowfullscreen)
+	if albums.length
+		.single__fullwidth.single__fullwidth
+			h2.modal__title Albums by #{band.name}
+			.single__albums
+				each album in albums
+					.single__album
+						a(href=`/album/${album.slug}`)
+							img(src=`/uploads/covers/${album.cover}`)
 	if band.photos.gallery
 		.single__fullwidth.single__fullwidth--ebony
 			.single__gallery
 				each photo in band.photos.galleryThumbs
 					.single__gallery-thumb
 						img.single__gallery-thumb-img(src=`/uploads/${photo}` alt=band.name)
-	//- if user.admin
-	//- 	+addAlbum(band)
 	#galleryModal.modal
 		.modal__container
 			.modal__header
