@@ -59,6 +59,9 @@ app.use((req, res, next) => {
   res.locals.flashes = req.flash();
   res.locals.user = req.user || null;
   res.locals.currentPath = req.path;
+  // if(/^\/band\//i.test(req.url)) {  // we want to send modal to only /band/ pages
+    // res.locals.modal = 
+  // }
   next();
 });
 

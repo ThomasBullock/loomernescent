@@ -21,10 +21,11 @@ exports.icon = (name) => fs.readFileSync(`./public/images/icons/${name}.svg`);
 exports.siteName = `Loomernescent | Shoegazer Portal`;
 
 exports.menu = [
-  { slug: '/bands', title: 'Bands', icon: 'store', },
-  { slug: '/top', title: 'Pedals', icon: 'top', },  
-  { slug: '/tags', title: 'Tags', icon: 'tag', }
-  // { slug: '/add', title: 'Add', icon: 'add', }
+  { slug: '/bands', title: 'Bands', icon: 'bands', },
+  { slug: '/albums/', title: 'Albums', icon: 'cassette'},
+  { slug: '/pedals', title: 'Pedals', icon: 'pedal', },  
+  { slug: '/tags', title: 'Tags', icon: 'pick', },
+  { slug: '/map', title: 'Map', icon: 'map', }
 ];
 
 exports.buildDatesString = (string) => {
@@ -42,3 +43,5 @@ exports.buildDatesString = (string) => {
 	}, "")
 	return datesString;
 }
+
+

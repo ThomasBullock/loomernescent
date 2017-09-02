@@ -1,5 +1,7 @@
 const mongoose = require('mongoose');
 const Band = mongoose.model('Band');
+const Album = mongoose.model('Album');
+const User = mongoose.model('User');
 const multer = require('multer');
 const jimp = require('jimp');
 const uuid = require('uuid'); 
@@ -8,8 +10,6 @@ const request = require('request'); // "Request" library
 const multerOptions = {
 	storage: multer.memoryStorage(),
 	fileFilter: function(req, file, next) {
-		// console.log(req);
-		// console.log(file);
 		const isPhoto = file.mimetype.startsWith('image/');
 		if(isPhoto) {
 		// yes this file is fine continue it on 
@@ -18,7 +18,6 @@ const multerOptions = {
 		// or no this file is not allowed
 			next({ message: 'That filetype isn\'t allowed!' }, false);		
 		}
-
 	}
 }
 
@@ -28,6 +27,10 @@ exports.homePage = (req, res) => {
 	// req.flash('success', 'Computer Says No...');		
 	res.render('index');
 };
+
+exports.add = (req, res) => {
+	res.render('add', {title: 'Add'})
+}
 
 exports.addBand = (req, res) => {
 	res.render('editBand', { title: 'Add Band'})
@@ -47,8 +50,6 @@ exports.processPhotos = (req, res, next) => {
 	next();
 }
 
-
-
 exports.resize = async(req, res, next) =>  {  // 
 	console.log('there are' + req.files.length);
 	// check if there is no new file to resize
@@ -58,14 +59,12 @@ exports.resize = async(req, res, next) =>  {  //
 		return
 	}
 
-
 	req.body.photos = {
 		gallery: [],
 		galleryThumbs: []
 	};
 
 	//now we resize for large
-
 	for(let i = 0; i < req.files.length; i++) {
 		// get file extension
 		const extension = req.files[i].mimetype.split('/')[1];
@@ -84,9 +83,8 @@ exports.resize = async(req, res, next) =>  {  //
 			req.body.photos.squareSm = `${uniqueID}_Sm.${extension}`;
 			const photoSmall = await jimp.read(req.files[i].buffer);			
 			await photoSmall.resize(300, jimp.AUTO);
-			await photoSmall.quality(20);
+			await photoSmall.quality(25);
 			await photoSmall.write('./public/uploads/' + req.body.photos.squareSm);
-
 		} else {
 			const uniqueID = uuid.v4();
 			req.body.photos.gallery.push(`${uniqueID}_Lg.${extension}`);
@@ -101,10 +99,7 @@ exports.resize = async(req, res, next) =>  {  //
 			await thumb.quality(30);
 			await thumb.write(`./public/uploads/${req.body.photos.galleryThumbs[req.body.photos.galleryThumbs.length - 1]}`);			
 		}
-
-
 			// req.body.photos[`Square${index}-Lg`] = `${uuid.v4()}_Lg.${extension}`;			
-
 	}
 	next();
 }
@@ -134,7 +129,6 @@ exports.getSpotifyData = async(req, res, next) => {
 
 	request.post(authOptions, function(error, response, body) {
 	  if (!error && response.statusCode === 200 && req.body.name) { // no point checking spotify if no name in form
-
 	    // use the access token to access the Spotify Web API
 	    var token = body.access_token;
 	    var options = {
@@ -144,8 +138,8 @@ exports.getSpotifyData = async(req, res, next) => {
 	      },
 	      json: true
 	    };
-	request.get(options, function(error, response, body) {
-		// console.log(body.artists);
+			request.get(options, function(error, response, body) {
+			// console.log(body.artists);
 				if(body.artists && body.artists.items[0]) {
 					req.body.spotifyID = body.artists.items[0].id;		
 					req.body.spotifyURL = body.artists.items[0].external_urls.spotify;							
@@ -175,7 +169,6 @@ exports.processBandData = (req, res, next) => {
 	} else {
 		req.body.yearsActive = null;
 	}
-
 	console.log(req.body.yearsActive)					
 	next();
 }
@@ -183,15 +176,11 @@ exports.processBandData = (req, res, next) => {
 exports.createBand = async (req, res) => {
 
 	req.body.author = req.user._id;
-
-
 	const band = await (new Band(req.body)).save(); // we do it all in one go so we can acces the slug which is generated when saved
 	// you can add property/values to band here band.cool = true - wont be in the database until .save()
 	// await band.save();
 	req.flash('success', `Successfully Created ${band.name}`);
 	res.redirect(`/band/${band.slug}`);		
-
-
 }
 
 exports.getBands = async (req, res) => {
@@ -213,7 +202,6 @@ exports.editBand = async (req, res) => {
 	confirmOwner(band, req.user);
 	// 3. Render out the edit form so the user can update their store
 	res.render('editBand', { title: `Edit ${band.name}`,  band: band } );
-
 }
 
 exports.updateBand = async (req, res) => {
@@ -232,10 +220,11 @@ exports.updateBand = async (req, res) => {
 
 exports.getBandBySlug = async (req, res, next) => {
 	const band = await Band.findOne({ slug: req.params.slug}).populate('author');
+	const albums = await Album.find( { bandID: band._id } ).sort( {"releaseDate": 1} );
 	if(!band) {
 		return next();
 	}
-	res.render('band', { band: band, title: band.name})
+	res.render('band', { band: band, albums: albums, title: band.name})
 }
 
 exports.getBandsByTag = async (req, res) => {
@@ -289,3 +278,31 @@ exports.mapBands = async (req, res) => {
 	const bands = await Band.find(q).select('slug name description location photos').limit(10);
 	res.json(bands)
 };
+
+exports.mapPage = (req, res) => {
+	res.render('map', { title: 'Map'});
+}
+
+exports.loveBand = async (req, res) => {
+	// have they already loved the band??
+	const loves = req.user.loves.map(obj => obj.toString());
+	// if the users loves array includes the band.id from the post request we remove it ($pull) 
+	// otherwise add it to the array $addtoset
+	const operator = loves.includes(req.params.id) ? '$pull' : '$addToSet'; 
+	const user = await User
+		.findByIdAndUpdate(req.user._id, 
+			{ [operator]: { loves: req.params.id }},
+			{ new: true }
+		);
+		res.json(user)
+}
+
+exports.getFavourites = async (req, res) => {
+	// we could query the current user and call .populate on their loves
+	
+	// or we could query a bunch of bands and find those bands whose ID is in our current love array
+	const bands = await Band.find({
+		_id: { $in: req.user.loves } // it will find any bands where their ID is in an array (req.user.loves)
+	});
+	res.render('bands', {title: 'My Favourites', bands });
+}

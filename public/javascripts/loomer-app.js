@@ -1,9 +1,13 @@
 import '../sass/style.scss';
 
-// import { $, $$ } from './modules/bling';
+import { $, $$ } from './modules/bling';
 import autocomplete from './modules/autocomplete';
 import autoHeightHero from './modules/autoHeightHero';
+import modal from './modules/modal';
 import typeAhead from './modules/typeAhead';
+import makeMap from './modules/map';
+import ajaxHeart from './modules/loves';
+
 // import getSpotifyData from './modules/spotify';
 
 // import request from 'request';
@@ -25,3 +29,16 @@ typeAhead( (document.querySelector('.search')));
 // window.addEventListener('resize', () => {
 // 	autoHeightHero();
 // });
+
+
+makeMap( document.getElementById('map') );
+
+modal();
+
+// const heartForms = $$('form.heart')
+const loveForms = document.querySelectorAll('form.heart');
+loveForms.forEach( (form) => {
+	form.addEventListener('submit', ajaxHeart)
+})
+
+

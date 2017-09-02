@@ -43,6 +43,11 @@ $ebony         : #111111 !default;
 $black         : #000000 !default;
 
 
+// Drop shadows 
+
+$small-shadow: 0 0 2px 2px rgba(0,0,0,0.1);
+$big-shadow: 0 0 10px 2px rgba(0,0,0,0.3);
+
 // Breakpoints
 $medium-screen: 600px;
 $large-screen: 900px;

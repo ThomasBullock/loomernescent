@@ -1,6 +1,7 @@
 const express = require('express');
 const router = express.Router();
 const bandController = require('../controllers/bandController');
+const albumController = require('../controllers/albumController');
 const userController = require('../controllers/userController');
 const authController = require('../controllers/authController');
 const { catchErrors } = require('../handlers/errorHandlers');
@@ -8,9 +9,10 @@ const { catchErrors } = require('../handlers/errorHandlers');
 // Do work here
 router.get('/', bandController.homePage);
 router.get('/bands', catchErrors(bandController.getBands));
-router.get('/add', authController.isLoggedIn, bandController.addBand); // it will not make it passed isLogged if not logged in
+router.get('/add', bandController.add);
+router.get('/addband', authController.isLoggedIn, bandController.addBand); // it will not make it passed isLogged if not logged in
 
-router.post('/add', 
+router.post('/addband', 
 	bandController.upload,
 	catchErrors(bandController.resize),
 	catchErrors(bandController.getSpotifyData),
@@ -18,7 +20,7 @@ router.post('/add',
 	catchErrors(bandController.createBand)
 	);
 
-router.post('/add/:id',
+router.post('/addband/:id',
 	bandController.upload,
 	catchErrors(bandController.resize),
 	bandController.processBandData, 	
@@ -27,6 +29,35 @@ router.post('/add/:id',
 router.get('/bands/:id/edit', catchErrors(bandController.editBand));
 
 router.get('/band/:slug', catchErrors(bandController.getBandBySlug));
+
+/// Albums
+
+router.get('/albums', catchErrors(albumController.getAlbums)); 
+
+router.get('/addalbum', authController.isLoggedIn, albumController.addAlbum);
+
+router.post('/addalbum', 
+	albumController.upload,
+	catchErrors(albumController.resize),
+	albumController.getArtistData,
+	albumController.getSpotifyData,
+	albumController.processAlbumData,
+	catchErrors(albumController.createAlbum)				
+	);
+// update an album
+router.post('/addalbum/:id',
+	albumController.upload,
+	catchErrors(albumController.resize),
+	albumController.getArtistData,
+	albumController.getSpotifyData,
+	albumController.processAlbumData,
+	catchErrors(albumController.updateAlbum)				
+	);
+
+router.get('/album/:id/edit', catchErrors(albumController.editAlbum));
+
+router.get('/album/:slug', catchErrors(albumController.getAlbumBySlug))
+
 
 router.get('/tags', catchErrors(bandController.getBandsByTag));
 router.get('/tags/:tag', catchErrors(bandController.getBandsByTag));
@@ -54,10 +85,13 @@ router.post('/account/reset/:token',
 	authController.confirmedPasswords, 
 	catchErrors(authController.update)
 );
+router.get('/map', bandController.mapPage);
+
+router.get('/favourites', authController.isLoggedIn, catchErrors(bandController.getFavourites));
 
 // API ///
 
 router.get('/api/v1/search', catchErrors(bandController.searchBands));
 router.get('/api/v1/bands/near', catchErrors(bandController.mapBands));
-
+router.post('/api/v1/bands/:id/loves', catchErrors(bandController.loveBand))
 module.exports = router;

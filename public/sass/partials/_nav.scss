@@ -18,12 +18,10 @@
   @include elem('section') {
     display: flex;
 
-
     @include mod('pages') {
       flex-wrap: wrap;
       flex: 0 1 auto;
     }
-
 
     @include mod('user') {
       justify-content: flex-end;
@@ -44,6 +42,7 @@
   // }
   @include elem('item') {
     display: flex;
+    // flex: 1 1 25%;
 
     @include mod('home') {
       flex: 1 1 100%;
@@ -63,7 +62,8 @@
     transition: transform 0.2s;
     border-bottom: 5px solid transparent;
     svg {
-      width: 40px;
+      width: 70px;
+      height: auto;
       transition: all 0.2s;
       fill: white;
       margin-bottom: 1rem;
@@ -120,7 +120,7 @@
       padding-left: 1rem;
       padding-right: 1rem;
       svg {
-        width: 30px;
+        width: 60px;
       }
   @include elem('logo') {
         svg {
@@ -188,7 +188,7 @@
       }
     }
   @include elem('item') {
-      width: 33.333333%;
+      width: 25%;
     }
   @include elem('link') {
       width: 100%;

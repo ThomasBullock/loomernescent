@@ -44,9 +44,7 @@ function typeAhead(search) {
 					searchResults.innerHTML = dompurify.sanitize(
 						`<span class="search__result"><strong>No results found for ${this.value}</strong></span>`
 						);					
-				}
-
-				
+				}		
 			})
 			.catch(err => {
 				console.error(err)
@@ -65,11 +63,11 @@ function typeAhead(search) {
 		const current = searchResults.querySelector(`.${activeClass}`);
 		const items = search.querySelectorAll('.search__result')
 		let next;
-		console.log(items);
+		// console.log(items);
 		if(e.keyCode === 40 && current) { // they press down and there is a current selected
-			next = current.nextElementSibling || items[0];
+			next = current.nextElementSibling || items[0]; // go to nextSibling and if there isn't one goto 0
 		} else if (e.keyCode === 38 && current) {
-			next = current.previousElementSibling || items[items.length - 1];
+			next = current.previousElementSibling || items[items.length - 1]; // go to prevSibling and if there isn't one goto end
 		} else if (e.keyCode === 40) {
 			next = items[0];
 		} else if (e.keyCode === 38) {

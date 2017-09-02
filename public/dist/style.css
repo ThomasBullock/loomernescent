@@ -39,6 +39,11 @@ body {
   max-width: 900px;
   margin: 0 auto; }
 
+.outer {
+  position: relative;
+  max-width: 1200px;
+  margin: 0 auto; }
+
 /* ================================= 
   MOBILE
 ==================================== */
@@ -814,7 +819,8 @@ label {
     transition: transform 0.2s;
     border-bottom: 5px solid transparent; }
     .nav__link svg {
-      width: 40px;
+      width: 70px;
+      height: auto;
       transition: all 0.2s;
       fill: white;
       margin-bottom: 1rem; }
@@ -854,7 +860,7 @@ label {
       padding-left: 1rem;
       padding-right: 1rem; }
       .nav__link svg {
-        width: 30px; }
+        width: 60px; }
       .nav__link__logo svg {
         width: 100px; } }
 
@@ -900,7 +906,7 @@ label {
       .nav__section--user svg {
         display: none; }
   .nav__item {
-    width: 33.333333%; }
+    width: 25%; }
   .nav__link {
     width: 100%; }
     .nav__link svg {
@@ -1023,6 +1029,103 @@ video {
     object-fit: cover;
     -webkit-clip-path: polygon(0 0, 100% 0, 100% 90%, 0% 100%);
             clip-path: polygon(0 0, 100% 0, 100% 90%, 0% 100%); }
+
+.albums {
+  display: -ms-flexbox;
+  display: flex;
+  -ms-flex-wrap: wrap;
+      flex-wrap: wrap;
+  -ms-flex-pack: justify;
+      justify-content: space-between; }
+
+.album {
+  width: 50%;
+  position: relative; }
+  .album__edit {
+    width: 100%; }
+  .album__actions {
+    position: absolute; }
+  .album__action {
+    fill: #F6F6F6; }
+  .album__cover {
+    max-width: 100%;
+    height: auto;
+    display: block; }
+  .album__title {
+    font-size: 40px; }
+  @media all and (min-width: 768px) and (max-width: 1024px) {
+    .album {
+      width: 33.3%; } }
+  @media all and (min-width: 1025px) {
+    .album {
+      width: 25%; } }
+
+.album-info {
+  display: -ms-flexbox;
+  display: flex;
+  -ms-flex-wrap: wrap;
+      flex-wrap: wrap; }
+  .album-info__title {
+    -ms-flex: 1 1 45%;
+        flex: 1 1 45%;
+    font-size: 36px;
+    margin-right: 1.5em; }
+  .album-info__artist {
+    font-size: 36px;
+    position: relative;
+    text-align: right; }
+    .album-info__artist:before {
+      position: absolute;
+      left: -27px;
+      top: 15px;
+      content: 'by';
+      font-size: 20px;
+      color: #333333;
+      margin-right: 10px; }
+  .album-info__hr {
+    width: 100%;
+    color: #AAAAAA;
+    margin-bottom: 1.5em; }
+  .album-info__tracklist {
+    -ms-flex: 1 1 40%;
+        flex: 1 1 40%;
+    margin-top: 0; }
+  .album-info__credits {
+    display: -ms-flexbox;
+    display: flex;
+    -ms-flex: 1 1 60%;
+        flex: 1 1 60%;
+    -ms-flex-wrap: wrap;
+        flex-wrap: wrap; }
+  .album-info__date {
+    -ms-flex: 1 1 100%;
+        flex: 1 1 100%; }
+  .album-info__label {
+    -ms-flex: 1 1 100%;
+        flex: 1 1 100%; }
+  .album-info__credit {
+    -ms-flex: 1 1 100%;
+        flex: 1 1 100%; }
+  .album-info__link {
+    display: -ms-flexbox;
+    display: flex;
+    -ms-flex-align: center;
+        align-items: center; }
+    .album-info__link a {
+      margin-left: 0.75em;
+      margin-right: 0.75em; }
+
+.addPage__title {
+  text-align: center; }
+
+.addPage__links {
+  display: -ms-flexbox;
+  display: flex;
+  -ms-flex-pack: center;
+      justify-content: center; }
+
+.addPage__link {
+  margin: 1.5em; }
 
 .tags {
   margin: 0;
@@ -1147,7 +1250,7 @@ video {
     margin: 0 auto;
     position: relative;
     margin-top: -10rem;
-    box-shadow: 0 0 10px 2px rgba(0, 0, 0, 0.15); }
+    box-shadow: 0 0 10px 2px rgba(0, 0, 0, 0.3); }
   .single__body {
     display: -ms-flexbox;
     display: flex;
@@ -1168,6 +1271,14 @@ video {
     max-width: 100%;
     height: auto;
     display: block; }
+  .single__fullwidth {
+    margin-top: -1.5em;
+    width: 100%;
+    padding: 3em 1.5em; }
+    .single__fullwidth--black {
+      background: #000000; }
+    .single__fullwidth--ebony {
+      background: #111111; }
   .single__video {
     padding: 1.5em;
     width: 100%;
@@ -1180,17 +1291,26 @@ video {
       left: 0;
       height: 100%;
       width: 100%; }
-  .single__fullwidth {
-    margin-top: -1.5em;
-    width: 100%;
-    padding: 3em 1.5em; }
-    .single__fullwidth--black {
-      background: #111111; }
   .single__video-wrapper {
     height: 0;
     overflow: hidden;
     padding-bottom: 56.25%;
     position: relative; }
+  .single__albums {
+    max-width: 900px;
+    margin: 0 auto;
+    margin-top: 1.5em;
+    display: -ms-flexbox;
+    display: flex;
+    -ms-flex-wrap: wrap;
+        flex-wrap: wrap;
+    -ms-flex-pack: center;
+        justify-content: center; }
+  .single__album {
+    padding: 1.5em;
+    -ms-flex: 1 1 33.3%;
+        flex: 1 1 33.3%;
+    max-width: 300px; }
   .single__map {
     width: calc(100% + 6rem);
     max-width: none;
@@ -1206,6 +1326,19 @@ video {
     @media all and (max-width: 850px) {
       .single__location {
         margin-right: 0; } }
+  .single__gallery {
+    display: -ms-flexbox;
+    display: flex;
+    -ms-flex-pack: center;
+        justify-content: center; }
+  .single__gallery-thumb {
+    text-align: center; }
+  .single__gallery-thumb-img {
+    max-height: 200px;
+    box-shadow: 0 0 10px 2px rgba(0, 0, 0, 0.3);
+    border: solid 1px #000000; }
+    .single__gallery-thumb-img:hover {
+      cursor: pointer; }
   @media all and (min-width: 768px) and (max-width: 1024px) {
     .single__video {
       padding: 1.5em 0; }
@@ -1230,6 +1363,61 @@ video {
         left: 0;
         height: 100%;
         width: 100%; } }
+
+.modal {
+  display: none;
+  /* Hidden by default */
+  position: fixed;
+  /* Stay in place */
+  z-index: 1;
+  /* Sit on top */
+  top: 0;
+  right: 0;
+  bottom: 0;
+  left: 0;
+  width: 100%;
+  /* Full width */
+  height: 100%;
+  /* Full height */
+  overflow: auto;
+  /* Enable scroll if needed */
+  background-color: #111111;
+  /* Fallback color */
+  background-color: rgba(17, 17, 17, 0.8);
+  /* Black w/ opacity */ }
+  .modal__container {
+    z-index: 99999;
+    display: table;
+    margin: 100px auto;
+    padding: 1.5em;
+    border: 1px solid #111111;
+    width: auto;
+    /* Could be more or less, depending on screen size */
+    overflow-y: auto;
+    overflow-x: auto;
+    width: auto;
+    background: linear-gradient(0, #48ded4 0%, #a026bf 20%, #e82c75 60%, #FFC40E 85%, #48ded4 95%); }
+  .modal__title {
+    color: #222222;
+    text-align: center;
+    margin: 0; }
+  .modal__header {
+    position: relative; }
+  .modal__body {
+    width: auto;
+    padding: 1.5em; }
+    .modal__body img {
+      border: solid 1px #000000; }
+  .modal__close {
+    cursor: pointer;
+    line-height: 20px;
+    position: absolute;
+    top: 2px;
+    right: 2px;
+    color: #aaa;
+    float: right;
+    font-size: 28px;
+    font-weight: bold; }
 
 .heart__button {
   background: none;
@@ -1418,7 +1606,8 @@ video {
   height: 500px; }
 
 .popup {
-  width: 300px; }
+  width: 200px;
+  text-align: center; }
   .popup img {
     width: 100%; }
 
