@@ -39,6 +39,11 @@ body {
   max-width: 900px;
   margin: 0 auto; }
 
+.outer {
+  position: relative;
+  max-width: 1200px;
+  margin: 0 auto; }
+
 /* ================================= 
   MOBILE
 ==================================== */
@@ -1025,6 +1030,103 @@ video {
     -webkit-clip-path: polygon(0 0, 100% 0, 100% 90%, 0% 100%);
             clip-path: polygon(0 0, 100% 0, 100% 90%, 0% 100%); }
 
+.albums {
+  display: -ms-flexbox;
+  display: flex;
+  -ms-flex-wrap: wrap;
+      flex-wrap: wrap;
+  -ms-flex-pack: justify;
+      justify-content: space-between; }
+
+.album {
+  width: 50%;
+  position: relative; }
+  .album__edit {
+    width: 100%; }
+  .album__actions {
+    position: absolute; }
+  .album__action {
+    fill: #F6F6F6; }
+  .album__cover {
+    max-width: 100%;
+    height: auto;
+    display: block; }
+  .album__title {
+    font-size: 40px; }
+  @media all and (min-width: 768px) and (max-width: 1024px) {
+    .album {
+      width: 33.3%; } }
+  @media all and (min-width: 1025px) {
+    .album {
+      width: 25%; } }
+
+.album-info {
+  display: -ms-flexbox;
+  display: flex;
+  -ms-flex-wrap: wrap;
+      flex-wrap: wrap; }
+  .album-info__title {
+    -ms-flex: 1 1 45%;
+        flex: 1 1 45%;
+    font-size: 36px;
+    margin-right: 1.5em; }
+  .album-info__artist {
+    font-size: 36px;
+    position: relative;
+    text-align: right; }
+    .album-info__artist:before {
+      position: absolute;
+      left: -27px;
+      top: 15px;
+      content: 'by';
+      font-size: 20px;
+      color: #333333;
+      margin-right: 10px; }
+  .album-info__hr {
+    width: 100%;
+    color: #AAAAAA;
+    margin-bottom: 1.5em; }
+  .album-info__tracklist {
+    -ms-flex: 1 1 40%;
+        flex: 1 1 40%;
+    margin-top: 0; }
+  .album-info__credits {
+    display: -ms-flexbox;
+    display: flex;
+    -ms-flex: 1 1 60%;
+        flex: 1 1 60%;
+    -ms-flex-wrap: wrap;
+        flex-wrap: wrap; }
+  .album-info__date {
+    -ms-flex: 1 1 100%;
+        flex: 1 1 100%; }
+  .album-info__label {
+    -ms-flex: 1 1 100%;
+        flex: 1 1 100%; }
+  .album-info__credit {
+    -ms-flex: 1 1 100%;
+        flex: 1 1 100%; }
+  .album-info__link {
+    display: -ms-flexbox;
+    display: flex;
+    -ms-flex-align: center;
+        align-items: center; }
+    .album-info__link a {
+      margin-left: 0.75em;
+      margin-right: 0.75em; }
+
+.addPage__title {
+  text-align: center; }
+
+.addPage__links {
+  display: -ms-flexbox;
+  display: flex;
+  -ms-flex-pack: center;
+      justify-content: center; }
+
+.addPage__link {
+  margin: 1.5em; }
+
 .tags {
   margin: 0;
   padding: 0;
@@ -1169,6 +1271,14 @@ video {
     max-width: 100%;
     height: auto;
     display: block; }
+  .single__fullwidth {
+    margin-top: -1.5em;
+    width: 100%;
+    padding: 3em 1.5em; }
+    .single__fullwidth--black {
+      background: #000000; }
+    .single__fullwidth--ebony {
+      background: #111111; }
   .single__video {
     padding: 1.5em;
     width: 100%;
@@ -1181,19 +1291,26 @@ video {
       left: 0;
       height: 100%;
       width: 100%; }
-  .single__fullwidth {
-    margin-top: -1.5em;
-    width: 100%;
-    padding: 3em 1.5em; }
-    .single__fullwidth--black {
-      background: #000000; }
-    .single__fullwidth--ebony {
-      background: #111111; }
   .single__video-wrapper {
     height: 0;
     overflow: hidden;
     padding-bottom: 56.25%;
     position: relative; }
+  .single__albums {
+    max-width: 900px;
+    margin: 0 auto;
+    margin-top: 1.5em;
+    display: -ms-flexbox;
+    display: flex;
+    -ms-flex-wrap: wrap;
+        flex-wrap: wrap;
+    -ms-flex-pack: center;
+        justify-content: center; }
+  .single__album {
+    padding: 1.5em;
+    -ms-flex: 1 1 33.3%;
+        flex: 1 1 33.3%;
+    max-width: 300px; }
   .single__map {
     width: calc(100% + 6rem);
     max-width: none;

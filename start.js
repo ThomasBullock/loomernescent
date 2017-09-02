@@ -15,6 +15,7 @@ mongoose.connection.on('error', (err) => {
 
 // import all of our models
 require('./models/Band');
+require('./models/Album');
 require('./models/User');
 
 // Start our app!

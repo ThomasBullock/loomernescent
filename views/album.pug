@@ -1,0 +1,53 @@
+extends layout
+
+include icons/_bandcamp
+include icons/_spotify
+include icons/_cross
+
+block content
+	//- pre= h.dump(band)
+	.single
+		.single__hero
+			img.single__image(src=`/uploads/${band.photos.gallery[0] || 'Band.jpg' }`)
+			h2.title.title--single
+				a(href=`/bands/${band.slug}`) #{band.name}
+	.single__details
+		img(src=`/uploads/covers/${album.cover}`)
+		.album-info
+			h3.album-info__title #{album.title}
+			h3.album-info__artist #{album.artist}
+			hr.album-info__hr
+			ol.album-info__tracklist
+				each track in album.tracks
+					li.album-info__track #{track}
+			.album-info__credits
+				span.album-info__date
+					strong Released: 
+					!= h.moment(album.releaseDate).format("MMM Do YYYY")
+				span.album-info__label 
+					strong Label: 
+					| #{album.label} 
+				if album.producer.length
+					span.album-info__credit 
+						strong Producers: 
+						| #{album.producer.join(' - ')}
+				if album.mixedBy.length
+					span.album-info__credit 
+						strong Mixed: 
+						| #{album.mixedBy.join(' - ')}
+				if album.engineer.length
+					span.album-info__credit 
+						strong Engineer(s): 
+						| #{album.engineer.join(' - ')}
+				if album.spotifyURL
+					.album-info__link
+						span 
+							strong Stream It
+						a.album-info__spotify(href=`${album.spotifyURL}` target='_blank')
+							+spotify()
+				if album.bandcampURL
+					.album-info__link
+						span 
+							strong Buy It	
+						a.album-info__spotify(href=`${album.bandcampURL}` target='_blank')
+							+bandcamp()

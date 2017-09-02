@@ -1,5 +1,5 @@
 mixin bandForm(band = {})
-	form.add-band(action=`/add/${band._id || ''}` method="post" class="card" enctype="multipart/form-data")
+	form.add-band(action=`/addband/${band._id || ''}` method="post" class="card" enctype="multipart/form-data")
 		label(for="name") Name
 		input(type="text" id="band-name" name="name" value=band.name)
 		label(for="description") Description

@@ -4,7 +4,7 @@ include icons/_youtube
 include icons/_cross
 
 block content
-	//- pre= h.dump(band)
+	//- pre= h.dump(albums)
 	.single
 		.single__hero
 			img.single__image(src=`/uploads/${band.photos.gallery[0] || 'Band.jpg' }`)
@@ -48,6 +48,14 @@ block content
 					//- +youtube()
 					.single__video-wrapper
 						iframe(src=band.youtubePL frameborder="0" allowfullscreen)
+	if albums.length
+		.single__fullwidth.single__fullwidth
+			h2.modal__title Albums by #{band.name}
+			.single__albums
+				each album in albums
+					.single__album
+						a(href=`/album/${album.slug}`)
+							img(src=`/uploads/covers/${album.cover}`)
 	if band.photos.gallery
 		.single__fullwidth.single__fullwidth--ebony
 			.single__gallery

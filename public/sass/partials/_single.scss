@@ -83,19 +83,6 @@
     @include img-responsive();
   }
 
-  @include elem('video') {
-    padding: $base-spacing;
-    width: 100%;
-    margin: 0 auto;
-
-    embed,
-    object,
-    iframe {
-      @include position(absolute, 0 null null 0);
-      @include size(100%);
-    }
-  }
-
   @include elem('fullwidth') {
     margin-top: -$base-spacing;
     width: 100%;
@@ -110,11 +97,43 @@
     }    
   }
 
+  @include elem('video') {
+    padding: $base-spacing;
+    width: 100%;
+    margin: 0 auto;
+
+    embed,
+    object,
+    iframe {
+      @include position(absolute, 0 null null 0);
+      @include size(100%);
+    }
+  }
+
   @include elem('video-wrapper') {
     height: 0;
     overflow: hidden;
     padding-bottom: 56.25%; // For ratio 16:9. 75% if ratio is 4:3
     position: relative;    
+  }
+  
+  @include elem('albums') {
+    max-width: 900px;
+    margin: 0 auto;
+    margin-top: $base-spacing;
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;    
+  }
+
+  @include elem('album') {
+    padding: $base-spacing;
+    flex: 1 1 33.3%;
+    max-width: 300px;
+    
+    img {
+      // box-shadow: $small-shadow;
+    }
   }
 
   &__map {
