@@ -34,6 +34,10 @@ body {
     height: 10px;
     width: 100%; }
 
+.fullwidth {
+  position: relative;
+  width: 100%; }
+
 .inner {
   position: relative;
   max-width: 900px;
@@ -1598,12 +1602,11 @@ video {
     text-align: center; }
 
 .map {
-  padding: 20px;
   background: white;
   box-shadow: 0 0 10px rgba(0, 0, 0, 0.1), 0 5px 10px rgba(0, 0, 0, 0.05); }
 
 #map {
-  height: 500px; }
+  height: 600px; }
 
 .popup {
   width: 200px;

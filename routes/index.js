@@ -93,5 +93,6 @@ router.get('/favourites', authController.isLoggedIn, catchErrors(bandController.
 
 router.get('/api/v1/search', catchErrors(bandController.searchBands));
 router.get('/api/v1/bands/near', catchErrors(bandController.mapBands));
+router.get('/api/v1/bands/all', catchErrors(bandController.mapAllBands));
 router.post('/api/v1/bands/:id/loves', catchErrors(bandController.loveBand))
 module.exports = router;

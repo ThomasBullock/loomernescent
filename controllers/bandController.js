@@ -21,11 +21,65 @@ const multerOptions = {
 	}
 }
 
-exports.homePage = (req, res) => {
+const randomNum = (min, max) => {
+  min = Math.ceil(min);
+  max = Math.floor(max);
+  return Math.floor(Math.random() * (max - min)) + min; //The maximum is exclusive and the minimum is inclusive
+}
+
+// const uniqueRandomNum = (arr, tot, max) => {
+// 		while(arr.length < tot){
+// 		  var r = randomNum(0, max)-1
+// 		  var found = false;
+// 		  for(var i=0;i<arr.length;i++) {
+// 			if(arr[i]== r) {
+// 				found=true;break
+// 			}
+// 		  }
+// 		  if(!found)arr[arr.length] = r;
+// 		}
+// 	};
+
+
+exports.homePage = async (req, res) => {
 	// req.flash('info', 'Computer Says No...');
 	// req.flash('error', 'Computer Says No...');
-	// req.flash('success', 'Computer Says No...');		
-	res.render('index');
+	// req.flash('success', 'Computer Says No...');
+	const bands = await Band.find().select('name slug photos');
+	const albums = await Album.find().select('title slug cover');
+	const hero = [];
+	for(let i = 0; i < 12; i++) {
+		const select = randomNum(0, 2);
+		console.log(select);
+		if(select === 0) {
+			const choice = randomNum(0, bands.length);
+			const band = bands[choice];
+			bands.splice(choice, 1);
+			console.log(bands.length);
+			hero.push(
+				{
+					type: 'band',
+				 	name: band.name,
+				 	slug: band.slug,
+				 	img: band.photos.squareSm
+				}
+				)
+		} else {
+			const choice = randomNum(0, albums.length);			
+			const album = albums[choice];
+			albums.splice(choice, 1);
+			hero.push(
+				{
+					type: 'album',
+				 	name: album.title,
+				 	slug: album.slug,
+				 	img: `covers/${album.cover}`
+				}
+			)			 
+		}
+	}
+	// console.log(hero);		
+	res.render('index', { title: 'Loomernescent', hero });
 };
 
 exports.add = (req, res) => {
@@ -77,21 +131,28 @@ exports.resize = async(req, res, next) =>  {  //
 			req.body.photos.squareLg = `${uniqueID}_Lg.${extension}`;
 			const photoLarge = await jimp.read(req.files[i].buffer);			
 			await photoLarge.resize(800, jimp.AUTO);
-			await photoLarge.quality(30);
+			await photoLarge.quality(35);
 			await photoLarge.write('./public/uploads/' + req.body.photos.squareLg);
 
 			req.body.photos.squareSm = `${uniqueID}_Sm.${extension}`;
 			const photoSmall = await jimp.read(req.files[i].buffer);			
 			await photoSmall.resize(300, jimp.AUTO);
-			await photoSmall.quality(25);
+			await photoSmall.quality(30);
 			await photoSmall.write('./public/uploads/' + req.body.photos.squareSm);
 		} else {
 			const uniqueID = uuid.v4();
 			req.body.photos.gallery.push(`${uniqueID}_Lg.${extension}`);
 			const gallery = await jimp.read(req.files[i].buffer);
-			await gallery.resize(1000, jimp.AUTO);
-			await gallery.quality(40);
-			await gallery.write(`./public/uploads/${req.body.photos.gallery[req.body.photos.gallery.length - 1]}`);
+			if(checkDimensions.bitmap.width > checkDimensions.bitmap.height) {
+				await gallery.resize(1000, jimp.AUTO);
+				await gallery.quality(40);
+				await gallery.write(`./public/uploads/${req.body.photos.gallery[req.body.photos.gallery.length - 1]}`);
+			} else {
+				await gallery.resize(jimp.AUTO, 800);
+				await gallery.quality(40);
+				await gallery.write(`./public/uploads/${req.body.photos.gallery[req.body.photos.gallery.length - 1]}`);				
+			}
+
 
 			req.body.photos.galleryThumbs.push(`${uniqueID}_Sm.${extension}`);
 			const thumb = await jimp.read(req.files[i].buffer);
@@ -276,6 +337,26 @@ exports.mapBands = async (req, res) => {
 	// const projection
 	
 	const bands = await Band.find(q).select('slug name description location photos').limit(10);
+	res.json(bands)
+};
+
+exports.mapAllBands = async (req, res) => {
+	const coordinates = [req.query.lng, req.query.lat].map(parseFloat); // change string to numbers
+
+	const q = {
+		location: {
+			$near: {
+				$geometry: {
+					type: 'Point',
+					coordinates
+				},
+				$maxDistance: 20000
+			}
+		}
+	}
+	// const projection
+	
+	const bands = await Band.find().select('slug name description location photos');
 	res.json(bands)
 };
 

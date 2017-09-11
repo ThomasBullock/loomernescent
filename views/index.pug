@@ -1,12 +1,13 @@
 extends layout
 
 block content
+	//- pre= h.dump(hero)
 	- const links = ['Art Of Fighting', 'The Jesus and Mary Chain', 'Lush', 'Swervedriver', 'Loveless', 'MBV', 'Lush', 'Swervedriver', 'Loveless', 'Art Of Fighting', 'The Jesus and Mary Chain', 'Pychocandy']
 	.hero
 		.hero__link-wrapper
-			each link in links
-				a.hero__link(href=`${link}`)
-					img(src=`/images/photos/${link} Sq Md.jpg`)
+			each link in hero
+				a.hero__link(href=`${link.type}/${link.slug}`)
+					img(src=`/uploads/${link.img}` alt=`${link.name}`)
 			.hero__background
 				.hero__layer--left
 				.hero__layer--center
