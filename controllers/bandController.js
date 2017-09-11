@@ -65,7 +65,7 @@ exports.homePage = async (req, res) => {
 				}
 				)
 		} else {
-			const choice = randomNum(0, bands.length);			
+			const choice = randomNum(0, albums.length);			
 			const album = albums[choice];
 			albums.splice(choice, 1);
 			hero.push(
@@ -143,9 +143,16 @@ exports.resize = async(req, res, next) =>  {  //
 			const uniqueID = uuid.v4();
 			req.body.photos.gallery.push(`${uniqueID}_Lg.${extension}`);
 			const gallery = await jimp.read(req.files[i].buffer);
-			await gallery.resize(1000, jimp.AUTO);
-			await gallery.quality(40);
-			await gallery.write(`./public/uploads/${req.body.photos.gallery[req.body.photos.gallery.length - 1]}`);
+			if(checkDimensions.bitmap.width > checkDimensions.bitmap.height) {
+				await gallery.resize(1000, jimp.AUTO);
+				await gallery.quality(40);
+				await gallery.write(`./public/uploads/${req.body.photos.gallery[req.body.photos.gallery.length - 1]}`);
+			} else {
+				await gallery.resize(jimp.AUTO, 800);
+				await gallery.quality(40);
+				await gallery.write(`./public/uploads/${req.body.photos.gallery[req.body.photos.gallery.length - 1]}`);				
+			}
+
 
 			req.body.photos.galleryThumbs.push(`${uniqueID}_Sm.${extension}`);
 			const thumb = await jimp.read(req.files[i].buffer);
@@ -330,6 +337,26 @@ exports.mapBands = async (req, res) => {
 	// const projection
 	
 	const bands = await Band.find(q).select('slug name description location photos').limit(10);
+	res.json(bands)
+};
+
+exports.mapAllBands = async (req, res) => {
+	const coordinates = [req.query.lng, req.query.lat].map(parseFloat); // change string to numbers
+
+	const q = {
+		location: {
+			$near: {
+				$geometry: {
+					type: 'Point',
+					coordinates
+				},
+				$maxDistance: 20000
+			}
+		}
+	}
+	// const projection
+	
+	const bands = await Band.find().select('slug name description location photos');
 	res.json(bands)
 };
 
