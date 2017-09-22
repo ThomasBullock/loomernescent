@@ -1,0 +1,22 @@
+mixin bandCard(pedal = {})
+	.band
+		.band__hero
+			.band__actions
+				if user
+					.band__action.band__action--heart
+						form.heart(method="POST" action=`/api/v1/bands/${band.id}/loves`)
+							- const heartStrings = user.loves.map(obj => obj.toString())
+							- const heartClass = heartStrings.includes(band._id.toString()) ? 'heart__button--hearted' : ''
+							//- pre= h.dump(heartStrings)
+							button.heart__button(type="submit" name="heart" class=heartClass)
+								!= h.icon('heart')
+				//- user && band.author.equals(user._id)
+				if user && user.admin 
+					.band__action.band__action--edit
+						a(href=`/bands/${band._id}/edit`)
+							!= h.icon('pencil')
+			img(src=`/uploads/${band.photos.squareSm || 'band.jpg'}`)
+			h2.title
+				a(href=`/band/${band.slug}`) #{band.name}
+		.band__details
+			p= band.description.split(' ').slice(0, 25).join(' ')

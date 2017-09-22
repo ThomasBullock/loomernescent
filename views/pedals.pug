@@ -1,0 +1,10 @@
+extends layout
+
+include mixins/_pedalCard
+
+block content
+	.inner
+		h2= title
+		.bands
+			each pedal in pedals
+				+pedalCard(pedal)

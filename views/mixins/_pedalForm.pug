@@ -1,0 +1,16 @@
+mixin pedalForm(pedal = {})
+	form.add-band(action=`/addpedal/${pedal._id || ''}` method="post" class="card" enctype="multipart/form-data")
+		label(for="brand") Brand
+		input(type="text" id="brand" name="brand" value=(pedal.brand))
+		label(for="name") Pedal Name
+		input(type="text" id="name" name="name" value=(pedal.name))
+		label(for="associatedBands") Associated Bands
+		input(type="text" id="associatedBands" name="associatedBands" value=(pedal.associatedBands))
+		label(for="yearsManufactured") Years Manufactured 
+		input(type="text" id="yearsManufactured" name="yearsManufactured" value=(pedal.yearsManufactured && pedal.yearsManufactured.join(',')))
+		label(for="image") Image
+		input(type="file" id="image" name="image" accept="image/png, image/jpeg")
+		input(type="submit" value="Save -<" class="button")
+
+
+				

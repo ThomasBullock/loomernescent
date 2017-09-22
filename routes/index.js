@@ -2,6 +2,7 @@ const express = require('express');
 const router = express.Router();
 const bandController = require('../controllers/bandController');
 const albumController = require('../controllers/albumController');
+const pedalController = require('../controllers/pedalController');
 const userController = require('../controllers/userController');
 const authController = require('../controllers/authController');
 const { catchErrors } = require('../handlers/errorHandlers');
@@ -58,6 +59,18 @@ router.get('/album/:id/edit', catchErrors(albumController.editAlbum));
 
 router.get('/album/:slug', catchErrors(albumController.getAlbumBySlug))
 
+//// PEDALS ////
+
+router.get('/pedals', catchErrors(pedalController.getPedals));
+
+router.get('/addpedal', authController.isLoggedIn, pedalController.addPedal)
+
+router.post('/addpedal', 
+	pedalController.upload,
+	catchErrors(pedalController.resize),
+	pedalController.processPedalData,  	 
+	catchErrors(pedalController.createPedal)
+	);
 
 router.get('/tags', catchErrors(bandController.getBandsByTag));
 router.get('/tags/:tag', catchErrors(bandController.getBandsByTag));
