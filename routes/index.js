@@ -10,6 +10,7 @@ const { catchErrors } = require('../handlers/errorHandlers');
 // Do work here
 router.get('/', bandController.homePage);
 router.get('/bands', catchErrors(bandController.getBands));
+router.get('/bands/page/:page', catchErrors(bandController.getBands));
 router.get('/add', bandController.add);
 router.get('/addband', authController.isLoggedIn, bandController.addBand); // it will not make it passed isLogged if not logged in
 
