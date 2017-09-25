@@ -33,7 +33,6 @@ const spotifyOptions = (endpoint, token) => {
 	}
 };
 
-
 exports.getAlbums = async(req, res) => {
 	console.log('getting albums')
 	const albums = await Album.find();
@@ -54,7 +53,6 @@ exports.resize = async(req, res, next) => {
 		next()
 		return;
 	}
-	console.log(req.file)
 	const extension = req.file.mimetype.split('/')[1];
 	req.body.cover = `${uuid.v4()}.${extension}`;
 	// now we resize

@@ -17,6 +17,7 @@ mongoose.connection.on('error', (err) => {
 require('./models/Band');
 require('./models/Album');
 require('./models/User');
+require('./models/Pedal');
 
 // Start our app!
 const app = require('./app');
