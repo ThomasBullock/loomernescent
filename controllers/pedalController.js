@@ -19,8 +19,16 @@ const multerOptions = {
 	}
 };
 
+const getBandFromPersonnel = async(artist) => {
+	const band = await Band.find({ personnel: {$in: [artist] } })
+	console.log('me console the band');
+	console.log(band);
+	return band.slug;		
+}
+
 exports.getPedals = async(req, res) => {
-	res.render('pedals', {title: 'Pedals'})
+	const pedals = await Pedal.find();
+	res.render('pedals', {title: 'Pedals', pedals: pedals})
 }
 
 exports.addPedal = (req, res) => {
@@ -35,20 +43,51 @@ exports.resize = async(req, res, next) => {
 		next()
 		return;
 	}
-	console.log(req.file)
+	// console.log(req.file)
 	const extension = req.file.mimetype.split('/')[1];
 	req.body.image = `${uuid.v4()}.${extension}`;
 	// now we resize
 	const image = await jimp.read(req.file.buffer);
 	await image.resize(600, jimp.AUTO);
 	await image.quality(35);
-	await image.write(`./public/uploads/${req.body.image}`);
+	await image.write(`./public/uploads/pedals/${req.body.image}`);
 	// once we have written the photo to our filesystem keep going!
 	// console.log(req.body.cover);
 	next();			
 }
 
-exports.processPedalData = (req, res, next) => {
+exports.processPedalData = async(req, res, next) => {
+	const artists = req.body.associatedArtists.split(',').map( (item) => item.trim() );
+	const bands = await Band.find({ personnel: {$in: artists }}, { name: 1, slug: 1, personnel: 1 });
+
+	const bandsArray = bands.reverse().map( (band) => band.name );	
+	const bandsSlugArray = bands.map( (band) => band.slug );
+
+	// console.log(bandsArray)
+	// console.log(bandsSlugArray)
+
+	req.body.associatedBandsSlug = bandsSlugArray;
+	req.body.associatedBands = bandsArray;
+		
+	let filterBands = [];
+	bands.map( (band) => {  // build object containing pedal user their band and band slug
+		return band.personnel.map( (person) => {
+			if(artists.includes(person)) {
+				filterBands.push({
+					artist: person,
+					band: band.name,
+					slug: band.slug						
+				});
+
+			}
+		})
+	});
+		
+	req.body.usedBy = filterBands;
+		
+	if(req.body.type2 === 'None') {
+		req.body.type2 = null
+	}
 	const cleanArray = req.body.yearsManufactured.split(',').map( (year) => year.trim() );
 	if(req.body.yearsManufactured) {
 		req.body.yearsManufactured = cleanArray.map( (year) => {
@@ -61,8 +100,15 @@ exports.processPedalData = (req, res, next) => {
 }
 
 exports.createPedal = async(req, res) => {
-	console.log(req.body);
+	// console.log(req.body);
 	const pedal = await (new Pedal(req.body)).save();
 	req.flash('success', `Successfully Created ${pedal.name}`);
 	res.redirect(`/pedal/${pedal.slug}`);		
+}
+
+
+exports.getPedalBySlug = async(req, res) => {
+	const pedal = await Pedal.findOne({ slug: req.params.slug })
+	console.log(pedal)
+	res.render('pedal', {title: `${pedal.brand} ${pedal.name}`, pedal: pedal })
 }

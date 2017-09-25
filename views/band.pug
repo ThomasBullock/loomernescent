@@ -22,9 +22,10 @@ block content
 				p.single__detail 
 					strong Personnel: 
 					!= band.personnel.join(' | ')
-				p.single__detail 
-					strong Past Personnel: 
-					!= band.pastPersonnel.join(' | ')	
+				if band.pastPersonnel.length
+					p.single__detail 
+						strong Past Personnel: 
+						!= band.pastPersonnel.join(' | ')	
 				p.single__detail 
 					strong Record Labels: 
 					!= band.labels.join(' ')

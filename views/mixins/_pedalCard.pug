@@ -1,22 +1,21 @@
-mixin bandCard(pedal = {})
-	.band
-		.band__hero
-			.band__actions
+mixin pedalCard(pedal = {})
+	.pedal
+		.pedal__hero
+			.pedal__actions
 				if user
-					.band__action.band__action--heart
-						form.heart(method="POST" action=`/api/v1/bands/${band.id}/loves`)
+					.pedal__action.pedal__action--heart
+						form.heart(method="POST" action=`/api/v1/pedals/${pedal.id}/loves`)
 							- const heartStrings = user.loves.map(obj => obj.toString())
-							- const heartClass = heartStrings.includes(band._id.toString()) ? 'heart__button--hearted' : ''
+							- const heartClass = heartStrings.includes(pedal._id.toString()) ? 'heart__button--hearted' : ''
 							//- pre= h.dump(heartStrings)
 							button.heart__button(type="submit" name="heart" class=heartClass)
 								!= h.icon('heart')
-				//- user && band.author.equals(user._id)
+				//- user && pedal.author.equals(user._id)
 				if user && user.admin 
-					.band__action.band__action--edit
-						a(href=`/bands/${band._id}/edit`)
+					.pedal__action.pedal__action--edit
+						a(href=`/pedals/${pedal._id}/edit`)
 							!= h.icon('pencil')
-			img(src=`/uploads/${band.photos.squareSm || 'band.jpg'}`)
+			img(src=`/uploads/pedals/${pedal.image || 'Pedal.jpg'}`)
 			h2.title
-				a(href=`/band/${band.slug}`) #{band.name}
-		.band__details
-			p= band.description.split(' ').slice(0, 25).join(' ')
+				a(href=`/pedal/${pedal.slug}`) #{pedal.name}
+		.pedal__details

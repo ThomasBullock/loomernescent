@@ -14,10 +14,17 @@ const pedalSchema = new mongoose.Schema({
 		trim: true
 	},
 	slug: String,
-	associatedBands: {
-		type: [String],
-		trim: true
-	},
+	type: String,
+	type2: String,
+	usedBy: [
+		{
+			artist: String,
+			band: String,
+			slug: String
+		}
+	],
+		
+	
 	associatedBandsID: {
 		type: mongoose.Schema.ObjectId,
 		ref: 'Band'
@@ -29,5 +36,16 @@ const pedalSchema = new mongoose.Schema({
 	}, 			
 	image: String	
 })
+
+pedalSchema.pre('save', async function(next) {
+	if(!this.isModified('name')) {  // only when the band name is changed!
+		next(); // skip it
+		return // stop
+	}	
+	
+	this.slug = slug(`${this.brand}-${this.name}`);
+	
+	next();		
+});
 
 module.exports = mongoose.model('Pedal', pedalSchema);

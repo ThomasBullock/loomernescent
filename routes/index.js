@@ -63,7 +63,7 @@ router.get('/album/:slug', catchErrors(albumController.getAlbumBySlug))
 
 router.get('/pedals', catchErrors(pedalController.getPedals));
 
-router.get('/addpedal', authController.isLoggedIn, pedalController.addPedal)
+router.get('/addpedal', authController.isLoggedIn, pedalController.addPedal);
 
 router.post('/addpedal', 
 	pedalController.upload,
@@ -71,6 +71,8 @@ router.post('/addpedal',
 	pedalController.processPedalData,  	 
 	catchErrors(pedalController.createPedal)
 	);
+
+router.get('/pedal/:slug', catchErrors(pedalController.getPedalBySlug));
 
 router.get('/tags', catchErrors(bandController.getBandsByTag));
 router.get('/tags/:tag', catchErrors(bandController.getBandsByTag));
