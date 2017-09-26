@@ -34,7 +34,8 @@ router.get('/band/:slug', catchErrors(bandController.getBandBySlug));
 
 /// Albums
 
-router.get('/albums', catchErrors(albumController.getAlbums)); 
+router.get('/albums', catchErrors(albumController.getAlbums));
+router.get('/albums/page/:page', catchErrors(albumController.getAlbums)); 
 
 router.get('/addalbum', authController.isLoggedIn, albumController.addAlbum);
 
@@ -63,6 +64,7 @@ router.get('/album/:slug', catchErrors(albumController.getAlbumBySlug))
 //// PEDALS ////
 
 router.get('/pedals', catchErrors(pedalController.getPedals));
+router.get('/pedals/page/:page', catchErrors(pedalController.getPedals));
 
 router.get('/addpedal', authController.isLoggedIn, pedalController.addPedal);
 

@@ -34,10 +34,29 @@ const spotifyOptions = (endpoint, token) => {
 };
 
 exports.getAlbums = async(req, res) => {
+	const page = req.params.page || 1;
+	const limit = 12;
+	const skip = (limit * page) - limit;
 	console.log('getting albums')
-	const albums = await Album.find();
-	// console.log(albums);
-	res.render('albums', {title: 'Albums', albums: albums});
+	// const albums = await Album.find();
+	
+	const albumsPromise = Album
+		.find()
+		.skip(skip)
+		.limit(limit)
+		
+	const countPromise = Album.count();
+	
+	const [albums, count ] = await Promise.all([albumsPromise, countPromise])
+	console.log(count);
+	console.log(albums);
+	const pages = Math.ceil(count / limit);
+	if(!albums.length && skip) {
+		req.flash('info', `Hey! You aked for page ${page}. But that doesn't exist So I put you on page ${pages}`)
+		res.redirect(`/albums/page/${pages}`);
+		return;
+	}	
+	res.render('albums', {title: 'Albums', albums: albums, page: page, pages: pages, count: count});
 }
 
 exports.addAlbum = (req, res) => {
