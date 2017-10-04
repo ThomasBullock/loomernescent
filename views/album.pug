@@ -10,12 +10,13 @@ block content
 		.single__hero
 			img.single__image(src=`/uploads/${band.photos.gallery[0] || 'Band.jpg' }`)
 			h2.title.title--single
-				a(href=`/bands/${band.slug}`) #{band.name}
+				a(href=`/band/${band.slug}`) #{band.name}
 	.single__details
 		img(src=`/uploads/covers/${album.cover}`)
 		.album-info
 			h3.album-info__title #{album.title}
-			h3.album-info__artist #{album.artist}
+			a(href=`/band/${band.slug}`) 
+				h3.album-info__artist #{album.artist}
 			hr.album-info__hr
 			ol.album-info__tracklist
 				each track in album.tracks

@@ -1,6 +1,7 @@
 extends layout
 
 include mixins/_bandCard
+include mixins/_pagination
 
 block content
 	.inner
@@ -8,3 +9,4 @@ block content
 		.bands
 			each band in bands
 				+bandCard(band)
+		+pagination(page, pages, count, 'bands')

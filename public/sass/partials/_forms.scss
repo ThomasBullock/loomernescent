@@ -20,6 +20,24 @@ input, textarea {
   flex: 1 1 50%;
 }
 
+fieldset {
+  border: none;
+  display: flex;
+  justify-content: space-between;
+  flex-wrap: nowrap;
+}
+
+.effects {
+  display: flex;
+}
+
+.effect-select {
+  width: 50%;
+  select {
+    width: 100%;
+  }
+}
+ 
 label {
   padding: 10px 0;
   display: block;

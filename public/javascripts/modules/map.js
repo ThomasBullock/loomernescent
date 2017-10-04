@@ -3,14 +3,20 @@ import styles from './mapStyles';
 
 const mapOptions = {
 		center: { lat: 43.2, lng: 0 },
-		zoom: 6,
+		zoom: 5,
 		styles: styles
 	};
 
 console.log(styles);
 
-function loadBands(map, lat = 51.454, lng = -0.978 ) {
-	axios.get(`/api/v1/bands/near?lat=${lat}&lng=${lng}`)
+function loadBands(map, lat, lng) {
+	let apiRequest;
+	if(!lat && !lng) {
+		apiRequest = `/api/v1/bands/all`;
+	} else {
+		apiRequest = `/api/v1/bands/near?lat=${lat}&lng=${lng}`;
+	}
+	axios.get(apiRequest)
 		.then(res => {
 			const places = res.data
 			console.log(places)
@@ -54,16 +60,15 @@ function loadBands(map, lat = 51.454, lng = -0.978 ) {
 			map.setCenter(bounds.getCenter());
 			map.fitBounds(bounds);
 			if(markers.length === 1) {
-				map.setZoom(map.getZoom() - 10);				
-			} else {
-				map.setZoom(map.getZoom() - 1);	
+				map.setZoom(map.getZoom() - 12);				
+			} else if(markers.length <= 10) {
+				map.setZoom(map.getZoom() - 8);	
 			}
 
 		})
 }
 
 function makeMap(mapDiv) {
-	console.log(mapDiv);
 	if(!mapDiv) return;  // dont run on pages without map!
 	
 	// make our map

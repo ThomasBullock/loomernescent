@@ -9,7 +9,7 @@
 
 @font-face {
     font-family: 'nexarust';
-    src: url('/fonts/nexa-rust.sans-black.otf') format('opentype');
+    src: url('/fonts/NexaRustSans-Black.otf') format('opentype');
     font-weight: normal;
     font-style: normal;
 }
@@ -52,34 +52,37 @@ strong {
 
 .title {
   word-wrap: break-word;
+  font-family: 'impact';
   position: relative;
   z-index: 2;
   margin:0;
   font-size: 40px;
   z-index: 2;
   line-height:1.1;
-  transform: skew(0, -3deg);
+  color: $vapor;
+  // transform: skew(0, -3deg);
   &--long {
     font-size: 30px;
   }
-  &:before {
-    content: '';
-    width:50px;
-    left:0;
-    top:0;
-    height:100%;
-    // top:10%;
-    display: block;
-    position: absolute;
-    z-index: -1;
-    transform:skew(-5deg)
-  }
+  // &:before {
+  //   content: '';
+  //   width:50px;
+  //   left:0;
+  //   top:0;
+  //   height:100%;
+  //   // top:10%;
+  //   display: block;
+  //   position: absolute;
+  //   z-index: -1;
+  //   transform:skew(-5deg)
+  // }
   line-height:1.1;
   // inline link inside
   a {
-    border-bottom: 0;
-    $yellowa: rgba($yellow,0.8);
-    background-image: linear-gradient(to right, $yellowa 100%, $yellowa 50%);
+    color: $vapor;
+    // border-bottom: 0;
+    // $yellowa: rgba($yellow,0.8);
+    // background-image: linear-gradient(to right, $yellowa 100%, $yellowa 50%);
   }
 }
 
@@ -88,6 +91,10 @@ strong {
   margin-top: -9rem;
   font-size: 10rem;
   text-align: center;
+}
+
+.title--page {
+  font-family: 'nexarust';  
 }
 
 

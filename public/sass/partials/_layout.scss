@@ -21,10 +21,15 @@ body {
 //   flex-direction: column;
 // }
 
+.fullwidth {
+  position: relative;
+  width: 100%;
+}
+
 .inner {
   position: relative;
   max-width:900px;
-  margin: 0 auto;
+  margin: 0 auto $base-spacing * 2;
 }
 
 .outer {

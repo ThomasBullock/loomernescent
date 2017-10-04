@@ -34,10 +34,14 @@ body {
     height: 10px;
     width: 100%; }
 
+.fullwidth {
+  position: relative;
+  width: 100%; }
+
 .inner {
   position: relative;
   max-width: 900px;
-  margin: 0 auto; }
+  margin: 0 auto 3em; }
 
 .outer {
   position: relative;
@@ -562,7 +566,7 @@ template {
 
 @font-face {
   font-family: 'nexarust';
-  src: url("/fonts/nexa-rust.sans-black.otf") format("opentype");
+  src: url("/fonts/NexaRustSans-Black.otf") format("opentype");
   font-weight: normal;
   font-style: normal; }
 
@@ -596,37 +600,28 @@ strong {
 
 .title {
   word-wrap: break-word;
+  font-family: 'impact';
   position: relative;
   z-index: 2;
   margin: 0;
   font-size: 40px;
   z-index: 2;
   line-height: 1.1;
-  -ms-transform: skew(0, -3deg);
-      transform: skew(0, -3deg);
+  color: #F6F6F6;
   line-height: 1.1; }
   .title--long {
     font-size: 30px; }
-  .title:before {
-    content: '';
-    width: 50px;
-    left: 0;
-    top: 0;
-    height: 100%;
-    display: block;
-    position: absolute;
-    z-index: -1;
-    -ms-transform: skew(-5deg);
-        transform: skew(-5deg); }
   .title a {
-    border-bottom: 0;
-    background-image: linear-gradient(to right, rgba(255, 196, 14, 0.8) 100%, rgba(255, 196, 14, 0.8) 50%); }
+    color: #F6F6F6; }
 
 .title--single {
   max-width: 600px;
   margin-top: -9rem;
   font-size: 10rem;
   text-align: center; }
+
+.title--page {
+  font-family: 'nexarust'; }
 
 input, textarea {
   width: 100%;
@@ -642,6 +637,24 @@ input, textarea {
   width: 50%;
   -ms-flex: 1 1 50%;
       flex: 1 1 50%; }
+
+fieldset {
+  border: none;
+  display: -ms-flexbox;
+  display: flex;
+  -ms-flex-pack: justify;
+      justify-content: space-between;
+  -ms-flex-wrap: nowrap;
+      flex-wrap: nowrap; }
+
+.effects {
+  display: -ms-flexbox;
+  display: flex; }
+
+.effect-select {
+  width: 50%; }
+  .effect-select select {
+    width: 100%; }
 
 label {
   padding: 10px 0;
@@ -1114,6 +1127,72 @@ video {
     .album-info__link a {
       margin-left: 0.75em;
       margin-right: 0.75em; }
+
+.pedals {
+  display: -ms-flexbox;
+  display: flex;
+  -ms-flex-wrap: wrap;
+      flex-wrap: wrap;
+  -ms-flex-pack: justify;
+      justify-content: space-between; }
+
+.pedal__actions {
+  position: relative;
+  z-index: 2;
+  display: -ms-flexbox;
+  display: flex;
+  color: white;
+  -ms-flex-align: center;
+      align-items: center;
+  -ms-flex-pack: distribute;
+      justify-content: space-around; }
+
+.pedal__action {
+  font-size: 10px; }
+  .pedal__action svg {
+    width: 25px;
+    fill: white; }
+
+.pedal__hero {
+  position: relative;
+  padding: 0 10px 0 10px;
+  text-align: right;
+  min-height: 200px; }
+  @media all and (max-width: 650px) {
+    .pedal__hero {
+      min-height: 240px; } }
+  .pedal__hero:before {
+    display: block;
+    content: '';
+    position: absolute;
+    height: 105%;
+    width: 100%;
+    top: 0;
+    right: 0;
+    background: linear-gradient(45deg, #05b3d6 0%, rgba(5, 179, 214, 0) 70%), linear-gradient(135deg, #0958ec 10%, rgba(9, 88, 236, 0) 80%), linear-gradient(225deg, #d209ec 10%, rgba(210, 9, 236, 0) 80%), linear-gradient(315deg, #05e129 100%, rgba(5, 225, 41, 0) 70%);
+    opacity: 0.6;
+    z-index: 1;
+    -webkit-clip-path: polygon(0 0, 100% 0, 100% 90%, 0% 100%);
+            clip-path: polygon(0 0, 100% 0, 100% 90%, 0% 100%); }
+  .pedal__hero img {
+    height: 105%;
+    width: 100%;
+    top: 0;
+    right: 0;
+    position: absolute;
+    left: 0;
+    object-fit: cover;
+    -webkit-clip-path: polygon(0 0, 100% 0, 100% 90%, 0% 100%);
+            clip-path: polygon(0 0, 100% 0, 100% 90%, 0% 100%); }
+
+.pedal-info__image {
+  width: 90%;
+  height: auto;
+  margin: 0 auto; }
+
+.pedal-info__title {
+  width: 100%;
+  text-align: center; }
 
 .addPage__title {
   text-align: center; }
@@ -1598,12 +1677,11 @@ video {
     text-align: center; }
 
 .map {
-  padding: 20px;
   background: white;
   box-shadow: 0 0 10px rgba(0, 0, 0, 0.1), 0 5px 10px rgba(0, 0, 0, 0.05); }
 
 #map {
-  height: 500px; }
+  height: 600px; }
 
 .popup {
   width: 200px;

@@ -1,0 +1,12 @@
+extends layout
+
+include mixins/_pedalCard
+include mixins/_pagination
+
+block content
+	.inner
+		h2= title
+		.pedals
+			each pedal in pedals
+				+pedalCard(pedal)
+		+pagination(page, pages, count, 'pedals')
