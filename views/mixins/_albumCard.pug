@@ -4,8 +4,8 @@ mixin albumCard(album = {})
 			if user
 				.album__action.album__action--heart
 					form.heart(method="POST" action=`/api/v1/albums/${album._id}/loves`)
-						//- - const heartStrings = user.loves.map(obj => obj.toString())
-						//- - const heartClass = heartStrings.includes(band._id.toString()) ? 'heart__button--hearted' : ''
+						- const heartStrings = user.loves.map(obj => obj.toString())
+						- const heartClass = heartStrings.includes(album._id.toString()) ? 'heart__button--hearted' : ''
 						//- pre= h.dump(heartStrings)
 						button.heart__button(type="submit" name="heart" class=heartClass)
 							!= h.icon('heart')

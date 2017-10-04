@@ -130,3 +130,11 @@ exports.getPedalBySlug = async(req, res) => {
 	console.log(pedal)
 	res.render('pedal', {title: `${pedal.brand} ${pedal.name}`, pedal: pedal })
 }
+
+exports.lovePedal = async (req, res) => {
+	// have they already loved the band??
+
+	// if the users loves array includes the pedal.id from the post request we remove it ($pull) 
+	// otherwise add it to the array $addtoset
+
+}
