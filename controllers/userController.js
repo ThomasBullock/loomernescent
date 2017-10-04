@@ -2,6 +2,7 @@ const mongoose = require('mongoose');
 const User = mongoose.model('User');
 const Band = mongoose.model('Band');
 const Album = mongoose.model('Album');
+const Pedal = mongoose.model('Pedal');
 const promisify = require('es6-promisify');
 
 exports.loginForm = (req, res) => {
@@ -71,11 +72,12 @@ exports.getFavourites = async (req, res) => {
 	// })
 	// console.log(loves)
 	const bands = await Band.find({ _id: {$in: req.user.loves }})
-	const albums = await Album.find({ _id: {$in: req.user.loves } } )
+	const albums = await Album.find({ _id: {$in: req.user.loves } })
+	const pedals = await Pedal.find({ _id: {$in: req.user.loves }})
 	// or we could query a bunch of bands and find those bands whose ID is in our current love array
 	// const bands = await Band.find({
 	// 	_id: { $in: req.user.loves } // it will find any bands where their ID is in an array (req.user.loves)
 	// });
 	console.log(bands, albums)
-	res.render('bands', {title: 'My Favourites', band: [] });
+	res.render('favourites', {title: 'My Favourites', bands: bands, albums: albums });
 }

@@ -114,4 +114,5 @@ router.get('/api/v1/bands/near', catchErrors(bandController.mapBands));
 router.get('/api/v1/bands/all', catchErrors(bandController.mapAllBands));
 router.post('/api/v1/bands/:id/loves', catchErrors(bandController.loveBand))
 router.post('/api/v1/albums/:id/loves', catchErrors(albumController.loveAlbum))
+router.post('/api/v1/pedals/:id/loves', catchErrors(pedalController.lovePedal))
 module.exports = router;
