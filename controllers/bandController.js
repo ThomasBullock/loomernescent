@@ -383,6 +383,7 @@ exports.mapPage = (req, res) => {
 }
 
 exports.loveBand = async (req, res) => {
+	console.log('loving band!')
 	// have they already loved the band??
 	const loves = req.user.loves.map(obj => obj.toString());
 	// if the users loves array includes the band.id from the post request we remove it ($pull) 

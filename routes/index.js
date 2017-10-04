@@ -105,7 +105,7 @@ router.post('/account/reset/:token',
 );
 router.get('/map', bandController.mapPage);
 
-router.get('/favourites', authController.isLoggedIn, catchErrors(bandController.getFavourites));
+router.get('/favourites', authController.isLoggedIn, catchErrors(userController.getFavourites));
 
 // API ///
 
@@ -113,4 +113,5 @@ router.get('/api/v1/search', catchErrors(bandController.searchBands));
 router.get('/api/v1/bands/near', catchErrors(bandController.mapBands));
 router.get('/api/v1/bands/all', catchErrors(bandController.mapAllBands));
 router.post('/api/v1/bands/:id/loves', catchErrors(bandController.loveBand))
+router.post('/api/v1/albums/:id/loves', catchErrors(albumController.loveAlbum))
 module.exports = router;

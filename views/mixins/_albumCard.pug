@@ -3,7 +3,7 @@ mixin albumCard(album = {})
 		.album__actions
 			if user
 				.album__action.album__action--heart
-					form.heart(method="POST" action=`/api/v1/bands/${album.id}/loves`)
+					form.heart(method="POST" action=`/api/v1/albums/${album._id}/loves`)
 						//- - const heartStrings = user.loves.map(obj => obj.toString())
 						//- - const heartClass = heartStrings.includes(band._id.toString()) ? 'heart__button--hearted' : ''
 						//- pre= h.dump(heartStrings)

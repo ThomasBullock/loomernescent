@@ -231,4 +231,21 @@ exports.updateAlbum = async (req, res) => {
 	res.redirect('/albums');
 }
 
+exports.loveAlbum = async (req, res) => {
+	console.log('hearting album')
+	
+	const loves = req.user.loves.map(obj => obj.toString());
+	// console.log(loves)
+	// if the users loves array includes the band.id from the post request we remove it ($pull) 
+	// otherwise add it to the array $addtoset
+	const operator = loves.includes(req.params.id) ? '$pull' : '$addToSet';
+	const user = await User
+		.findByIdAndUpdate( req.user.id, 
+			{ [operator] : { loves: req.params.id }},
+			{ new: true }
+			);
+	res.json(user)	
+
+}
+
 
