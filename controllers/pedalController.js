@@ -27,8 +27,26 @@ const getBandFromPersonnel = async(artist) => {
 }
 
 exports.getPedals = async(req, res) => {
-	const pedals = await Pedal.find();
-	res.render('pedals', {title: 'Pedals', pedals: pedals})
+	const page = req.params.page || 1;
+	const limit = 2;
+	const skip = (limit * page) - limit;
+	
+	const pedalsPromise = Pedal
+		.find()
+		.skip(skip)
+		.limit(limit)
+		
+	const countPromise = Pedal.count();
+	
+	const [ pedals, count ] = await Promise.all([pedalsPromise, countPromise]);
+	
+	const pages = Math.ceil(count / limit);
+	if(!pedals.length && skip) {
+		req.flash('info', `Hey! You aked for page ${page}. But that doesn't exist So I put you on page ${pages}`)
+		res.redirect(`/pedals/page/${pages}`);
+		return;
+	}		
+	res.render('pedals', {title: 'Pedals', pedals: pedals, page: page, pages: pages, count: count})
 }
 
 exports.addPedal = (req, res) => {
@@ -111,4 +129,12 @@ exports.getPedalBySlug = async(req, res) => {
 	const pedal = await Pedal.findOne({ slug: req.params.slug })
 	console.log(pedal)
 	res.render('pedal', {title: `${pedal.brand} ${pedal.name}`, pedal: pedal })
+}
+
+exports.lovePedal = async (req, res) => {
+	// have they already loved the band??
+
+	// if the users loves array includes the pedal.id from the post request we remove it ($pull) 
+	// otherwise add it to the array $addtoset
+
 }
