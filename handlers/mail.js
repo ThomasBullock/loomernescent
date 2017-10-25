@@ -3,13 +3,23 @@ const pug = require('pug');
 const juice = require('juice');
 const htmlToText = require('html-to-text');
 const promisify = require('es6-promisify');
+const postmark = require("postmark");
+
+// const transport = nodemailer.createTransport({
+// 	host: process.env.MAIL_HOST,
+// 	port: process.env.MAIL_PORT,
+// 	auth: {
+// 		user: process.env.MAIL_USER,
+// 		pass: process.env.MAIL_PASS
+// 	}
+// });
 
 const transport = nodemailer.createTransport({
-	host: process.env.MAIL_HOST,
-	port: process.env.MAIL_PORT,
+	host: process.env.POSTMARK_HOST,
+	port: process.env.POSTMARK_PORT,
 	auth: {
-		user: process.env.MAIL_USER,
-		pass: process.env.MAIL_PASS
+		user: process.env.POSTMARK_USER,
+		pass: process.env.POSTMARK_PASS
 	}
 });
 
@@ -31,7 +41,7 @@ exports.send = async (options) => {
 	const html = generateHTML(options.filename, options );
 	const text = htmlToText.fromString(html);
 	const mailOptions = {
-		from: `Loomernescent <noreply@loomernescent.com>`,
+		from: `Loomernescent <talk@loomernescent.com>`,
 		to: options.user.email,
 		subject: options.subject,
 		html: html,

@@ -4,6 +4,7 @@ const Band = mongoose.model('Band');
 const Album = mongoose.model('Album');
 const Pedal = mongoose.model('Pedal');
 const promisify = require('es6-promisify');
+const mail = require('../handlers/mail');
 
 exports.loginForm = (req, res) => {
 	res.render('login', { title: 'Login' });
@@ -41,6 +42,12 @@ exports.register = async (req, res, next) => {
 	const user = new User({ email: req.body.email, name: req.body.name });
 	const register = promisify(User.register, User) // see userSchema.plugin in User model for register comes from
 	await register(user, req.body.password);
+	await mail.send({
+	user: user,
+  filename: 'welcome',  // the name of the pug file to render		
+	subject: 'Welcome to Loomernescent'
+	// resetURL: resetURL // this will be sent through to the pug file that is rendered by generateHTML in mail.js
+})
 	next(); 
 }
 
