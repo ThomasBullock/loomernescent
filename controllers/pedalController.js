@@ -45,7 +45,8 @@ exports.getPedals = async(req, res) => {
 		req.flash('info', `Hey! You aked for page ${page}. But that doesn't exist So I put you on page ${pages}`)
 		res.redirect(`/pedals/page/${pages}`);
 		return;
-	}		
+	}
+	console.log(pedals)		
 	res.render('pedals', {title: 'Pedals', pedals: pedals, page: page, pages: pages, count: count})
 }
 
