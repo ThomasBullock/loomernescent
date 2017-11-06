@@ -1229,7 +1229,6 @@ video {
       flex-wrap: wrap; }
 
 .tag {
-  display: block;
   margin-right: 1rem;
   /* ================================= 
     MOBILE
@@ -1270,6 +1269,9 @@ video {
       background: #9f9bd3; }
       .tag__link--active .tag__text {
         color: white; }
+  .tag__pick {
+    width: 100px;
+    height: 50px; }
   .tag__text {
     padding: 1rem 1rem;
     display: block; }

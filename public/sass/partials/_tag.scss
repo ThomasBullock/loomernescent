@@ -9,7 +9,7 @@
 }
 
 .tag {
-  display: block;
+  // display: block;
   margin-right: 1rem;
   @include elem('choice') {
     display: flex;
@@ -43,6 +43,12 @@
       }
     }
   }
+
+  @include elem('pick') {
+    width: 100px;
+    height: 50px;
+  }
+
   @include elem('text') {
     padding: 1rem 1rem;
     display: block;
