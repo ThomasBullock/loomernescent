@@ -50,6 +50,10 @@
     position: relative;
     margin-top: -10rem;
     box-shadow: $big-shadow;
+    
+    @include mod('margin') {
+      margin-bottom: $base-spacing; 
+    }
   }
 
   @include elem('body') {
