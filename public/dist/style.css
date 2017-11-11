@@ -1229,7 +1229,8 @@ video {
       flex-wrap: wrap; }
 
 .tag {
-  margin-right: 1rem;
+  -ms-flex: 0 1 20px;
+      flex: 0 1 20px;
   /* ================================= 
     MOBILE
   ==================================== */
@@ -1258,20 +1259,30 @@ video {
       .tag__choice input:checked + label {
         background: #FFC40E; }
   .tag__link {
-    background: #FFC40E;
     color: #000000;
     display: -ms-flexbox;
     display: flex;
-    padding-left: 10px;
-    -webkit-clip-path: polygon(10px 0%, 100% 1%, 100% 100%, 10px 100%, 0% 50%);
-            clip-path: polygon(10px 0%, 100% 1%, 100% 100%, 10px 100%, 0% 50%); }
-    .tag__link--active {
-      background: #9f9bd3; }
-      .tag__link--active .tag__text {
-        color: white; }
+    padding-left: 10px; }
+    .tag__link:hover {
+      fill: green; }
+      .tag__link:hover .tag__body {
+        transition: all 300ms ease;
+        fill: pink; }
+    .tag__link--active .tag__text {
+      color: white; }
+    .tag__link--active .tag__body {
+      fill: purple; }
+    .tag__link svg {
+      stroke: #363171;
+      fill: #363171; }
+  .tag__body {
+    fill: #EE7297; }
   .tag__pick {
-    width: 100px;
-    height: 50px; }
+    width: 200px;
+    height: 100px;
+    fill: red; }
+    .tag__pick svg text {
+      fill: purple; }
   .tag__text {
     padding: 1rem 1rem;
     display: block; }

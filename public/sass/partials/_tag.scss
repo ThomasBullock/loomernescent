@@ -10,7 +10,9 @@
 
 .tag {
   // display: block;
-  margin-right: 1rem;
+  // margin-right: 1rem;
+  flex: 0 1 20px;
+  // width: 20%;
   @include elem('choice') {
     display: flex;
     justify-content: center;
@@ -31,22 +33,53 @@
     }
   }
   @include elem('link') {
-    background:$yellow;
+    // background:$yellow;
     color:$black;
     display: flex;
     padding-left: 10px;
-    clip-path: polygon(10px 0%, 100% 1%, 100% 100%, 10px 100%, 0% 50%);
+
+
+
+    &:hover {
+      fill: green;
+
+      .tag__body {
+        transition: all $base-duration * 2 $base-timing;        
+        fill: pink;
+      } 
+    }    
+
+
     @include mod('active') {
-      background: lighten($purple, 40%);
+      // background: lighten($purple, 40%);
       .tag__text {
         color: white;
       }
+
+      .tag__body {
+        fill: purple;
+      }    
+    }
+
+    svg {
+      stroke: #363171;
+      fill: #363171;
     }
   }
 
+  @include elem('body') {
+    fill: $pink;
+
+  }
+
   @include elem('pick') {
-    width: 100px;
-    height: 50px;
+    width: 200px;
+    height: 100px;
+    fill: red;
+
+    svg text {
+      fill: purple;
+    }
   }
 
   @include elem('text') {
