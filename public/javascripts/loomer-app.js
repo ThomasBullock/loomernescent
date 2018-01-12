@@ -40,5 +40,6 @@ const loveForms = document.querySelectorAll('form.heart');
 loveForms.forEach( (form) => {
 	form.addEventListener('submit', ajaxHeart)
 })
+console.log(loveForms);
 
 

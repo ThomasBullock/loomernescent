@@ -245,9 +245,27 @@ exports.createBand = async (req, res) => {
 }
 
 exports.getBands = async (req, res) => {
+	const page = req.params.page || 1;
+	const limit = 6;
+	const skip = (limit * page) - limit; 
 	// 1. Query the database for a list of all bands
-	const bands = await Band.find();
-	res.render('bands', { title: 'Bands', bands: bands });
+	const bandsPromise = Band
+		.find()
+		.skip(skip)
+		.limit(limit)
+		// .sort({created: 'desc' })
+		
+	const countPromise = Band.count();
+
+	
+	const [bands, count] = await Promise.all([bandsPromise, countPromise]);	
+	const pages = Math.ceil(count / limit);
+	if(!bands.length && skip) {
+		req.flash('info', `Hey! You aked for page ${page}. But that doesn't exist So I put you on page ${pages}`)
+		res.redirect(`/bands/page/${pages}`);
+		return;
+	}
+	res.render('bands', { title: 'Bands' , bands: bands, page: page, pages: pages, count: count });
 }
 
 const confirmOwner = (store, user) => {
@@ -365,6 +383,7 @@ exports.mapPage = (req, res) => {
 }
 
 exports.loveBand = async (req, res) => {
+	console.log('loving band!')
 	// have they already loved the band??
 	const loves = req.user.loves.map(obj => obj.toString());
 	// if the users loves array includes the band.id from the post request we remove it ($pull) 

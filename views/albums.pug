@@ -1,6 +1,7 @@
 extends layout
 
 include mixins/_albumCard
+include mixins/_pagination
 
 block content
 	.outer
@@ -8,4 +9,5 @@ block content
 		.albums
 			each album in albums
 				+albumCard(album)
+		+pagination(page, pages, count, 'albums')
 

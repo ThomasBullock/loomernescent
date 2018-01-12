@@ -2,6 +2,7 @@ import axios from 'axios';
 
 function ajaxHeart(e) {
 	e.preventDefault();
+	console.log(this.action);
 
 	axios.post(this.action)
 		.then(res => {

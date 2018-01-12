@@ -1,6 +1,10 @@
 const mongoose = require('mongoose');
 const User = mongoose.model('User');
+const Band = mongoose.model('Band');
+const Album = mongoose.model('Album');
+const Pedal = mongoose.model('Pedal');
 const promisify = require('es6-promisify');
+const mail = require('../handlers/mail');
 
 exports.loginForm = (req, res) => {
 	res.render('login', { title: 'Login' });
@@ -38,6 +42,12 @@ exports.register = async (req, res, next) => {
 	const user = new User({ email: req.body.email, name: req.body.name });
 	const register = promisify(User.register, User) // see userSchema.plugin in User model for register comes from
 	await register(user, req.body.password);
+	await mail.send({
+	user: user,
+  filename: 'welcome',  // the name of the pug file to render		
+	subject: 'Welcome to Loomernescent'
+	// resetURL: resetURL // this will be sent through to the pug file that is rendered by generateHTML in mail.js
+})
 	next(); 
 }
 
@@ -61,3 +71,20 @@ exports.updateAccount = async (req, res) => {
 	res.redirect('back')
 }
 
+exports.getFavourites = async (req, res) => {
+	// we could query the current user and call .populate on their loves
+	console.log(req.user.loves)
+	// const loves = await User.find({
+	// 	loves: { $in: req.user.loves }
+	// })
+	// console.log(loves)
+	const bands = await Band.find({ _id: {$in: req.user.loves }})
+	const albums = await Album.find({ _id: {$in: req.user.loves } })
+	const pedals = await Pedal.find({ _id: {$in: req.user.loves }})
+	// or we could query a bunch of bands and find those bands whose ID is in our current love array
+	// const bands = await Band.find({
+	// 	_id: { $in: req.user.loves } // it will find any bands where their ID is in an array (req.user.loves)
+	// });
+	console.log(bands, albums)
+	res.render('favourites', {title: 'My Favourites', bands: bands, albums: albums });
+}

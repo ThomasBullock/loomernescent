@@ -1,6 +1,7 @@
 const mongoose = require('mongoose');
 const Band = mongoose.model('Band');
 const Pedal = mongoose.model('Pedal');
+const User = mongoose.model('User');
 const multer = require('multer');
 const jimp = require('jimp');
 const uuid = require('uuid'); 
@@ -27,8 +28,27 @@ const getBandFromPersonnel = async(artist) => {
 }
 
 exports.getPedals = async(req, res) => {
-	const pedals = await Pedal.find();
-	res.render('pedals', {title: 'Pedals', pedals: pedals})
+	const page = req.params.page || 1;
+	const limit = 2;
+	const skip = (limit * page) - limit;
+	
+	const pedalsPromise = Pedal
+		.find()
+		.skip(skip)
+		.limit(limit)
+		
+	const countPromise = Pedal.count();
+	
+	const [ pedals, count ] = await Promise.all([pedalsPromise, countPromise]);
+	
+	const pages = Math.ceil(count / limit);
+	if(!pedals.length && skip) {
+		req.flash('info', `Hey! You aked for page ${page}. But that doesn't exist So I put you on page ${pages}`)
+		res.redirect(`/pedals/page/${pages}`);
+		return;
+	}
+	console.log(pedals)		
+	res.render('pedals', {title: 'Pedals', pedals: pedals, page: page, pages: pages, count: count})
 }
 
 exports.addPedal = (req, res) => {
@@ -111,4 +131,23 @@ exports.getPedalBySlug = async(req, res) => {
 	const pedal = await Pedal.findOne({ slug: req.params.slug })
 	console.log(pedal)
 	res.render('pedal', {title: `${pedal.brand} ${pedal.name}`, pedal: pedal })
+}
+
+exports.lovePedal = async (req, res) => {
+	// have they already loved the band??
+	const loves = req.user.loves.map(obj => obj.toString());
+	// console.log(loves)
+
+	// if the users loves array includes the pedal.id from the post request we remove it ($pull) 
+	const operator = (loves.includes(req.params.id)) ? '$pull' : '$addToSet';
+	console.log(operator)
+	// otherwise add it to the array $addtoset
+	const user = await User
+		.findByIdAndUpdate(req.user._id,
+   	{ [operator] : { loves : req.params.id }},
+   	{ new: true } 
+	);
+	console.log(user)
+	res.json(user)	
+
 }
