@@ -46,11 +46,26 @@
 
     @include mod('home') {
       flex: 1 1 100%;
+      background: $jet;
+
+      &:hover {
+        background: transparent;
+      }
+    }
+
+    @include mod('user') { // adjust this with media queries
+      // flex: 1;
+      // border-bottom: 0;
+
+      &:hover {
+        background: transparent;
+      }
     }
   }
   @include elem('link') {
     background: $jet;
     color: white;
+    text-align: center;
     // border-right: 1px solid rgba(255,255,255,0.1); // try this!???
     text-transform: uppercase;
     padding: 1.2rem 2rem 1rem 2rem;
@@ -101,7 +116,7 @@
     flex-wrap: nowrap;
 
     h1 {
-      font-size: modular-scale(4);
+      font-size: modular-scale(3);
     }    
 
   @include elem('section') {
@@ -151,9 +166,14 @@
 
     @include mod('pages') {
       flex-wrap: nowrap;
+      flex: 1 1 auto;
     }  
     @include mod('user') {
-      // flex: 1 1 100%;
+      display: flex;
+      // flex-direction: column;
+      justify-content: center;
+      // align-items: center;      
+      flex: 1 1 10%;
       order: 1;      
     }    
     @include mod('search') {
@@ -175,7 +195,7 @@
       width: 100%;
     @include mod('user') {
         justify-content: center;
-        order: -1;
+        order: 2;
         // border-bottom: 1px solid rgba(255,255,255,0.1);
         border-bottom: 1px solid $charcoal;
         .avatar {
@@ -188,7 +208,7 @@
       }
     }
   @include elem('item') {
-      width: 25%;
+      width: 20%;
     }
   @include elem('link') {
       width: 100%;

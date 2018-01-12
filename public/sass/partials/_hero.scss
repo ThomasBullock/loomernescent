@@ -11,6 +11,7 @@
 		display: flex;
 		flex-wrap: wrap;
 		width: 100%;
+		min-height: 400px;
 		height: auto;
 	  background: linear-gradient(#ffa949,transparent 90%),
 	              linear-gradient(0deg, $red, transparent 30%),
