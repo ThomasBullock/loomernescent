@@ -29,7 +29,7 @@ const getBandFromPersonnel = async(artist) => {
 
 exports.getPedals = async(req, res) => {
 	const page = req.params.page || 1;
-	const limit = 2;
+	const limit = 3;
 	const skip = (limit * page) - limit;
 	
 	const pedalsPromise = Pedal
@@ -68,8 +68,8 @@ exports.resize = async(req, res, next) => {
 	req.body.image = `${uuid.v4()}.${extension}`;
 	// now we resize
 	const image = await jimp.read(req.file.buffer);
-	await image.resize(600, jimp.AUTO);
-	await image.quality(35);
+	await image.resize(800, jimp.AUTO);
+	await image.quality(40);
 	await image.write(`./public/uploads/pedals/${req.body.image}`);
 	// once we have written the photo to our filesystem keep going!
 	// console.log(req.body.cover);

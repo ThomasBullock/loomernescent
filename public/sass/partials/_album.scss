@@ -41,50 +41,129 @@
   	width:25%;
   }
 
-}
+} // End of album
+
+
+/// ALBUM INFO ////
 
 .album-info {
   display: flex;
-  flex-wrap: wrap;
+  flex-direction: column;
   // justify-content: space-between;
 
+  @media all and (min-width : 768px) and (max-width : 1024px) {  
+    max-width: 800px;
+    margin: 0 auto;
+  } 
+
+  @media all and (min-width : 1025px) { 
+    flex-direction: row;
+  } 
+
+  @include elem('cover') {
+    flex: 1 1 100%;
+
+    @media all and (min-width : 1025px) {     
+      flex: 1 1 60%;
+    }
+    
+    img {
+      @include img-responsive();
+      // margin: 0 auto;
+    }
+
+  }
+
+  @include elem('content') {
+    display: flex;
+    flex-wrap: wrap;
+    // justify-content: space-around;
+    align-items: flex-start;
+  
+    flex-direction: row;
+    flex: 1 1 40%;
+    
+    @media all and (min-width : 1025px) { 
+      margin-left: $base-spacing;
+      // flex-direction: column;
+      // flex-wrap: nowrap;      
+      
+    }  
+       
+  }
+
   @include elem('title') {
-    flex: 1 1 45%;
+    flex: 0 1 45%;
     font-size: 36px;
+    font-size: modular-scale(1);        
     margin-right: $base-spacing;
+    
+    @media all and (min-width : 1025px) { 
+      // flex: 1 1 100%;
+      margin: 0;
+    }    
+  }
+  
+  @include elem('artist-link') {
+    display: flex;
+    justify-content: flex-end;
+    flex: 0 1 45%;
+    
+    @media all and (min-width : 1025px) {
+      // flex: 1 1 100%;   
+    }         
+  }
+  
+  @include elem('before') {
+    margin-top: $base-spacing;
+    margin-right: $base-spacing / 2;
+    
+    @media all and (min-width : 1025px) { 
+      margin-top: 0;   
+    }      
   }
   
   @include elem('artist') {
-    &:before {
-      position: absolute;
-      left: -27px;
-      top: 15px;
-      content: 'by';
-      font-size: 20px;
-      color: $oil;
-      margin-right: 10px;
-    }
-    font-size: 36px;    
-    position: relative;
-    // flex: 0 1 55%;
-    text-align: right;     
+    // &:before {
+    //   position: absolute;
+    //   left: -27px;
+    //   // top: 15px;
+    //   content: 'by';
+    //   font-size: 20px;
+    //   color: $oil;
+    //   margin-right: 10px;
+    // }
+    font-size: modular-scale(1);    
+    @media all and (min-width : 1025px) { 
+      margin: 0;
+    }   
   }
 
   @include elem('hr') {
     width: 100%;
     color: $base;
     margin-bottom: $base-spacing;
+    
+    @media all and (min-width : 1025px) { 
+      margin-top: ($base-spacing * -1); 
+    }
+
   }
 
   @include elem('tracklist') {
-    flex: 1 1 40%;
+    flex: 1 1 100%;
     margin-top: 0;
+    margin-right: $base-spacing;
     // padding-left: $base-spacing / 2;
+
+    @media all and (min-width : 768px) and (max-width : 1024px) {  
+      flex: 1 1 45%;
+    }     
   }
 
   @include elem('credits') {
     display: flex;
-    flex: 1 1 60%;
+    flex: 1 1 35%;
     flex-wrap: wrap;  
   }
 
