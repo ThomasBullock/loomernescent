@@ -88,10 +88,16 @@ strong {
 }
 
 .title--single {
-  max-width: 600px;
+  max-width: 90%;
   margin-top: -9rem;
-  font-size: 10rem;
+  font-size: 7rem;
   text-align: center;
+  
+  @media all and (min-width : 1025px) { 
+    max-width: 600px;
+    font-size: 9rem;    
+  }
+  
 }
 
 .title--page {
