@@ -25,7 +25,8 @@
 	"personnel": ["Rachel Goswell", "Neil Halstead", "Nick Chaplin", "Christian Savill", "Simon Scott"],
 	"labels": ["Creation", "SBK", "Dead Oceans"],
 	"__v": 0
-}, {
+}, 
+{
 	"_id": "596f6628253f654c87441432",
 	"slug": "my-bloody-valentine",
 	"name": "My Bloody Valentine",
@@ -53,7 +54,8 @@
 	"labels": ["Creation", "Tycoon", "Fever", "Kaleidoscope", "Sound", "Lazy", "Sire", "Island", "Sony", "mbv"],
 	"__v": 0,
 	"vimeoPL": "https://vimeo.com/album/4684772"
-}, {
+}, 
+{
 	"_id": "5971f94982f70d4ca2214542",
 	"slug": "ride",
 	"name": "Ride",
@@ -80,4 +82,58 @@
 	"personnel": ["Andy Bell", "Laurence Colbert", "Mark Gardener", "Steve Queralt"],
 	"labels": ["Creation", "Warner", "Sire", "The First Time", "Wichita"],
 	"__v": 0
-}]
+},
+{
+  "_id": "5985d1fbb6421b0527b47c82",
+  "slug": "lush",
+  "name": "Lush",
+  "description": "Lush were an English rock band formed in London in 1987. The lineup before the original split consisted of Miki Berenyi (vocals, guitar), Emma Anderson (vocals, guitar), Phil King (bass) and Chris Acland (drums).",
+  "youtubePL": "https://www.youtube.com/embed/videoseries?list=PLTMsUFwFkdoeMuf2JW9wgCpAtbOcyiRN_",
+  "vimeoPL": "",
+  "spotifyID": "3ysp8GwsheDcBxP9q65lBg",
+  "spotifyURL": "https://open.spotify.com/artist/3ysp8GwsheDcBxP9q65lBg",
+  "author": "596da83c4a6d5b31cd18446c",
+  "photos": {
+    "squareLg": "72887da9-b563-4296-a8f2-476c0c3ff01f_Lg.jpeg",
+    "squareSm": "72887da9-b563-4296-a8f2-476c0c3ff01f_Sm.jpeg",
+    "galleryThumbs": [
+        "1b03c808-4fa1-48a8-931c-25893d485f52_Sm.jpeg",
+        "2bbab706-6c62-4491-8e0e-7716f3664ea5_Sm.jpeg",
+        "36664842-2b63-41a8-97d3-2d7df296dfb9_Sm.jpeg"
+    ],
+    "gallery": [
+        "1b03c808-4fa1-48a8-931c-25893d485f52_Lg.jpeg",
+        "2bbab706-6c62-4491-8e0e-7716f3664ea5_Lg.jpeg",
+        "36664842-2b63-41a8-97d3-2d7df296dfb9_Lg.jpeg"
+    ]
+  },
+  "location": {
+    "address": "London, United Kingdom",
+    "coordinates": [
+        -0.12775829999998223,
+        51.5073509
+    ],
+    "type": "Point"
+  },
+  "created": "2017-08-05T14:11:07.362Z",
+  "yearsActive": ["1987-01-01T00:00:00.000Z", "1996-01-01T00:00:00.000Z", "2015-01-01T00:00:00.000Z", "2016-01-01T00:00:00.000Z"],
+  "tags": [
+      "Ethereal",
+      "Dreamy",
+      "Female Vox"
+  ],
+  "pastPersonnel": [
+      "Meriel Barham"
+  ],
+  "personnel": [
+      "Miki Berenyi",
+      "Emma Anderson",
+      "Chris Acland",
+      "Steve Rippon"
+  ],
+  "labels": [
+      "4AD"
+  ],
+  "__v": 0
+}
+]

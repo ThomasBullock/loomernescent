@@ -2,6 +2,7 @@ extends layout
 
 include icons/_youtube
 include icons/_cross
+include icons/_pick
 
 block content
 	//- pre= h.dump(albums)
@@ -36,7 +37,8 @@ block content
 				each tag in band.tags
 					li.tag
 						a.tag__link(href=`/tags/${tag}`)
-							span.tag__text ##{tag}
+							+pick(tag)
+				//-			span.tag__text ##{tag}
 	if band.vimeoPL || band.youtubePL						
 		.single__fullwidth.single__fullwidth--black
 			//- if band.vimeoPL
