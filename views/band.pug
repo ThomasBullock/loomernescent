@@ -12,10 +12,12 @@ block content
 				a(href=`/bands/${band.slug}`) #{band.name}
 				
 	.single__details
-		p.single__location= band.location.address
-		p.single__lead= band.description
-		.single__body 
-			.single__col
+		.ribbon__wrapper
+			.ribbon!= h.countryToISO(band.location.address)		
+		.band-info
+			.band-info__photo
+				img(src=`/uploads/${band.photos.squareLg || 'Band.jpg' }`)
+			.band-info__facts
 				p.single__detail
 					strong Years Active: 
 					!= h.buildDatesString(band.yearsActive)
@@ -28,15 +30,21 @@ block content
 						!= band.pastPersonnel.join(' | ')	
 				p.single__detail 
 					strong Record Labels: 
-					!= band.labels.join(' ')
-			.single__img-col
-				img.single__detail-img(src=`/uploads/${band.photos.squareSm || 'Band.jpg' }`)
-		if band.tags
-			ul.tags
-				each tag in band.tags
-					li.tag
-						a.tag__link(href=`/tags/${tag}`)
-							span.tag__text ##{tag}
+					!= band.labels.join(' | ')
+				if band.tags
+					.band-info_tags
+						ul.tags
+							each tag in band.tags
+								li.tag
+									a.tag__link(href=`/tags/${tag}`)
+										span.tag__text ##{tag}																	
+			.band-info__content
+				p.single__lead= band.description
+				.single__body 
+					.single__col
+
+
+
 	if band.vimeoPL || band.youtubePL						
 		.single__fullwidth.single__fullwidth--black
 			//- if band.vimeoPL
