@@ -50,10 +50,14 @@ strong {
   color: $jet;
 }
 
+.nexa-rust {
+  font-family: 'nexarust', sans-serif;
+}
+
 .title {
   word-wrap: break-word;
   // font-family: 'impact';
-  font-family: 'nexarust', sans-serif;  
+  // font-family: 'nexarust', sans-serif;  
   position: relative;
   z-index: 2;
   margin:0;
@@ -65,25 +69,31 @@ strong {
   &--long {
     font-size: 30px;
   }
-  // &:before {
-  //   content: '';
-  //   width:50px;
-  //   left:0;
-  //   top:0;
-  //   height:100%;
-  //   // top:10%;
-  //   display: block;
-  //   position: absolute;
-  //   z-index: -1;
-  //   transform:skew(-5deg)
-  // }
+
   line-height:1.1;
   // inline link inside
   a {
     color: $vapor;
-    // border-bottom: 0;
-    // $yellowa: rgba($yellow,0.8);
-    // background-image: linear-gradient(to right, $yellowa 100%, $yellowa 50%);
+  }
+  
+  @include mod('albums') {
+    text-align: center;
+  }
+  
+  @include mod('tags') {
+
+    font-size: modular-scale(3);
+    margin-bottom: 0;
+    color: $oil;
+    text-align: center;
+    
+    @media all and (min-width : 768px) and (max-width : 1024px) {  
+      font-size: modular-scale(4);
+    }
+    
+    @media all and (min-width : 1025px) { 
+      font-size: modular-scale(5);
+    }          
   }
 }
 

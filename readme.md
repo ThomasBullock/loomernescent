@@ -17,5 +17,19 @@ npm run blowitallaway
 ```
 
 
+Tags
+
+Male Vox
+Female Vox
+Heavy
+Creation
+4AD
+Melancholy
+Ethereal
+Intense
+Hypnotic
+Eighties
+Nineties
+Noughties
 
 

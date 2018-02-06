@@ -1,0 +1,71 @@
+[{
+    "_id": "598c0c983c7004070c63946c",
+    "slug": "gala",
+    "title": "Gala",
+    "artist": "Lush",
+    "bandID": "5985d1fbb6421b0527b47c82",
+    "comments": "",
+    "label": "4AD",
+    "cover": "af753176-a95b-40a9-9344-a4404e97a324.jpeg",
+    "tracks": [
+        "Sweetness and Light",
+        "Sunbathing",
+        "Breeze",
+        "De-Luxe",
+        "Leaves Me Cold",
+        "Downer",
+        "Thoughtforms",
+        "Baby Talk",
+        "Thoughtforms (Original Version)",
+        "Scarlet",
+        "Bitter",
+        "Second Sight",
+        "Etheriel",
+        "Hey Hey Helen",
+        "Scarlet (Longer Version)"
+    ],
+    "mixedBy": [],
+    "engineer": [],
+    "producer": [
+        "Tim Friese-Greene",
+        "Robin Guthrie",
+        "John Fryer"
+    ],
+    "releaseDate": "1990-11-13T00:00:00.000Z",
+    "__v": 0,
+    "spotifyURL": "https://open.spotify.com/album/11hFygy8xLDCeECJEDnNEK"
+},
+{
+    "_id": "59896a5d70cb61229c1a7e1c",
+    "slug": "spooky",
+    "title": "Spooky",
+    "artist": "Lush",
+    "bandID": "5985d1fbb6421b0527b47c82",
+    "comments": "Spooky reached the UK Top 10 and topped the national indie charts. The album produced three singles: \"Nothing Natural\", \"Superblast!\" and \"For Love\".",
+    "label": "4AD",
+    "cover": "97ecfbda-3e47-4b57-9e6c-320662d8436d.jpeg",
+    "tracks": [
+        "Stray",
+        "Nothing Natural",
+        "Tiny Smiles",
+        "Covert",
+        "Ocean",
+        "For Love",
+        "Superblast!",
+        "Untogether",
+        "Fantasy",
+        "Take",
+        "Laura",
+        "Monochrome"
+    ],
+    "mixedBy": "",
+    "engineer": "",
+    "producer": [
+        "Robin Guthrie"
+    ],
+    "releaseDate": "1992-01-27T00:00:00.000Z",
+    "__v": 0,
+    "spotifyURL": "https://open.spotify.com/album/7lhh1T1STMB4EAbwsNM1JG",
+    "bandcampURL": ""
+}
+]

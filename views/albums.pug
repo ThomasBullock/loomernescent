@@ -5,7 +5,7 @@ include mixins/_pagination
 
 block content
 	.outer
-		h2=title
+		h2.title--albums.nexa-rust=title
 		.albums
 			each album in albums
 				+albumCard(album)

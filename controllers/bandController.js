@@ -27,19 +27,6 @@ const randomNum = (min, max) => {
   return Math.floor(Math.random() * (max - min)) + min; //The maximum is exclusive and the minimum is inclusive
 }
 
-// const uniqueRandomNum = (arr, tot, max) => {
-// 		while(arr.length < tot){
-// 		  var r = randomNum(0, max)-1
-// 		  var found = false;
-// 		  for(var i=0;i<arr.length;i++) {
-// 			if(arr[i]== r) {
-// 				found=true;break
-// 			}
-// 		  }
-// 		  if(!found)arr[arr.length] = r;
-// 		}
-// 	};
-
 
 exports.homePage = async (req, res) => {
 	// req.flash('info', 'Computer Says No...');
@@ -48,7 +35,7 @@ exports.homePage = async (req, res) => {
 	const bands = await Band.find().select('name slug photos');
 	const albums = await Album.find().select('title slug cover');
 	const hero = [];
-	for(let i = 0; i < 12; i++) {
+	for(let i = 0; i < 24; i++) {
 		const select = randomNum(0, 2);
 		console.log(select);
 		if(select === 0) {
@@ -107,7 +94,6 @@ exports.processPhotos = (req, res, next) => {
 exports.resize = async(req, res, next) =>  {  // 
 	console.log('there are' + req.files.length);
 	// check if there is no new file to resize
-	// console.log(req.files)
 	if(req.files.length === 0) {
 		next(); // skip to the next middleware
 		return
@@ -131,13 +117,13 @@ exports.resize = async(req, res, next) =>  {  //
 			req.body.photos.squareLg = `${uniqueID}_Lg.${extension}`;
 			const photoLarge = await jimp.read(req.files[i].buffer);			
 			await photoLarge.resize(800, jimp.AUTO);
-			await photoLarge.quality(35);
+			await photoLarge.quality(38);
 			await photoLarge.write('./public/uploads/' + req.body.photos.squareLg);
 
 			req.body.photos.squareSm = `${uniqueID}_Sm.${extension}`;
 			const photoSmall = await jimp.read(req.files[i].buffer);			
 			await photoSmall.resize(300, jimp.AUTO);
-			await photoSmall.quality(30);
+			await photoSmall.quality(32);
 			await photoSmall.write('./public/uploads/' + req.body.photos.squareSm);
 		} else {
 			const uniqueID = uuid.v4();
@@ -157,7 +143,7 @@ exports.resize = async(req, res, next) =>  {  //
 			req.body.photos.galleryThumbs.push(`${uniqueID}_Sm.${extension}`);
 			const thumb = await jimp.read(req.files[i].buffer);
 			await thumb.resize(500, jimp.AUTO);
-			await thumb.quality(30);
+			await thumb.quality(34);
 			await thumb.write(`./public/uploads/${req.body.photos.galleryThumbs[req.body.photos.galleryThumbs.length - 1]}`);			
 		}
 			// req.body.photos[`Square${index}-Lg`] = `${uuid.v4()}_Lg.${extension}`;			
@@ -313,8 +299,6 @@ exports.getBandsByTag = async (req, res) => {
 	const bandPromise = Band.find({ tags: tagQuery });
 	// wait for multiple promises to come back
 	const [tags, bands] = await Promise.all([tagsPromise, bandPromise]);
-	// var tags = result[0];  // because above we use destructuring these two lines are not needed
-	// var bands = result[1];
 	// console.log(Object.keys(tag))
 	res.render('tags', {tags : tags, title: 'Tags', tag: tag, bands: bands});
 }

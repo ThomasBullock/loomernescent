@@ -7,12 +7,12 @@ mongoose.Promise = global.Promise; // Tell Mongoose to use ES6 promises
 
 // import all of our models - they need to be imported only once
 const Band = require('../models/Band');
-// const Review = require('../models/Review');
+const Review = require('../models/Album');
 const User = require('../models/User');
 
 
 const bands = JSON.parse(fs.readFileSync(__dirname + '/bands.json', 'utf-8'));
-// const reviews = JSON.parse(fs.readFileSync(__dirname + '/reviews.json', 'utf-8'));
+const reviews = JSON.parse(fs.readFileSync(__dirname + '/albums.json', 'utf-8'));
 const users = JSON.parse(fs.readFileSync(__dirname + '/users.json', 'utf-8'));
 
 async function deleteData() {

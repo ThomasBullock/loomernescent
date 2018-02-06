@@ -61,7 +61,7 @@
 
 .band-info {
   display: flex;
-  flex-direction: column;  
+  flex-direction: column;
 
   @media all and (min-width : 768px) and (max-width : 1024px) {  
     max-width: 800px;
@@ -97,11 +97,13 @@
   @include elem('facts') {
     display: flex;
     flex-direction: column;
-    flex: 1 1 100%;
+    flex: 0 1 100%;
+    justify-content: space-around;
+    // align-items: center;      
     margin-top: $base-spacing;  
     
     @media all and (min-width : 768px) and (max-width : 1024px) {
-      margin-top: $base-spacing;      
+      margin-top: 0;
       margin-left: $base-spacing;
       flex: 1 1 55%;           
     }  
@@ -136,7 +138,7 @@
   
   @include elem('tags') {
     
-    flex: 1 1 100%;
+    flex: 1 1 55%;
   }
   
 }

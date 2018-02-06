@@ -38,7 +38,7 @@ mixin bandForm(band = {})
 		input(type="text" id="spotifyID" name="spotifyID" value=band.spotifyID)
 		label(for="spotifyURL") Spotify URL
 		input(type="text" id="spotifyURL" name="spotifyURL" value=band.spotifyURL)
-		-const choices = ['Ethereal', 'Dissonant', 'Dreamy', 'Heavy', 'Soft', 'Languid', 'Druggy', 'Extended Jams', 'Female Vox', 'Male Vox']
+		-const choices = ['Male Vox', 'Female Vox', 'Heavy', 'Creation', '4AD', 'Melancholy', 'Ethereal', 'Intense', 'Hypnotic', 'Eighties', 'Nineties', 'Noughties']
 		-const tags = band.tags || []
 		ul.tags
 			each tag in choices
