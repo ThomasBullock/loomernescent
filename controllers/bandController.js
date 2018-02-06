@@ -19,13 +19,13 @@ const multerOptions = {
 			next({ message: 'That filetype isn\'t allowed!' }, false);		
 		}
 	}
-}
+};
 
 const randomNum = (min, max) => {
   min = Math.ceil(min);
   max = Math.floor(max);
   return Math.floor(Math.random() * (max - min)) + min; //The maximum is exclusive and the minimum is inclusive
-}
+};
 
 
 exports.homePage = async (req, res) => {
@@ -37,12 +37,12 @@ exports.homePage = async (req, res) => {
 	const hero = [];
 	for(let i = 0; i < 24; i++) {
 		const select = randomNum(0, 2);
-		console.log(select);
+		// console.log(select);
 		if(select === 0) {
 			const choice = randomNum(0, bands.length);
 			const band = bands[choice];
 			bands.splice(choice, 1);
-			console.log(bands.length);
+			// console.log(bands.length);
 			hero.push(
 				{
 					type: 'band',
@@ -71,7 +71,7 @@ exports.homePage = async (req, res) => {
 
 exports.add = (req, res) => {
 	res.render('add', {title: 'Add'})
-}
+};
 
 exports.addBand = (req, res) => {
 	res.render('editBand', { title: 'Add Band'})
@@ -83,13 +83,13 @@ exports.processPhotos = (req, res, next) => {
 	if(req.files.length === 0) {
 		next(); // skip to the next middleware
 		return
-	}	
+	}
 	console.log('we process files')
 	req.files.forEach((file)=> {
 		console.log(file);
 	})
 	next();
-}
+};
 
 exports.resize = async(req, res, next) =>  {  // 
 	console.log('there are' + req.files.length);
@@ -101,7 +101,7 @@ exports.resize = async(req, res, next) =>  {  //
 
 	req.body.photos = {
 		gallery: [],
-		galleryThumbs: []
+		galleryThumbs: [],
 	};
 
 	//now we resize for large
@@ -149,7 +149,7 @@ exports.resize = async(req, res, next) =>  {  //
 			// req.body.photos[`Square${index}-Lg`] = `${uuid.v4()}_Lg.${extension}`;			
 	}
 	next();
-}
+};
 
 exports.getSpotifyData = async(req, res, next) => {
 	// if the spotify fields are already filled then next!
@@ -198,7 +198,7 @@ exports.getSpotifyData = async(req, res, next) => {
 	  	next();
 	  }
 	});
-}
+};
 
 exports.processBandData = (req, res, next) => {
 	console.log(req.body.yearsActive)		
@@ -252,13 +252,13 @@ exports.getBands = async (req, res) => {
 		return;
 	}
 	res.render('bands', { title: 'Bands' , bands: bands, page: page, pages: pages, count: count });
-}
+};
 
 const confirmOwner = (store, user) => {
 	if(!user.admin) {
 		throw Error('You must own a store in order to edit it')
 	} 
-}
+};
 
 exports.editBand = async (req, res) => {
 	// 1. Find the store given the ID (params)
@@ -267,7 +267,7 @@ exports.editBand = async (req, res) => {
 	confirmOwner(band, req.user);
 	// 3. Render out the edit form so the user can update their store
 	res.render('editBand', { title: `Edit ${band.name}`,  band: band } );
-}
+};
 
 exports.updateBand = async (req, res) => {
 	// set the location data to be a point 
@@ -281,7 +281,7 @@ exports.updateBand = async (req, res) => {
 	req.flash('success', `Successfully updated <strong>${band.name}</strong>. <a href="/band/${band.slug}">View Band</a>`)
 	// Redirect them to the band and tell them it worked
 	res.redirect(`/bands/${band._id}/edit`);
-}
+};
 
 exports.getBandBySlug = async (req, res, next) => {
 	const band = await Band.findOne({ slug: req.params.slug}).populate('author');
@@ -290,7 +290,7 @@ exports.getBandBySlug = async (req, res, next) => {
 		return next();
 	}
 	res.render('band', { band: band, albums: albums, title: band.name})
-}
+};
 
 exports.getBandsByTag = async (req, res) => {
 	const tag = req.params.tag;
@@ -301,7 +301,7 @@ exports.getBandsByTag = async (req, res) => {
 	const [tags, bands] = await Promise.all([tagsPromise, bandPromise]);
 	// console.log(Object.keys(tag))
 	res.render('tags', {tags : tags, title: 'Tags', tag: tag, bands: bands});
-}
+};
 
 exports.searchBands = async (req, res) => {
 	// const query = req.query;
@@ -320,7 +320,7 @@ exports.searchBands = async (req, res) => {
 	})
 	.limit(10);
 	res.json(bands)
-}
+};
 
 exports.mapBands = async (req, res) => {
 	const coordinates = [req.query.lng, req.query.lat].map(parseFloat); // change string to numbers
@@ -335,7 +335,7 @@ exports.mapBands = async (req, res) => {
 				$maxDistance: 20000
 			}
 		}
-	}
+	};
 	// const projection
 	
 	const bands = await Band.find(q).select('slug name description location photos').limit(10);
@@ -379,7 +379,7 @@ exports.loveBand = async (req, res) => {
 			{ new: true }
 		);
 		res.json(user)
-}
+};
 
 exports.getFavourites = async (req, res) => {
 	// we could query the current user and call .populate on their loves
@@ -389,4 +389,4 @@ exports.getFavourites = async (req, res) => {
 		_id: { $in: req.user.loves } // it will find any bands where their ID is in an array (req.user.loves)
 	});
 	res.render('bands', {title: 'My Favourites', bands });
-}
+};
