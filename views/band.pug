@@ -2,20 +2,21 @@ extends layout
 
 include icons/_youtube
 include icons/_cross
+include icons/_pick
 
 block content
 	//- pre= h.dump(albums)
 	.single
 		.single__hero
 			img.single__image(src=`/uploads/${band.photos.gallery[0] || 'Band.jpg' }`)
-			h2.title.title--single
-				a(href=`/bands/${band.slug}`) #{band.name}
-				
+			h2.title.title--single #{band.name}		
 	.single__details
-		p.single__location= band.location.address
-		p.single__lead= band.description
-		.single__body 
-			.single__col
+		.ribbon__wrapper
+			.ribbon!= h.countryToISO(band.location.address)		
+		.band-info
+			.band-info__photo
+				img(src=`/uploads/${band.photos.squareLg || 'Band.jpg' }`)
+			.band-info__facts
 				p.single__detail
 					strong Years Active: 
 					!= h.buildDatesString(band.yearsActive)
@@ -28,15 +29,21 @@ block content
 						!= band.pastPersonnel.join(' | ')	
 				p.single__detail 
 					strong Record Labels: 
-					!= band.labels.join(' ')
-			.single__img-col
-				img.single__detail-img(src=`/uploads/${band.photos.squareSm || 'Band.jpg' }`)
-		if band.tags
-			ul.tags
-				each tag in band.tags
-					li.tag
-						a.tag__link(href=`/tags/${tag}`)
-							span.tag__text ##{tag}
+					!= band.labels.join(' | ')
+				if band.tags
+					ul.tags
+						each tag in band.tags
+							li.tag
+								a.tag__link(href=`/tags/${tag}`)
+									+pick(tag)
+									//-	span.tag__text ##{tag}																	
+			.band-info__content
+				p.single__lead= band.description
+				.single__body 
+					.single__col
+
+
+
 	if band.vimeoPL || band.youtubePL						
 		.single__fullwidth.single__fullwidth--black
 			//- if band.vimeoPL

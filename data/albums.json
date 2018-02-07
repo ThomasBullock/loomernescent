@@ -1,0 +1,197 @@
+[{
+    "_id": "598c0c983c7004070c63946c",
+    "slug": "gala",
+    "title": "Gala",
+    "artist": "Lush",
+    "bandID": "5985d1fbb6421b0527b47c82",
+    "comments": "",
+    "label": "4AD",
+    "cover": "af753176-a95b-40a9-9344-a4404e97a324.jpeg",
+    "tracks": [
+        "Sweetness and Light",
+        "Sunbathing",
+        "Breeze",
+        "De-Luxe",
+        "Leaves Me Cold",
+        "Downer",
+        "Thoughtforms",
+        "Baby Talk",
+        "Thoughtforms (Original Version)",
+        "Scarlet",
+        "Bitter",
+        "Second Sight",
+        "Etheriel",
+        "Hey Hey Helen",
+        "Scarlet (Longer Version)"
+    ],
+    "mixedBy": [],
+    "engineer": [],
+    "producer": [
+        "Tim Friese-Greene",
+        "Robin Guthrie",
+        "John Fryer"
+    ],
+    "releaseDate": "1990-11-13T00:00:00.000Z",
+    "__v": 0,
+    "spotifyURL": "https://open.spotify.com/album/11hFygy8xLDCeECJEDnNEK"
+},
+{
+    "_id": "59896a5d70cb61229c1a7e1c",
+    "slug": "spooky",
+    "title": "Spooky",
+    "artist": "Lush",
+    "bandID": "5985d1fbb6421b0527b47c82",
+    "comments": "Spooky reached the UK Top 10 and topped the national indie charts. The album produced three singles: \"Nothing Natural\", \"Superblast!\" and \"For Love\".",
+    "label": "4AD",
+    "cover": "97ecfbda-3e47-4b57-9e6c-320662d8436d.jpeg",
+    "tracks": [
+        "Stray",
+        "Nothing Natural",
+        "Tiny Smiles",
+        "Covert",
+        "Ocean",
+        "For Love",
+        "Superblast!",
+        "Untogether",
+        "Fantasy",
+        "Take",
+        "Laura",
+        "Monochrome"
+    ],
+    "mixedBy": "",
+    "engineer": "",
+    "producer": [
+        "Robin Guthrie"
+    ],
+    "releaseDate": "1992-01-27T00:00:00.000Z",
+    "__v": 0,
+    "spotifyURL": "https://open.spotify.com/album/7lhh1T1STMB4EAbwsNM1JG",
+    "bandcampURL": ""
+},
+{
+    "_id": "59885c631627c3210e0d805a",
+    "slug": "mauve",
+    "title": "Mauve",
+    "artist": "Ringo Deathstarr",
+    "comments": "",
+    "label": "Club AC30",
+    "cover": "c573126b-d2c3-4284-87bd-3899d719559c.jpeg",
+    "spotifyURL": "https://open.spotify.com/album/7kg1TIfwXIso8TxwwtPJYW",
+    "tracks": [
+        "Rip",
+        "Burn",
+        "Drain",
+        "Slack",
+        "Brightest Star",
+        "Drag",
+        "Fifteen",
+        "Girls We Know",
+        "Nap Time",
+        "Waste",
+        "Do You Wanna",
+        "Please Don't Kill Youself",
+        "Wave"
+    ],
+    "mixedBy": [
+        "Elliott Frazier"
+    ],
+    "engineer": [
+        "Elliott Frazier",
+        "Jason Buntz",
+        "Tommy Dietrich",
+        "Alex Lyon",
+        "Chad McGillivray",
+        "Alle Norton"
+    ],
+    "producer": [
+        "Elliott Frazier"
+    ],
+    "releaseDate": "2012-09-24T00:00:00.000Z",
+    "__v": 0,
+    "bandID": "5985d929b6421b0527b47c84",
+    "bandcampURL": "https://ringodeathstarr.bandcamp.com/album/mauve"
+},
+{
+    "_id": "59885939951a5c1ebae7427d",
+    "slug": "loveless",
+    "title": "Loveless",
+    "artist": "My Bloody Valentine",
+    "bandID": "596f6628253f654c87441432",
+    "comments": "",
+    "label": "Creation Records",
+    "cover": "c616a24e-ffa3-4816-a7af-82bcadf3afa9.jpeg",
+    "spotifyURL": "https://open.spotify.com/album/3GH4IiI6jQAIvnHVdb5FB6",
+    "tracks": [
+        "Only Shallow",
+        "Loomer",
+        "Touched",
+        "To Here Knows When",
+        "When You Sleep",
+        "I Only Said",
+        "Come In Alone",
+        "Sometimes",
+        "Blown A Wish",
+        "What You Want",
+        "Soon"
+    ],
+    "mixedBy": [
+        "Alan Moulder"
+    ],
+    "engineer": [
+        "Alan Moulder Kevin Shields",
+        "Colm Ó Cíosóig",
+        "Dick Meaney",
+        "Anjali Dutt",
+        "Guy Fixsen",
+        "Harold Burgon",
+        "Nick Robbins",
+        "Ingo Vauk",
+        "Andy Wilkinson",
+        "Darren Allison",
+        "Nick Addison",
+        "Charles Steel",
+        "Tony Falter",
+        "Hugh Price",
+        "Adrian Bushby",
+        "Pascale Giovetto",
+        "Nick Savage"
+    ],
+    "producer": [
+        "Kevin Shields"
+    ],
+    "releaseDate": "1991-11-04T00:00:00.000Z",
+    "__v": 0,
+    "bandcampURL": ""
+},
+{
+    "_id": "59894f54c92fe111ae49e4aa",
+    "slug": "mbv",
+    "title": "MBV",
+    "artist": "My Bloody Valentine",
+    "bandID": "596f6628253f654c87441432",
+    "comments": "The long awaited (22 years!) follow up to Loveless appeared suddenly in 2013.",
+    "label": "mbv records",
+    "cover": "e46aaa81-dbe4-491f-a17c-9d34e98dba57.jpeg",
+    "tracks": [
+        "She Found Now",
+        "Only Tomorrow",
+        "Who Sees You",
+        "Is This and Yes",
+        "If I Am",
+        "New You",
+        "In Another Way",
+        "Nothing Is",
+        "Wonder 2"
+    ],
+    "mixedBy": [
+        "Kevin Shields",
+        "Andy Savours"
+    ],
+    "engineer": [],
+    "producer": [
+        "Kevin Shields"
+    ],
+    "releaseDate": "2013-02-02T00:00:00.000Z",
+    "__v": 0
+}
+]

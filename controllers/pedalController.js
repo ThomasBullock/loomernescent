@@ -1,6 +1,7 @@
 const mongoose = require('mongoose');
 const Band = mongoose.model('Band');
 const Pedal = mongoose.model('Pedal');
+const User = mongoose.model('User');
 const multer = require('multer');
 const jimp = require('jimp');
 const uuid = require('uuid'); 
@@ -28,7 +29,7 @@ const getBandFromPersonnel = async(artist) => {
 
 exports.getPedals = async(req, res) => {
 	const page = req.params.page || 1;
-	const limit = 2;
+	const limit = 3;
 	const skip = (limit * page) - limit;
 	
 	const pedalsPromise = Pedal
@@ -45,7 +46,8 @@ exports.getPedals = async(req, res) => {
 		req.flash('info', `Hey! You aked for page ${page}. But that doesn't exist So I put you on page ${pages}`)
 		res.redirect(`/pedals/page/${pages}`);
 		return;
-	}		
+	}
+	console.log(pedals)		
 	res.render('pedals', {title: 'Pedals', pedals: pedals, page: page, pages: pages, count: count})
 }
 
@@ -66,8 +68,8 @@ exports.resize = async(req, res, next) => {
 	req.body.image = `${uuid.v4()}.${extension}`;
 	// now we resize
 	const image = await jimp.read(req.file.buffer);
-	await image.resize(600, jimp.AUTO);
-	await image.quality(35);
+	await image.resize(800, jimp.AUTO);
+	await image.quality(44);
 	await image.write(`./public/uploads/pedals/${req.body.image}`);
 	// once we have written the photo to our filesystem keep going!
 	// console.log(req.body.cover);
@@ -133,8 +135,19 @@ exports.getPedalBySlug = async(req, res) => {
 
 exports.lovePedal = async (req, res) => {
 	// have they already loved the band??
+	const loves = req.user.loves.map(obj => obj.toString());
+	// console.log(loves)
 
 	// if the users loves array includes the pedal.id from the post request we remove it ($pull) 
+	const operator = (loves.includes(req.params.id)) ? '$pull' : '$addToSet';
+	console.log(operator)
 	// otherwise add it to the array $addtoset
+	const user = await User
+		.findByIdAndUpdate(req.user._id,
+   	{ [operator] : { loves : req.params.id }},
+   	{ new: true } 
+	);
+	console.log(user)
+	res.json(user)	
 
 }

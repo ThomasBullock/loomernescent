@@ -5,19 +5,27 @@ block content
 		.single__hero
 			img.single__image(src=`/images/Pedals_Sm2.jpeg` srcset='/images/Pedals_Sm.jpeg 767w, /images/Pedals_Lg.jpeg 1000w' alt='A wall of guitar pedals in a japanese music shop')
 			h2.title.title--single #{pedal.brand} #{pedal.name}
-	.single__details
-		img.pedal-info__image(src=`/uploads/pedals/${pedal.image}` alt=`${pedal.brand} ${pedal.name}`)
-		.album-info
-			h3.pedal-info__title #{pedal.brand} #{pedal.name}
-			hr.album-info__hr
-			if pedal.yearsManufactured.length
-				p.single__detail
-					strong Manufactured: 
-					!= h.buildDatesString(pedal.yearsManufactured)
-			if pedal.usedBy.length
-				p.single__detail
-					strong used By: 
-					each user in pedal.usedBy
-						span #{user.artist}
-						a(href=`/band/${user.slug}`) (#{user.band})
-				
+	.single__details.single__details--margin
+		.pedal-info__image
+			img(src=`/uploads/pedals/${pedal.image}` alt=`${pedal.brand} ${pedal.name}`)
+		.pedal-info__content
+			h3.pedal-info__title #{pedal.brand} #{pedal.name}			
+			.pedal-info
+				hr.album-info__hr
+				if pedal.yearsManufactured.length
+					p.pedal-info__detail
+						strong Manufactured: 
+						!= h.buildDatesString(pedal.yearsManufactured)
+				if pedal.usedBy.length
+					p.pedal-info__detail
+						strong Notable Users: 
+						each user, i in pedal.usedBy
+							-const artist = `${user.artist} `
+							if i < pedal.usedBy.length - 1
+								span.pedal-info__user
+									span #{artist}
+									a(href=`/band/${user.slug}`) (#{user.band})
+							else
+								span.pedal-info__user
+									span #{artist}
+									a(href=`/band/${user.slug}`) (#{user.band})

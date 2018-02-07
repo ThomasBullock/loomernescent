@@ -17,7 +17,7 @@ const multerOptions = {
 			next(null, true) // null means we pass the second value true (yes we're fine)
 		} else {
 		// or no this file is not allowed
-			next({ message: 'That filetype isn\'t allowed!' }, false);		
+			next({ message: 'That filetype isn\'t allowed!' }, false);
 		}
 	}
 };
@@ -43,7 +43,7 @@ exports.getAlbums = async(req, res) => {
 	const albumsPromise = Album
 		.find()
 		.skip(skip)
-		.limit(limit)
+		.limit(limit);
 		
 	const countPromise = Album.count();
 	
@@ -57,7 +57,7 @@ exports.getAlbums = async(req, res) => {
 		return;
 	}	
 	res.render('albums', {title: 'Albums', albums: albums, page: page, pages: pages, count: count});
-}
+};
 
 exports.addAlbum = (req, res) => {
 	res.render('editAlbum', { title: 'Add Album'})
@@ -73,16 +73,27 @@ exports.resize = async(req, res, next) => {
 		return;
 	}
 	const extension = req.file.mimetype.split('/')[1];
-	req.body.cover = `${uuid.v4()}.${extension}`;
+	const bandIn = req.body.artist.split(' ').reduce((accum, next, i, arr) => {
+		if(arr.length === 1) {
+	  	return next.charAt(0) + next.charAt(1);
+	  } else {
+	  	if(i === 0) {
+	  		return next.charAt(0);
+	  	} else {
+	    	return accum + next.charAt(0);
+	    }
+	  }
+	}, "");
+	req.body.cover = `${bandIn}-${uuid.v4()}.${extension}`;
 	// now we resize
 	const cover = await jimp.read(req.file.buffer);
 	await cover.resize(800, jimp.AUTO);
-	await cover.quality(35);
+	await cover.quality(36);
 	await cover.write(`./public/uploads/covers/${req.body.cover}`);
 	// once we have written the photo to our filesystem keep going!
 	// console.log(req.body.cover);
 	next();
-}
+};
 
 exports.getArtistData = async(req, res, next) => {
 	console.log('we are in getArtistData')
@@ -93,7 +104,7 @@ exports.getArtistData = async(req, res, next) => {
 	req.body.bandID = band._id;
 	req.body.artistSpotifyID = band.spotifyID
 	next();
-}
+};
 
 exports.getSpotifyData = async(req, res, next) => {
 	console.log('we are in spotify')
@@ -178,7 +189,7 @@ exports.getSpotifyData = async(req, res, next) => {
 			next();
 		}
 	}); 
-}
+};
 
 exports.processAlbumData = (req, res, next) => {
 	if(req.body.producer) {
@@ -187,49 +198,49 @@ exports.processAlbumData = (req, res, next) => {
 	}
 	if(req.body.engineer)	{
 		const engineers = req.body.engineer.split(',').map( (item) => item.trim() );
-		req.body.engineer = engineers;		
+		req.body.engineer = engineers;
 	}	 
 	if(req.body.mixedBy)	{
 		const mixed = req.body.mixedBy.split(',').map( (item) => item.trim() );
-		req.body.mixedBy = mixed;		
+		req.body.mixedBy = mixed;
 	}
 
 	if (typeof req.body.tracks === 'string') {
 		const trackList = req.body.tracks.split(',').map( (item) => item.trim() );
-		req.body.tracks = trackList
+		req.body.tracks = trackList;
 	}
 	next();	
-}
+};
 
 exports.createAlbum = async (req, res) => {
 	const album = await (new Album(req.body)).save();
 	req.flash('success', `Successfully Created ${album.title}`);
-	res.redirect(`/album/${album.slug}`);	
-}
+	res.redirect(`/album/${album.slug}`);
+};
 
 exports.editAlbum = async (req, res) => {
 	const album = await Album.findOne( { _id: req.params.id } );
-	res.render('editAlbum', { title: `Edit ${album.title}`,  album: album } );	
-}
+	res.render('editAlbum', { title: `Edit ${album.title}`,  album: album } );
+};
 
 exports.getAlbumBySlug = async (req, res) => {
 	// console.log(req.params.slug)
 	const album = await Album.findOne( { slug: req.params.slug } );
 	const band = await Band.findOne( { _id: album.bandID } );
 
-	res.render('album', {album: album, band: band});
-}
+	res.render('album', { title: album.title , album: album, band: band});
+};
 
 exports.updateAlbum = async (req, res) => {
 	console.log('we are in update!')
 	const album = await Album.findOneAndUpdate({ _id: req.params.id }, req.body, {
 		new: true,
-		runValidators: true
+		runValidators: true,
 	}).exec();
 	// console.log(album);
 	req.flash('success', `Successfully updated <strong>${album.title}</strong>. <a href="/album/${album.slug}">View Album</a>`)
 	res.redirect('/albums');
-}
+};
 
 exports.loveAlbum = async (req, res) => {
 	console.log('hearting album')
@@ -246,6 +257,6 @@ exports.loveAlbum = async (req, res) => {
 			);
 	res.json(user)	
 
-}
+};
 
 

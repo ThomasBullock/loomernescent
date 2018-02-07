@@ -1,4 +1,59 @@
-[{
+[
+	{
+	"_id": "5985d55fb6421b0527b47c83",
+	"slug": "alisons-halo",
+	"name": "Alison's Halo",
+	"description": "Alison's Halo is a band from Tempe, Arizona. Their sound, distinguished by dreamy vocals and loud, spacey guitars, is often also associated with shoegaze and dream pop.",
+	"youtubePL": "https://www.youtube.com/embed/videoseries?list=PLTMsUFwFkdod1z8poKsjdfO43RN6tYs_K",
+	"vimeoPL": "",
+	"spotifyID": "1xD4rzgPGOwrc7RHZywzKg",
+	"spotifyURL": "https://open.spotify.com/artist/1xD4rzgPGOwrc7RHZywzKg",
+	"author": "596da83c4a6d5b31cd18446c",
+	"photos": {
+	    "squareSm": "45f71205-9116-468e-8ce8-dabe15288315_Sm.jpeg",
+	    "squareLg": "45f71205-9116-468e-8ce8-dabe15288315_Lg.jpeg",
+	    "galleryThumbs": [
+	        "643c0aa7-7946-4e9d-b9a6-aa9813631282_Sm.jpeg",
+	        "1e785432-6927-40e2-b032-d693e7892154_Sm.jpeg",
+	        "fa83114d-52ad-4260-9fec-bf76101b1804_Sm.jpeg"
+	    ],
+	    "gallery": [
+	        "643c0aa7-7946-4e9d-b9a6-aa9813631282_Lg.jpeg",
+	        "1e785432-6927-40e2-b032-d693e7892154_Lg.jpeg",
+	        "fa83114d-52ad-4260-9fec-bf76101b1804_Lg.jpeg"
+	    ]
+	},
+	"location": {
+	    "type": "Point",
+	    "coordinates": [
+	        -111.94000540000002,
+	        33.4255104
+	    ],
+	    "address": "Tempe, AZ, United States"
+	},
+	"created": "2017-08-05T14:25:35.690Z",
+	"yearsActive": ["1992-01-01T00:00:00.000Z"],
+	"tags": [
+	    "Ethereal",
+	    "Female Vox"
+	],
+	"pastPersonnel": [
+	    "Lynn Anderson",
+	    "Thomas Lanser",
+	    "Scott Macdonald",
+	    "David Rogers"
+	],
+	"personnel": [
+	    "Catherine Cooper",
+	    "Adam Cooper",
+	    "Roger Brogan"
+	],
+	"labels": [
+	    "Burnt Hair Records"
+	],
+	"__v": 0
+},
+	{
 	"_id": "596da47db376ae2ebb24c572",
 	"slug": "slowdive",
 	"name": "Slowdive",
@@ -53,7 +108,8 @@
 	"labels": ["Creation", "Tycoon", "Fever", "Kaleidoscope", "Sound", "Lazy", "Sire", "Island", "Sony", "mbv"],
 	"__v": 0,
 	"vimeoPL": "https://vimeo.com/album/4684772"
-}, {
+}, 
+{
 	"_id": "5971f94982f70d4ca2214542",
 	"slug": "ride",
 	"name": "Ride",
@@ -80,4 +136,62 @@
 	"personnel": ["Andy Bell", "Laurence Colbert", "Mark Gardener", "Steve Queralt"],
 	"labels": ["Creation", "Warner", "Sire", "The First Time", "Wichita"],
 	"__v": 0
-}]
+},
+{
+    "_id": "5985d929b6421b0527b47c84",
+    "slug": "ringo-deathstarr",
+    "name": "Ringo Deathstarr",
+    "description": "Ringo Deathstarr is an American shoegaze band from Austin, Texas, United States. The band was formed by singer/songwriter Elliott Frazier in 2007, and released their eponymous EP on the same year.",
+    "youtubePL": "https://www.youtube.com/embed/videoseries?list=PLTMsUFwFkdoehNUonJQBEU0YJz0eFtDcm",
+    "vimeoPL": "https://vimeo.com/album/4684784",
+    "spotifyID": "3sWLSYm3MFYosc4AZhwajg",
+    "spotifyURL": "https://open.spotify.com/artist/3sWLSYm3MFYosc4AZhwajg",
+    "author": "596da83c4a6d5b31cd18446c",
+    "photos": {
+        "squareLg": "c93abb82-0745-4c5d-b01f-7229dcefbca1_Lg.jpeg",
+        "squareSm": "c93abb82-0745-4c5d-b01f-7229dcefbca1_Sm.jpeg",
+        "galleryThumbs": [
+            "af472e90-3c0f-4521-ba31-3cbab48fdfc8_Sm.jpeg",
+            "75032377-b94e-46bc-8bc0-579144728935_Sm.jpeg",
+            "510a31cd-4aa1-4aea-9ea6-cf058de39a18_Sm.jpeg"
+        ],
+        "gallery": [
+            "af472e90-3c0f-4521-ba31-3cbab48fdfc8_Lg.jpeg",
+            "75032377-b94e-46bc-8bc0-579144728935_Lg.jpeg",
+            "510a31cd-4aa1-4aea-9ea6-cf058de39a18_Lg.jpeg"
+        ]
+    },
+    "location": {
+        "address": "Austin, TX, United States",
+        "coordinates": [
+            -97.74306079999997,
+            30.267153
+        ],
+        "type": "Point"
+    },
+    "created": "2017-08-05T14:41:45.551Z",
+    "yearsActive": ["2007-01-01T00:00:00.000Z"],
+    "tags": [
+        "Female Vox",
+        "Male Vox",
+        "Noughties"
+    ],
+    "pastPersonnel": [
+        "Dustin Gaudet",
+        "Renan McFarland"
+    ],
+    "personnel": [
+        "Alex Gehring",
+        "Elliott Frazier",
+        "Daniel Coborn"
+    ],
+    "labels": [
+        "Club AC30",
+        "Sonic Unyon",
+        "Vinyl Junkie Recordings",
+        "SVC Records",
+        "Fan Death Records"
+    ],
+    "__v": 0
+}
+]

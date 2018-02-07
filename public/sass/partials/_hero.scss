@@ -1,22 +1,36 @@
 .hero {
 	position: relative;
+	height: calc(100vh - 335px);
+	background: linear-gradient(0deg, $magenta 1%, $red 50%, $pink 99%);
 
+  @media all and (min-width : 1025px) {     
+		height: calc(100vh - 129px);
+  }
+	
 	@include elem('spacer') {
 		clear: both;
 	}
 
 	@include elem('link-wrapper') {
  		position: absolute;
+ 		overflow: hidden;
  		// z-index: -5; 		
 		display: flex;
+		// justify-content: stretch;
+		align-content: flex-start;
 		flex-wrap: wrap;
 		width: 100%;
+		min-height: 400px;
+		height: calc(100vh - 335px);
 		height: auto;
 	  background: linear-gradient(#ffa949,transparent 90%),
 	              linear-gradient(0deg, $red, transparent 30%),
-	              #ffa949 url('/images/Lava_00334.jpg') no-repeat center;
+	              #ffa949 url('/images/Lava.jpg') no-repeat center;
 	  background-size: cover;
-	  border-bottom: solid 1px transparentize($ebony, .3);			 				
+	  // border-bottom: solid 1px transparentize($ebony, .3);
+	  @media all and (min-width : 1025px) {     
+			height: calc(100vh - 129px);
+	  }	  			 				
 	}
 
 	@include elem('link') {
@@ -75,7 +89,19 @@
  	@include elem('slogan') {
  		// z-index: 5;
  		width: 250px;
- 		@include center(40%);
+ 		@include center(20%);
+  	font-family: 'nexarust', sans-serif;
+  	font-size: modular-scale(4);
+  	color: $vapor;  
+
+    @media all and (min-width : 768px) and (max-width : 1024px) {  
+	  	@include center(15%); 
+		}
+  	
+  	@media all and (min-width : 1025px) {
+  	 	@include center(40%); 
+  		font-size: modular-scale(5);
+  	}     	
  	}
 
 	/* ================================= 
@@ -104,6 +130,10 @@
 	  DESKTOP
 	==================================== */
 	@media all and (min-width : 1025px) { 
+
+		@include elem('link') {
+			// flex: 1 1 20%;			
+		}
 
 	}
 

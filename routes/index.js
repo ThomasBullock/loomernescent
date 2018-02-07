@@ -8,7 +8,7 @@ const authController = require('../controllers/authController');
 const { catchErrors } = require('../handlers/errorHandlers');
 
 // Do work here
-router.get('/', bandController.homePage);
+router.get('/', catchErrors(bandController.homePage));
 router.get('/bands', catchErrors(bandController.getBands));
 router.get('/bands/page/:page', catchErrors(bandController.getBands));
 router.get('/add', bandController.add);
