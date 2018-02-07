@@ -34,14 +34,21 @@ exports.homePage = async (req, res) => {
 	// req.flash('success', 'Computer Says No...');
 	const bands = await Band.find().select('name slug photos');
 	const albums = await Album.find().select('title slug cover');
+	console.log(bands[0]);
+	console.log(albums[1]);
 	const hero = [];
 	for(let i = 0; i < 24; i++) {
 		const select = randomNum(0, 2);
-		// console.log(select);
-		if(select === 0) {
+		if(select === 0) { // if 0 pick a band
 			const choice = randomNum(0, bands.length);
 			const band = bands[choice];
-			bands.splice(choice, 1);
+			if(!band) {
+				console.log('!!! ' + choice)
+				console.log(bands);
+				console.log(albums);
+			}
+			// console.log(band);
+			// bands.splice(choice, 1); // this is an attempt at uniqueness but fails??
 			// console.log(bands.length);
 			hero.push(
 				{
@@ -54,7 +61,10 @@ exports.homePage = async (req, res) => {
 		} else {
 			const choice = randomNum(0, albums.length);			
 			const album = albums[choice];
-			albums.splice(choice, 1);
+			if(!album) {
+				console.log('!!! ' + choice)
+			}			
+			// albums.splice(choice, 1); // this is an attempt at uniqueness but fails??
 			hero.push(
 				{
 					type: 'album',
@@ -65,7 +75,7 @@ exports.homePage = async (req, res) => {
 			)			 
 		}
 	}
-	// console.log(hero);		
+	console.log(hero);		
 	res.render('index', { title: 'Loomernescent', hero });
 };
 
@@ -108,26 +118,38 @@ exports.resize = async(req, res, next) =>  {  //
 	for(let i = 0; i < req.files.length; i++) {
 		// get file extension
 		const extension = req.files[i].mimetype.split('/')[1];
+		const bandIn = req.body.name.split(' ').reduce((accum, next, i, arr) => {
+			if(arr.length === 1) {
+		  	return next.charAt(0) + next.charAt(1);
+		  } else {
+		  	if(i === 0) {
+		  		return next.charAt(0);
+		  	} else {
+		    	return accum + next.charAt(0);
+		    }
+		  }
 
+		}, "");
 		// check if photo is square
 		const checkDimensions = await jimp.read(req.files[i].buffer);
 		if(checkDimensions.bitmap.width === checkDimensions.bitmap.height) {
 			console.log('Its square!');
+
 			const uniqueID = uuid.v4();
-			req.body.photos.squareLg = `${uniqueID}_Lg.${extension}`;
+			req.body.photos.squareLg = `${bandIn}_${uniqueID}_Lg.${extension}`;
 			const photoLarge = await jimp.read(req.files[i].buffer);			
 			await photoLarge.resize(800, jimp.AUTO);
 			await photoLarge.quality(38);
 			await photoLarge.write('./public/uploads/' + req.body.photos.squareLg);
 
-			req.body.photos.squareSm = `${uniqueID}_Sm.${extension}`;
+			req.body.photos.squareSm = `${bandIn}_${uniqueID}_Sm.${extension}`;
 			const photoSmall = await jimp.read(req.files[i].buffer);			
 			await photoSmall.resize(300, jimp.AUTO);
 			await photoSmall.quality(32);
 			await photoSmall.write('./public/uploads/' + req.body.photos.squareSm);
 		} else {
 			const uniqueID = uuid.v4();
-			req.body.photos.gallery.push(`${uniqueID}_Lg.${extension}`);
+			req.body.photos.gallery.push(`${bandIn}_${uniqueID}_Lg.${extension}`);
 			const gallery = await jimp.read(req.files[i].buffer);
 			if(checkDimensions.bitmap.width > checkDimensions.bitmap.height) {
 				await gallery.resize(1000, jimp.AUTO);
@@ -140,7 +162,7 @@ exports.resize = async(req, res, next) =>  {  //
 			}
 
 
-			req.body.photos.galleryThumbs.push(`${uniqueID}_Sm.${extension}`);
+			req.body.photos.galleryThumbs.push(`${bandIn}_${uniqueID}_Sm.${extension}`);
 			const thumb = await jimp.read(req.files[i].buffer);
 			await thumb.resize(500, jimp.AUTO);
 			await thumb.quality(34);

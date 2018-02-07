@@ -9,9 +9,7 @@ block content
 	.single
 		.single__hero
 			img.single__image(src=`/uploads/${band.photos.gallery[0] || 'Band.jpg' }`)
-			h2.title.title--single
-				a(href=`/bands/${band.slug}`) #{band.name}
-				
+			h2.title.title--single #{band.name}		
 	.single__details
 		.ribbon__wrapper
 			.ribbon!= h.countryToISO(band.location.address)		

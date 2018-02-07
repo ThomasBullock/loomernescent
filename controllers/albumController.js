@@ -73,11 +73,22 @@ exports.resize = async(req, res, next) => {
 		return;
 	}
 	const extension = req.file.mimetype.split('/')[1];
-	req.body.cover = `${uuid.v4()}.${extension}`;
+	const bandIn = req.body.artist.split(' ').reduce((accum, next, i, arr) => {
+		if(arr.length === 1) {
+	  	return next.charAt(0) + next.charAt(1);
+	  } else {
+	  	if(i === 0) {
+	  		return next.charAt(0);
+	  	} else {
+	    	return accum + next.charAt(0);
+	    }
+	  }
+	}, "");
+	req.body.cover = `${bandIn}-${uuid.v4()}.${extension}`;
 	// now we resize
 	const cover = await jimp.read(req.file.buffer);
 	await cover.resize(800, jimp.AUTO);
-	await cover.quality(35);
+	await cover.quality(36);
 	await cover.write(`./public/uploads/covers/${req.body.cover}`);
 	// once we have written the photo to our filesystem keep going!
 	// console.log(req.body.cover);
@@ -217,7 +228,7 @@ exports.getAlbumBySlug = async (req, res) => {
 	const album = await Album.findOne( { slug: req.params.slug } );
 	const band = await Band.findOne( { _id: album.bandID } );
 
-	res.render('album', {album: album, band: band});
+	res.render('album', { title: album.title , album: album, band: band});
 };
 
 exports.updateAlbum = async (req, res) => {
