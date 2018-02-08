@@ -65,7 +65,10 @@ exports.resize = async(req, res, next) => {
 	}
 	// console.log(req.file)
 	const extension = req.file.mimetype.split('/')[1];
-	req.body.image = `${uuid.v4()}.${extension}`;
+	const brand = req.body.brand.split(' ')[0];
+	console.log(brand)
+	req.body.image = `${req.body.brand.split(' ')[0]}-${uuid.v4()}.${extension}`;
+	console.log(req.body.image);
 	// now we resize
 	const image = await jimp.read(req.file.buffer);
 	await image.resize(800, jimp.AUTO);
