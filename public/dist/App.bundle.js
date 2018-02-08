@@ -1188,7 +1188,6 @@ function modal() {
 		btn.addEventListener('click', function (e) {
 			var imgString = e.target.src.split('/').pop();
 			var imgAlt = e.target.alt;
-			// imgString = imgStringArray
 			var imgStringLg = imgString.split('_')[0] + '_Lg.jpeg';
 			var modalImg = document.createElement('img');
 
@@ -1255,7 +1254,6 @@ function typeAhead(search) {
 
 		// show the search results!
 		searchResults.style.display = 'block';
-		// searchResults.innerHTML = '';
 
 		_axios2.default.get('/api/v1/search?q=' + this.value).then(function (response) {
 			if (response.data.length) {

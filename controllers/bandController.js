@@ -261,7 +261,6 @@ exports.getBands = async (req, res) => {
 		.find()
 		.skip(skip)
 		.limit(limit)
-		// .sort({created: 'desc' })
 		
 	const countPromise = Band.count();
 

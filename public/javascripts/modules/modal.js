@@ -21,7 +21,6 @@ function modal() {
 		btn.addEventListener('click', (e) => {
 			const imgString = e.target.src.split('/').pop();
 			const imgAlt = e.target.alt; 
-			// imgString = imgStringArray
 			const imgStringLg = `${imgString.split('_')[0]}_Lg.jpeg`;
 			const modalImg = document.createElement('img');
 
