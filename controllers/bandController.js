@@ -136,20 +136,20 @@ exports.resize = async(req, res, next) =>  {  //
 			console.log('Its square!');
 
 			const uniqueID = uuid.v4();
-			req.body.photos.squareLg = `${bandIn}_${uniqueID}_Lg.${extension}`;
+			req.body.photos.squareLg = `${bandIn}-${uniqueID}_Lg.${extension}`;
 			const photoLarge = await jimp.read(req.files[i].buffer);			
 			await photoLarge.resize(800, jimp.AUTO);
 			await photoLarge.quality(38);
 			await photoLarge.write('./public/uploads/' + req.body.photos.squareLg);
 
-			req.body.photos.squareSm = `${bandIn}_${uniqueID}_Sm.${extension}`;
+			req.body.photos.squareSm = `${bandIn}-${uniqueID}_Sm.${extension}`;
 			const photoSmall = await jimp.read(req.files[i].buffer);			
 			await photoSmall.resize(300, jimp.AUTO);
 			await photoSmall.quality(32);
 			await photoSmall.write('./public/uploads/' + req.body.photos.squareSm);
 		} else {
 			const uniqueID = uuid.v4();
-			req.body.photos.gallery.push(`${bandIn}_${uniqueID}_Lg.${extension}`);
+			req.body.photos.gallery.push(`${bandIn}-${uniqueID}_Lg.${extension}`);
 			const gallery = await jimp.read(req.files[i].buffer);
 			if(checkDimensions.bitmap.width > checkDimensions.bitmap.height) {
 				await gallery.resize(1000, jimp.AUTO);
@@ -162,7 +162,7 @@ exports.resize = async(req, res, next) =>  {  //
 			}
 
 
-			req.body.photos.galleryThumbs.push(`${bandIn}_${uniqueID}_Sm.${extension}`);
+			req.body.photos.galleryThumbs.push(`${bandIn}-${uniqueID}_Sm.${extension}`);
 			const thumb = await jimp.read(req.files[i].buffer);
 			await thumb.resize(500, jimp.AUTO);
 			await thumb.quality(34);

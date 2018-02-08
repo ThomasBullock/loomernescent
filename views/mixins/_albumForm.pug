@@ -12,7 +12,7 @@ mixin albumForm(album = {})
 		label(for="cover") Cover
 		input(type="file" name="cover" id="cover" accept="image/png, image/jpeg")
 		if album.cover
-			img(src=`/uploads/${album.cover}` alt=album.title width=200)
+			img(src=`/uploads/covers/${album.cover}` alt=album.title width=200)
 		label(for="producer") Producer
 		input(type="text" name="producer" placeholder="list personnel seperated by comma" value=(album.producer && album.producer.join(',')))
 		label(for="mixedBy") mixed By
