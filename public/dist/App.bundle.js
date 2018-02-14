@@ -984,36 +984,7 @@ function autocomplete(input, latInput, lngInput) {
 exports.default = autocomplete;
 
 /***/ }),
-/* 11 */
-/***/ (function(module, exports, __webpack_require__) {
-
-"use strict";
-
-
-Object.defineProperty(exports, "__esModule", {
-  value: true
-});
-// based on https://gist.github.com/paulirish/12fb951a8b893a454b32
-
-var $ = document.querySelector.bind(document);
-var $$ = document.querySelectorAll.bind(document);
-
-Node.prototype.on = window.on = function (name, fn) {
-  this.addEventListener(name, fn);
-};
-
-NodeList.prototype.__proto__ = Array.prototype; // eslint-disable-line
-
-NodeList.prototype.on = NodeList.prototype.addEventListener = function (name, fn) {
-  this.forEach(function (elem) {
-    elem.on(name, fn);
-  });
-};
-
-exports.$ = $;
-exports.$$ = $$;
-
-/***/ }),
+/* 11 */,
 /* 12 */
 /***/ (function(module, exports, __webpack_require__) {
 
@@ -3106,7 +3077,9 @@ exports.default = [{
 
 __webpack_require__(16);
 
-var _bling = __webpack_require__(11);
+var _imageLoader = __webpack_require__(43);
+
+var _imageLoader2 = _interopRequireDefault(_imageLoader);
 
 var _autocomplete = __webpack_require__(10);
 
@@ -3134,10 +3107,13 @@ var _loves2 = _interopRequireDefault(_loves);
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
+(0, _imageLoader2.default)();
+
 // import getSpotifyData from './modules/spotify';
 
 // import request from 'request';
 
+// import { $, $$ } from './modules/bling';
 var address = document.getElementById('address');
 var latitude = document.getElementById('lat');
 var longitude = document.getElementById('lng');
@@ -3166,7 +3142,39 @@ var loveForms = document.querySelectorAll('form.heart');
 loveForms.forEach(function (form) {
 	form.addEventListener('submit', _loves2.default);
 });
-console.log(loveForms);
+
+/***/ }),
+/* 37 */,
+/* 38 */,
+/* 39 */,
+/* 40 */,
+/* 41 */,
+/* 42 */,
+/* 43 */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+
+Object.defineProperty(exports, "__esModule", {
+	value: true
+});
+function imageLoader() {
+	window.addEventListener('load', function () {
+		console.log('we are in imageLoader');
+		var images = document.querySelectorAll('a.hero__link img');
+		// console.log(images);
+		for (var i = 0; i < images.length; i++) {
+
+			// console.log(images[i]);
+			if (images[i].getAttribute('data-src')) {
+				images[i].setAttribute('src', images[i].getAttribute('data-src'));
+			}
+		}
+	});
+}
+
+exports.default = imageLoader;
 
 /***/ })
 /******/ ]);

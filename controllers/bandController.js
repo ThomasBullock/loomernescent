@@ -27,55 +27,47 @@ const randomNum = (min, max) => {
   return Math.floor(Math.random() * (max - min)) + min; //The maximum is exclusive and the minimum is inclusive
 };
 
-
+// This function will fail if there is not enough band/album  data in the db to populate the hero[]
 exports.homePage = async (req, res) => {
-	// req.flash('info', 'Computer Says No...');
-	// req.flash('error', 'Computer Says No...');
-	// req.flash('success', 'Computer Says No...');
 	const bands = await Band.find().select('name slug photos');
 	const albums = await Album.find().select('title slug cover');
-	console.log(bands[0]);
-	console.log(albums[1]);
+
 	const hero = [];
 	for(let i = 0; i < 24; i++) {
-		const select = randomNum(0, 2);
-		if(select === 0) { // if 0 pick a band
+		const select = Math.random() <= .6;
+		if(select && bands.length > 0) { // if true and band list still > 0 pick a band
 			const choice = randomNum(0, bands.length);
+			// console.log('choice is '  + choice, bands.length);
 			const band = bands[choice];
-			if(!band) {
-				console.log('!!! ' + choice)
-				console.log(bands);
-				console.log(albums);
-			}
-			// console.log(band);
-			// bands.splice(choice, 1); // this is an attempt at uniqueness but fails??
-			// console.log(bands.length);
 			hero.push(
 				{
 					type: 'band',
 				 	name: band.name,
 				 	slug: band.slug,
-				 	img: band.photos.squareSm
+				 	img: band.photos.squareSm,
 				}
-				)
+				);
+			bands.splice(choice, 1); // this is an attempt at uniqueness but fails??
 		} else {
-			const choice = randomNum(0, albums.length);			
+			const choice = randomNum(0, albums.length);		
 			const album = albums[choice];
-			if(!album) {
-				console.log('!!! ' + choice)
-			}			
-			// albums.splice(choice, 1); // this is an attempt at uniqueness but fails??
-			hero.push(
-				{
-					type: 'album',
-				 	name: album.title,
-				 	slug: album.slug,
-				 	img: `covers/${album.cover}`
-				}
-			)			 
+			// console.log('album !!! ' + choice, albums.length)
+			if(album) {
+				hero.push(
+					{
+						type: 'album',
+					 	name: album.title,
+					 	slug: album.slug,
+					 	img: `covers/${album.cover}`,
+					}
+				);
+				albums.splice(choice, 1); // this is an attempt at uniqueness but fails??		
+			}	else {
+				continue;
+			}		
+				 
 		}
 	}
-	console.log(hero);		
 	res.render('index', { title: 'Loomernescent', hero });
 };
 
