@@ -6,7 +6,7 @@
 }
 
 .pedal {
-	flex: 1 1 30%;	
+	flex: 0 1 30%;	
 	
 	@include elem('actions') {
     position: relative;

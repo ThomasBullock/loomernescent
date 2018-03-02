@@ -48,8 +48,6 @@ exports.getAlbums = async(req, res) => {
 	const countPromise = Album.count();
 	
 	const [albums, count ] = await Promise.all([albumsPromise, countPromise])
-	console.log(count);
-	console.log(albums);
 	const pages = Math.ceil(count / limit);
 	if(!albums.length && skip) {
 		req.flash('info', `Hey! You aked for page ${page}. But that doesn't exist So I put you on page ${pages}`)

@@ -984,7 +984,33 @@ function autocomplete(input, latInput, lngInput) {
 exports.default = autocomplete;
 
 /***/ }),
-/* 11 */,
+/* 11 */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+
+Object.defineProperty(exports, "__esModule", {
+	value: true
+});
+function imageLoader() {
+	window.addEventListener('load', function () {
+		console.log('we are in imageLoader');
+		var images = document.querySelectorAll('a.hero__link img');
+		// console.log(images);
+		for (var i = 0; i < images.length; i++) {
+
+			// console.log(images[i]);
+			if (images[i].getAttribute('data-src')) {
+				images[i].setAttribute('src', images[i].getAttribute('data-src'));
+			}
+		}
+	});
+}
+
+exports.default = imageLoader;
+
+/***/ }),
 /* 12 */
 /***/ (function(module, exports, __webpack_require__) {
 
@@ -3077,7 +3103,7 @@ exports.default = [{
 
 __webpack_require__(16);
 
-var _imageLoader = __webpack_require__(43);
+var _imageLoader = __webpack_require__(11);
 
 var _imageLoader2 = _interopRequireDefault(_imageLoader);
 
@@ -3142,39 +3168,6 @@ var loveForms = document.querySelectorAll('form.heart');
 loveForms.forEach(function (form) {
 	form.addEventListener('submit', _loves2.default);
 });
-
-/***/ }),
-/* 37 */,
-/* 38 */,
-/* 39 */,
-/* 40 */,
-/* 41 */,
-/* 42 */,
-/* 43 */
-/***/ (function(module, exports, __webpack_require__) {
-
-"use strict";
-
-
-Object.defineProperty(exports, "__esModule", {
-	value: true
-});
-function imageLoader() {
-	window.addEventListener('load', function () {
-		console.log('we are in imageLoader');
-		var images = document.querySelectorAll('a.hero__link img');
-		// console.log(images);
-		for (var i = 0; i < images.length; i++) {
-
-			// console.log(images[i]);
-			if (images[i].getAttribute('data-src')) {
-				images[i].setAttribute('src', images[i].getAttribute('data-src'));
-			}
-		}
-	});
-}
-
-exports.default = imageLoader;
 
 /***/ })
 /******/ ]);

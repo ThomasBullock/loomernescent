@@ -2,6 +2,7 @@ extends layout
 
 include mixins/_bandCard
 include mixins/_albumCard
+include mixins/_pedalCard
 include mixins/_pagination
 
 block content
@@ -15,3 +16,7 @@ block content
 		.albums
 			each album in albums
 				+albumCard(album)
+		h2 Favourite Pedals
+		.pedals
+			each pedal in pedals
+				+pedalCard(pedal)

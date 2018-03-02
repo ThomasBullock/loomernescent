@@ -29,3 +29,5 @@ block content
 								span.pedal-info__user
 									span #{artist}
 									a(href=`/band/${user.slug}`) (#{user.band})
+				if pedal.comments
+					p.pedal-info__comments #{pedal.comments}

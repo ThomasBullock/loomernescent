@@ -85,6 +85,6 @@ exports.getFavourites = async (req, res) => {
 	// const bands = await Band.find({
 	// 	_id: { $in: req.user.loves } // it will find any bands where their ID is in an array (req.user.loves)
 	// });
-	console.log(bands, albums)
-	res.render('favourites', {title: 'My Favourites', bands: bands, albums: albums });
+	console.log(bands, albums, pedals)
+	res.render('favourites', {title: 'My Favourites', bands: bands, albums: albums, pedals: pedals });
 }
