@@ -16,6 +16,6 @@ mixin pedalCard(pedal = {})
 						a(href=`/pedals/${pedal._id}/edit`)
 							!= h.icon('pencil')
 			img(src=`/uploads/pedals/${pedal.image || 'Pedal.jpg'}`)
-			h2.title
+			h2.title.title--pedals
 				a(href=`/pedal/${pedal.slug}`) #{pedal.name}
 		.pedal__details

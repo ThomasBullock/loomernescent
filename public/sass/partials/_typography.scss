@@ -80,6 +80,13 @@ strong {
     text-align: center;
   }
   
+  @include mod('pedals') {
+    font-size: modular-scale(2);
+    color: $base;
+    text-align: center;
+    margin-top: $base-spacing;
+  }
+
   @include mod('tags') {
 
     font-size: modular-scale(3);

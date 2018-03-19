@@ -649,6 +649,11 @@ strong {
     color: #F6F6F6; }
   .title--albums {
     text-align: center; }
+  .title--pedals {
+    font-size: 1.5625em;
+    color: #AAAAAA;
+    text-align: center;
+    margin-top: 1.5em; }
   .title--tags {
     font-size: 1.95312em;
     margin-bottom: 0;
@@ -1755,7 +1760,12 @@ video {
   background: none;
   border: 0;
   outline: 0;
-  position: relative; }
+  position: relative;
+  top: 0.75em; }
+  .heart__button:hover {
+    cursor: pointer; }
+    .heart__button:hover svg {
+      fill: #F6F6F6; }
   .heart__button:after {
     content: '\2665\FE0F';
     font-size: 20px;
@@ -1764,11 +1774,14 @@ video {
     top: 0; }
   .heart__button svg {
     width: 25px;
-    fill: white; }
+    fill: #555555; }
   .heart__button--hearted svg {
     fill: red; }
   .heart__button--float:after {
     animation: fly 2.5s 1 ease-out; }
+  .heart__button--pedal svg {
+    width: 25px;
+    fill: #333333; }
 
 @keyframes fly {
   0% {

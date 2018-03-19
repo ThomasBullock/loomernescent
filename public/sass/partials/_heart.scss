@@ -1,9 +1,20 @@
 .heart {
-  &__button {
+  @include elem('button') {
     background: none;
     border: 0;
     outline: 0;
     position: relative;
+
+    top: $base-spacing / 2;
+
+    &:hover {
+      cursor: pointer;
+      svg {
+        fill: $vapor;        
+      }
+
+    }
+
     &:after {
       content: '♥️';
       font-size: 20px;
@@ -13,17 +24,24 @@
     }
     svg {
       width: 25px;
-      fill: white;
+      fill: $charcoal;
     }
-    &--hearted {
+    @include mod('hearted') {
       svg {
         fill: red;
       }
     }
-    &--float {
+    @include mod('float') {
       &:after {
         animation: fly 2.5s 1 ease-out;
       }
+    }
+
+    @include mod('pedal') {
+      svg {
+        width: 25px;
+        fill: $oil;
+      }      
     }
   }
 }
