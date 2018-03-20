@@ -1316,7 +1316,8 @@ video {
     display: -ms-flexbox;
     display: flex;
     -ms-flex-align: center;
-        align-items: center; }
+        align-items: center;
+    margin-top: 0.75em; }
     .album-info__link a {
       margin-left: 0.75em;
       margin-right: 0.75em; }

@@ -185,7 +185,7 @@
   @include elem('link') {
     display: flex;
     align-items: center;
-    // flex: 1 1 100%;
+    margin-top: $base-spacing / 2;
     a {
       margin-left: $base-spacing / 2;
       margin-right: $base-spacing / 2;      
