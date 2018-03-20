@@ -15,7 +15,7 @@ mixin albumCard(album = {})
 					a(href=`/album/${album._id}/edit`)
 						!= h.icon('pencil')
 		a(href=`/album/${album.slug}`) 
-			img.album__cover(src=`/uploads/covers/${album.cover || 'band.jpg'}`)
+			img.album__cover(src=`/uploads/covers/${album.cover || 'band.jpg'}` alt=`cover artwork for ${album.title} by ${album.artist}`)
 		//- h2.album__title
 		//- 	a(href=`/album/${album.slug}`) #{album.title}
 		//- .band__details

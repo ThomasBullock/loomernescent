@@ -190,6 +190,11 @@
       margin-left: $base-spacing / 2;
       margin-right: $base-spacing / 2;      
     }
+  }
+
+  @include elem('comments') {
+    margin-top: $base-spacing;
+    flex: 1 1 100%;
   }    
 }
 

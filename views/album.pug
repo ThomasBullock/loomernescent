@@ -14,7 +14,7 @@ block content
 	.single__details.single__details--margin
 		.album-info
 			.album-info__cover
-				img(src=`/uploads/covers/${album.cover}`)
+				img(src=`/uploads/covers/${album.cover}` alt=`cover artwork for ${album.title} by ${album.artist}`)
 			.album-info__content
 				h3.album-info__title #{album.title}
 				a.album-info__artist-link(href=`/band/${band.slug}`)
@@ -55,3 +55,5 @@ block content
 								strong Buy It	
 							a.album-info__spotify(href=`${album.bandcampURL}` target='_blank')
 								+bandcamp()
+				if album.comments
+					.album-info__comments #{album.comments}

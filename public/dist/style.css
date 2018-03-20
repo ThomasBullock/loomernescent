@@ -1321,6 +1321,10 @@ video {
     .album-info__link a {
       margin-left: 0.75em;
       margin-right: 0.75em; }
+  .album-info__comments {
+    margin-top: 1.5em;
+    -ms-flex: 1 1 100%;
+        flex: 1 1 100%; }
 
 .pedals {
   display: -ms-flexbox;

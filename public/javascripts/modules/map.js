@@ -7,7 +7,7 @@ const mapOptions = {
 		styles: styles
 	};
 
-console.log(styles);
+// console.log(styles);
 
 function loadBands(map, lat, lng) {
 	let apiRequest;
@@ -19,9 +19,9 @@ function loadBands(map, lat, lng) {
 	axios.get(apiRequest)
 		.then(res => {
 			const places = res.data
-			console.log(places)
+			// console.log(places)
 			if(!places.length) {
-				alert('no places found!');
+				alert('No bands where found in that city try another one :)');
 				return;
 			}
 			
@@ -38,7 +38,7 @@ function loadBands(map, lat, lng) {
 					position: position
 				});
 				marker.band = band;
-				console.log(marker)
+				// console.log(marker)
 				return marker;
 			});
 			

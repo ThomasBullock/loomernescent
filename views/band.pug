@@ -8,14 +8,14 @@ block content
 	//- pre= h.dump(albums)
 	.single
 		.single__hero
-			img.single__image(src=`/uploads/${band.photos.gallery[0] || 'Band.jpg' }`)
+			img.single__image(src=`/uploads/${band.photos.galleryThumbs[0] || 'Band.jpg' }` srcset=`/uploads/${band.photos.galleryThumbs[0]} 767w, /uploads/${band.photos.gallery[0]} 1000w` alt=`A photo of ${band.name}`)
 			h2.title.title--single #{band.name}		
 	.single__details
 		.ribbon__wrapper
 			.ribbon!= h.countryToISO(band.location.address)		
 		.band-info
 			.band-info__photo
-				img(src=`/uploads/${band.photos.squareLg || 'Band.jpg' }`)
+				img(src=`/uploads/${band.photos.squareLg || 'Band.jpg' }` alt=`A photo of ${band.name}`)
 			.band-info__facts
 				p.single__detail
 					strong Years Active: 
@@ -63,13 +63,13 @@ block content
 				each album in albums
 					.single__album
 						a(href=`/album/${album.slug}`)
-							img(src=`/uploads/covers/${album.cover}`)
+							img(src=`/uploads/covers/${album.cover}` alt=`cover artwork for ${album.title} by ${album.artist}`)
 	if band.photos.gallery
 		.single__fullwidth.single__fullwidth--ebony
 			.single__gallery
 				each photo in band.photos.galleryThumbs
 					.single__gallery-thumb
-						img.single__gallery-thumb-img(src=`/uploads/${photo}` alt=band.name)
+						img.single__gallery-thumb-img(src=`/uploads/${photo}` alt=`gallery thumbnail for ${band.name}`)
 	#galleryModal.modal
 		.modal__container
 			.modal__header
