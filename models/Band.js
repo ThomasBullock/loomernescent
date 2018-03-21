@@ -64,7 +64,8 @@ const bandSchema = new mongoose.Schema({
 bandSchema.index({
 	name: 'text',
 	personnel: 'text',
-	pastPersonnel: 'text'
+	pastPersonnel: 'text',
+	label: 'text'
 });
 
 bandSchema.index({

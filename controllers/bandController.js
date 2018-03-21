@@ -332,7 +332,25 @@ exports.searchBands = async (req, res) => {
 		score: { $meta: 'textScore' }	
 	})
 	.limit(10);
-	res.json(bands)
+	if(bands.length > 0) {
+		res.json(bands)		
+	} else {
+		const albums = await Album
+		.find({
+			$text: {
+				$search: req.query.q
+			}
+		}, {
+			score: {$meta: 'textScore' }
+		})
+		// then sort them
+		.sort({
+			score: { $meta: 'textScore' }	
+		})
+		.limit(10);
+		res.json(albums)
+	}
+
 };
 
 exports.mapBands = async (req, res) => {

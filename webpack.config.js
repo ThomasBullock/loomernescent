@@ -5,6 +5,7 @@
 const path = require('path');
 const webpack = require('webpack');
 const ExtractTextPlugin = require('extract-text-webpack-plugin');
+const OptimizeCssAssetsPlugin = require('optimize-css-assets-webpack-plugin');
 const autoprefixer = require('autoprefixer');
 /*
   webpack sees every file as a module.
@@ -74,6 +75,12 @@ const config = {
     uglify,
     // here is where we tell it to output our css to a separate file
     new ExtractTextPlugin('style.css'),
+    new OptimizeCssAssetsPlugin({
+      assetNameRegExp: /style.css$/,
+      cssProcessor: require('cssnano'),
+      cssProcessorOptions: { discardComments: { removeAll: true } },
+      canPrint: true
+    })    
   ],
   // target: node,
   // externals: {

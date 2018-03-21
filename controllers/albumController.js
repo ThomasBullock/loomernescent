@@ -254,7 +254,23 @@ exports.loveAlbum = async (req, res) => {
 			{ new: true }
 			);
 	res.json(user)	
-
 };
 
-
+exports.searchAlbums = async (req, res) => {
+	// const query = req.query;
+	const albums = await Album
+	// first find bands that match
+	.find({
+		$text: {
+			$search: req.query.q
+		}
+	}, {
+		score: {$meta: 'textScore' }
+	})
+	// then sort them
+	.sort({
+		score: { $meta: 'textScore' }	
+	})
+	.limit(10);
+	res.json(albums)		
+};

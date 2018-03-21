@@ -39,9 +39,11 @@ const albumSchema = new mongoose.Schema({
 })
 
 // Define our indexes
-
-
-
+albumSchema.index({
+	title: 'text',
+	producer: 'text',
+	mixedBy: 'text'
+});
 // Pre Save
 // Prevent duplicate album names overwritting slugs!
 albumSchema.pre('save', async function(next) {

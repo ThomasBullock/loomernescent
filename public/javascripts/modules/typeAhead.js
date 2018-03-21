@@ -1,11 +1,12 @@
 import axios from 'axios';
 import dompurify from 'dompurify';
 
-function searchResultsHTML(results) {
-	return results.map(band => {
+function searchResultsHTML(results, type) {
+	const path = (type === 'name') ? 'band' : 'album';
+	return results.map(item => {
 		return `
-			<a href="/band/${band.slug}" class="search__result">
-				<strong>${band.name}</strong>
+			<a href="/${path}/${item.slug}" class="search__result">
+				<strong>${item[type]}</strong>
 			</a>
 		`;
 	}).join('')
@@ -34,7 +35,10 @@ function typeAhead(search) {
 			.get(`/api/v1/search?q=${this.value}`)
 			.then(response => {
 				if(response.data.length) {
-					const html = dompurify.sanitize(searchResultsHTML(response.data));
+					console.log(response.data)
+					const responseType = (response.data[0].hasOwnProperty('name')) ? 'name' : 'title';
+					console.log(responseType)
+					const html = dompurify.sanitize(searchResultsHTML(response.data, responseType));
 					searchResults.innerHTML = html;
 					return;
 				} 
