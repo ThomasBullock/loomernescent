@@ -78,7 +78,7 @@ function makeMap(mapDiv) {
 	const autocomplete = new google.maps.places.Autocomplete(input);
 	autocomplete.addListener('place_changed', () => {
 		const place = autocomplete.getPlace();
-		console.log(place);
+		// console.log(place);
 		loadBands(map, place.geometry.location.lat(), place.geometry.location.lng());
 	})
 }
