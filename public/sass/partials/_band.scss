@@ -187,7 +187,8 @@
     right: 0;
     position: absolute;
     left: 0;
-    object-fit: cover;  
+    object-fit: contain; 
+    object-position: 0 0; 
     clip-path: polygon(0 0, 100% 0, 100% 90%, 0% 100%);
   }
 }
