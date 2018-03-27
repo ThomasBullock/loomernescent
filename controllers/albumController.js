@@ -105,9 +105,9 @@ exports.getArtistData = async(req, res, next) => {
 };
 
 exports.getSpotifyData = async(req, res, next) => {
-	console.log('we are in spotify')
+	// console.log('we are in spotify')
 	if(!req.body.artistSpotifyID) {
-		console.log('skip spotify!')
+		// console.log('skip spotify!')
 		next();
 		return;
 	} 
@@ -135,9 +135,8 @@ exports.getSpotifyData = async(req, res, next) => {
 	    var options = spotifyOptions(`artists/${req.body.artistSpotifyID}/albums`, token);
 	    // console.log(options);
 	    request.get(options, function(error, response, body) {
-	    	console.log(response.statusCode)
+	    	// console.log(response.statusCode)
 				let album;
-				// console.log(body.items);	
 				for(let i = 0; i < body.items.length; i++) {
 					// console.log(body.items[i].album_type)
 					// console.log(i, body.items[i])
@@ -230,7 +229,7 @@ exports.getAlbumBySlug = async (req, res) => {
 };
 
 exports.updateAlbum = async (req, res) => {
-	console.log('we are in update!')
+	// console.log('we are in update!')
 	const album = await Album.findOneAndUpdate({ _id: req.params.id }, req.body, {
 		new: true,
 		runValidators: true,
@@ -241,7 +240,7 @@ exports.updateAlbum = async (req, res) => {
 };
 
 exports.loveAlbum = async (req, res) => {
-	console.log('hearting album')
+	// console.log('hearting album')
 	
 	const loves = req.user.loves.map(obj => obj.toString());
 	// console.log(loves)

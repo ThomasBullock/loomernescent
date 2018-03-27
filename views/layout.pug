@@ -8,6 +8,8 @@ html
 			gtag('js', new Date());
 			gtag('config', 'UA-97822819-2');		
 		title= `${title} | ${h.siteName}`
+		meta(name="description" content="Loomernescent is a curated depository of guitar orientated music thats on the effected side of indie. Discover bands, albums and fx pedals from subgenres such as shoegaze, dreampop and noise rock.")
+		meta(name="keywords" content="shoegaze, guitar, fx, pedals, effects, noise, distortion, dreampop, loomer, loomernescent, indie, rock, reverb")
 		link(rel='stylesheet', href='/dist/style.css')
 		link(rel="shortcut icon" type="image/png" href="/images/icons/doughnut.png")
 		meta(name="viewport" content="width=device-width, initial-scale=1")
@@ -16,6 +18,7 @@ html
 			header
 				video#bgvid(autoplay='', loop='')
 					source(src='/video/background.mp4', type='video/mp4')
+				img.nav__background-img(src='/images/Lava.jpg' alt='A blurry closeup of a lava lamp')
 				nav.nav
 					.nav__section.nav__section--pages
 						li.nav__item.nav__item--home

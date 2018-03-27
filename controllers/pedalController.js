@@ -22,14 +22,13 @@ const multerOptions = {
 
 const getBandFromPersonnel = async(artist) => {
 	const band = await Band.find({ personnel: {$in: [artist] } })
-	console.log('me console the band');
-	console.log(band);
+	// console.log(band);
 	return band.slug;		
 }
 
 exports.getPedals = async(req, res) => {
 	const page = req.params.page || 1;
-	const limit = 3;
+	const limit = 6;
 	const skip = (limit * page) - limit;
 	
 	const pedalsPromise = Pedal
@@ -47,7 +46,7 @@ exports.getPedals = async(req, res) => {
 		res.redirect(`/pedals/page/${pages}`);
 		return;
 	}
-	console.log(pedals)		
+	// console.log(pedals)		
 	res.render('pedals', {title: 'Pedals', pedals: pedals, page: page, pages: pages, count: count})
 }
 

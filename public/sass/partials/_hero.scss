@@ -23,14 +23,14 @@
 		min-height: 400px;
 		height: calc(100vh - 335px);
 		height: auto;
-	  background: linear-gradient(#ffa949,transparent 90%),
-	              linear-gradient(0deg, $red, transparent 30%),
-	              #ffa949 url('/images/Lava.jpg') no-repeat center;
-	  background-size: cover;
-	  // border-bottom: solid 1px transparentize($ebony, .3);
-	  @media all and (min-width : 1025px) {     
-			height: calc(100vh - 129px);
-	  }	  			 				
+		background: linear-gradient(#ffa949,transparent 90%),
+					linear-gradient(0deg, $red, transparent 30%),
+					#ffa949 url('/images/Lava.jpg') no-repeat center;
+		background-size: cover;
+		// border-bottom: solid 1px transparentize($ebony, .3);
+		@media all and (min-width : 1025px) {     
+				height: calc(100vh - 129px);
+		}	  			 				
 	}
 
 	@include elem('link') {
@@ -64,7 +64,6 @@
 
 
  	@include elem('layer') {
-
  		@include mod('left') {
  			// position: absolute;
  			min-height: 100%;

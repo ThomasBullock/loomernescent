@@ -8,6 +8,22 @@
   justify-content: space-between;
   border-bottom: solid 1px transparentize($ebony, .3);
 
+
+  @include elem('background-img') {
+    position: absolute; 
+    min-width: 100%;
+    top: 0;
+    left: 0;
+    overflow: hidden;     
+    // min-height: 161px;
+    width: auto; 
+    height: 296px; 
+		// opacity: 0;
+		z-index: -250;
+		// transition: all .2s;
+		// left: -1%;    
+  }
+
   h1 {
     font-size: modular-scale(3);
     font-family: 'nexarust', sans-serif;
@@ -42,7 +58,6 @@
   // }
   @include elem('item') {
     display: flex;
-    min-width: 80px;
     // flex: 1 1 25%;
 
     @include mod('home') {
@@ -121,6 +136,10 @@
       font-size: modular-scale(3);
     }    
 
+  @include elem('background-img') {
+    height: 128px;         
+  }
+
   @include elem('section') {
       order: 1;
 
@@ -132,7 +151,11 @@
       // flex: 1 1 100%;
       order: 1;      
     }       
-  }    
+  }
+  
+  @include elem('item') {
+    min-width: 80px;
+  }
   @include elem('link') {
       padding-left: 1rem;
       padding-right: 1rem;
@@ -162,6 +185,11 @@
     h1 {
       font-size: modular-scale(2);
     }
+
+  @include elem('background-img') {
+    height: 155px;     
+  }
+
 
   @include elem('item') {
     min-width: 110px;
@@ -237,7 +265,7 @@
 
 
 
-video {
+video {  // should move into nav
     position: absolute; 
     right: 0; 
     top: 0;
@@ -257,12 +285,7 @@ video {
   }
 
   @media all and (min-width : 1025px) { 
-    height: 129px; 
+    height: 128px; 
   }      
-  // position: fixed;
-  // min-width: 100%;
-  // // min-height: 100%;
-  // width: 1000px;
-  // height: 251px;
-  // z-index: 1;  
+
 }
