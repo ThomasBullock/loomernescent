@@ -19,7 +19,7 @@ exports.icon = (name) => fs.readFileSync(`./public/images/icons/${name}.svg`);
 
 
 // Some details about the site
-exports.siteName = `Loomernescent | Music on the effected side of indie`;
+exports.siteName = `Music on the effected side of indie`;
 
 exports.menu = [
   { slug: '/bands', title: 'Bands', icon: 'bands', },
