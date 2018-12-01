@@ -62,7 +62,6 @@ exports.resize = async(req, res, next) => {
 		next()
 		return;
 	}
-	// console.log(req.file)
 	const extension = req.file.mimetype.split('/')[1];
 	const brand = req.body.brand.split(' ')[0];
 	console.log(brand)
@@ -74,7 +73,6 @@ exports.resize = async(req, res, next) => {
 	await image.quality(44);
 	await image.write(`./public/uploads/pedals/${req.body.image}`);
 	// once we have written the photo to our filesystem keep going!
-	// console.log(req.body.cover);
 	next();			
 }
 

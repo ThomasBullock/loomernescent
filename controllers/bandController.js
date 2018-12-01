@@ -42,9 +42,9 @@ exports.homePage = async (req, res) => {
 			hero.push(
 				{
 					type: 'band',
-				 	name: band.name,
-				 	slug: band.slug,
-				 	img: band.photos.squareSm,
+				  name: band.name,
+				  slug: band.slug,
+				  img: band.photos.squareSm,
 				}
 				);
 			bands.splice(choice, 1); // this is an attempt at uniqueness but fails??
@@ -56,16 +56,15 @@ exports.homePage = async (req, res) => {
 				hero.push(
 					{
 						type: 'album',
-					 	name: album.title,
-					 	slug: album.slug,
-					 	img: `covers/${album.cover}`,
+						name: album.title,
+					  slug: album.slug,
+					  img: `covers/${album.cover}`,
 					}
 				);
 				albums.splice(choice, 1); // this is an attempt at uniqueness but fails??		
 			}	else {
 				continue;
 			}		
-				 
 		}
 	}
 	res.render('index', { title: 'Loomernescent', hero });
@@ -153,14 +152,12 @@ exports.resize = async(req, res, next) =>  {  //
 				await gallery.write(`./public/uploads/${req.body.photos.gallery[req.body.photos.gallery.length - 1]}`);				
 			}
 
-
 			req.body.photos.galleryThumbs.push(`${bandIn}-${uniqueID}_Sm.${extension}`);
 			const thumb = await jimp.read(req.files[i].buffer);
 			await thumb.resize(500, jimp.AUTO);
 			await thumb.quality(34);
 			await thumb.write(`./public/uploads/${req.body.photos.galleryThumbs[req.body.photos.galleryThumbs.length - 1]}`);			
 		}
-			// req.body.photos[`Square${index}-Lg`] = `${uuid.v4()}_Lg.${extension}`;			
 	}
 	next();
 };
@@ -200,7 +197,6 @@ exports.getSpotifyData = async(req, res, next) => {
 	      json: true
 	    };
 			request.get(options, function(error, response, body) {
-			// console.log(body.artists);
 				if(body.artists && body.artists.items[0]) {
 					req.body.spotifyID = body.artists.items[0].id;		
 					req.body.spotifyURL = body.artists.items[0].external_urls.spotify;							
@@ -239,7 +235,6 @@ exports.createBand = async (req, res) => {
 	req.body.author = req.user._id;
 	const band = await (new Band(req.body)).save(); // we do it all in one go so we can acces the slug which is generated when saved
 	// you can add property/values to band here band.cool = true - wont be in the database until .save()
-	// await band.save();
 	req.flash('success', `Successfully Created ${band.name}`);
 	res.redirect(`/band/${band.slug}`);		
 }

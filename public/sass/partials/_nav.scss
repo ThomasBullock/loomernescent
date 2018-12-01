@@ -15,13 +15,10 @@
     top: 0;
     left: 0;
     overflow: hidden;     
-    // min-height: 161px;
     width: auto; 
     height: 296px; 
-		// opacity: 0;
 		z-index: -250;
-		// transition: all .2s;
-		// left: -1%;    
+
   }
 
   h1 {
@@ -30,9 +27,10 @@
     font-weight: normal;
     text-shadow: 0 2px 2px rgba(0, 0, 0, .8);
   }
-  // background: $black;
+
   @include elem('section') {
     display: flex;
+    z-index: 100;
 
     @include mod('pages') {
       flex-wrap: wrap;
@@ -50,15 +48,9 @@
       order: 12;      
     }    
   }
-  // &__section {
 
-  //   &--search {
-  //     flex: 1 1 auto;
-  //   }
-  // }
   @include elem('item') {
     display: flex;
-    // flex: 1 1 25%;
 
     @include mod('home') {
       flex: 1 1 100%;
@@ -70,8 +62,6 @@
     }
 
     @include mod('user') { // adjust this with media queries
-      // flex: 1;
-      // border-bottom: 0;
 
       &:hover {
         background: transparent;
@@ -82,7 +72,6 @@
     background: $jet;
     color: white;
     text-align: center;
-    // border-right: 1px solid rgba(255,255,255,0.1); // try this!???
     text-transform: uppercase;
     padding: 1.2rem 2rem 1rem 2rem;
     display: block;
@@ -106,7 +95,7 @@
       svg {
         transform: scale(1.2)
       }
-      // background: linear-gradient(90deg, #48ded4 0%, #a026bf 20%, #e82c75 60%, $yellow 85%, #48ded4 95%) fixed;
+
       background: none;
     }
   @include elem('logo') {
@@ -148,7 +137,6 @@
     }
 
     @include mod('user') {
-      // flex: 1 1 100%;
       order: 1;      
     }       
   }
@@ -267,13 +255,14 @@
 
 video {  // should move into nav
     position: absolute; 
-    right: 0; 
+    // right: 0; 
     top: 0;
+    left: 0;
+    // bottom: 0;
     min-width: 100%; 
-    // min-height: 161px;
     width: auto; 
     height: 296px; 
-    z-index: -100;
+    z-index: 0;
     background-size: cover;
     overflow: hidden;
     object-fit: fill;

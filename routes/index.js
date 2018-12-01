@@ -7,7 +7,8 @@ const userController = require('../controllers/userController');
 const authController = require('../controllers/authController');
 const { catchErrors } = require('../handlers/errorHandlers');
 
-// Do work here
+/// BANDS
+
 router.get('/', catchErrors(bandController.homePage));
 router.get('/bands', catchErrors(bandController.getBands));
 router.get('/bands/page/:page', catchErrors(bandController.getBands));
@@ -20,19 +21,19 @@ router.post('/addband',
 	catchErrors(bandController.getSpotifyData),
 	bandController.processBandData,  	 
 	catchErrors(bandController.createBand)
-	);
+);
 
 router.post('/addband/:id',
 	bandController.upload,
 	catchErrors(bandController.resize),
 	bandController.processBandData, 	
-	catchErrors(bandController.updateBand));
+  catchErrors(bandController.updateBand)
+);
 
 router.get('/bands/:id/edit', catchErrors(bandController.editBand));
-
 router.get('/band/:slug', catchErrors(bandController.getBandBySlug));
 
-/// Albums
+/// ALBUMS
 
 router.get('/albums', catchErrors(albumController.getAlbums));
 router.get('/albums/page/:page', catchErrors(albumController.getAlbums)); 
@@ -46,8 +47,8 @@ router.post('/addalbum',
 	albumController.getSpotifyData,
 	albumController.processAlbumData,
 	catchErrors(albumController.createAlbum)				
-	);
-// update an album
+);
+
 router.post('/addalbum/:id',
 	albumController.upload,
 	catchErrors(albumController.resize),
@@ -55,10 +56,9 @@ router.post('/addalbum/:id',
 	albumController.getSpotifyData,
 	albumController.processAlbumData,
 	catchErrors(albumController.updateAlbum)				
-	);
+);
 
 router.get('/album/:id/edit', catchErrors(albumController.editAlbum));
-
 router.get('/album/:slug', catchErrors(albumController.getAlbumBySlug))
 
 //// PEDALS ////
@@ -73,7 +73,7 @@ router.post('/addpedal',
 	catchErrors(pedalController.resize),
 	pedalController.processPedalData,  	 
 	catchErrors(pedalController.createPedal)
-	);
+);
 
 router.get('/pedal/:slug', catchErrors(pedalController.getPedalBySlug));
 
@@ -91,7 +91,7 @@ router.post('/register',
 	userController.validateRegister,
 	userController.register,
 	authController.login 
-	);
+);
 
 router.get('/logout', authController.logout);
 
@@ -115,4 +115,5 @@ router.get('/api/v1/bands/all', catchErrors(bandController.mapAllBands));
 router.post('/api/v1/bands/:id/loves', catchErrors(bandController.loveBand))
 router.post('/api/v1/albums/:id/loves', catchErrors(albumController.loveAlbum))
 router.post('/api/v1/pedals/:id/loves', catchErrors(pedalController.lovePedal))
+
 module.exports = router;

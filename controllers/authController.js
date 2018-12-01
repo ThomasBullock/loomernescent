@@ -51,9 +51,6 @@ exports.forgot = async(req, res) => {
 	})
 	req.flash('success', `You have been emailed a password reset link.`);
 	res.redirect('/login');
-
-	// console.log(user);
-
 };
 
 exports.reset = async(req, res) => {
@@ -66,7 +63,6 @@ exports.reset = async(req, res) => {
 		return res.redirect('/login');
 	}
 	// if there is a user, show the reset password form
-	// console.log(user);
 	res.render('reset', {title: 'Reset your Password'} )
 }
 

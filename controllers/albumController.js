@@ -105,9 +105,7 @@ exports.getArtistData = async(req, res, next) => {
 };
 
 exports.getSpotifyData = async(req, res, next) => {
-	// console.log('we are in spotify')
 	if(!req.body.artistSpotifyID) {
-		// console.log('skip spotify!')
 		next();
 		return;
 	} 
@@ -165,20 +163,7 @@ exports.getSpotifyData = async(req, res, next) => {
 			    	});
 			    next(); 
 			    })
-			  }	else {
-			  	// PERHAPS redundant???
-			  	
-			  	// console.log('album not found attempting search');
-			   //  var options = spotifyOptions(`search?q=${req.body.title}&type=album`, token); //search?q=tania%20bowra&type=artist
-			   //  request.get(options, (error, response, body) => {
-			   //  	// console.log(body)
-						// for(let i = 0; i < body.albums.items.length; i++) {
-						// 	// console.log(i, body.albums.items[i])
-						// 	// if(body.items[i].name === req.body.title) {
-						// 	// 	album = body.items[i];
-						// 	// }
-						// }			    	
-			   //  });			    			  	
+			  }	else {		    			  	
 			  	next();
 			  }
 			});
@@ -240,10 +225,7 @@ exports.updateAlbum = async (req, res) => {
 };
 
 exports.loveAlbum = async (req, res) => {
-	// console.log('hearting album')
-	
 	const loves = req.user.loves.map(obj => obj.toString());
-	// console.log(loves)
 	// if the users loves array includes the band.id from the post request we remove it ($pull) 
 	// otherwise add it to the array $addtoset
 	const operator = loves.includes(req.params.id) ? '$pull' : '$addToSet';
@@ -256,7 +238,6 @@ exports.loveAlbum = async (req, res) => {
 };
 
 exports.searchAlbums = async (req, res) => {
-	// const query = req.query;
 	const albums = await Album
 	// first find bands that match
 	.find({
