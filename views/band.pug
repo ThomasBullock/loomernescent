@@ -11,8 +11,12 @@ block content
 			img.single__image(src=`/uploads/${band.photos.galleryThumbs[0] || 'Band.jpg' }` srcset=`/uploads/${band.photos.galleryThumbs[0]} 767w, /uploads/${band.photos.gallery[0]} 1000w` alt=`A photo of ${band.name}`)
 			h2.title.title--single #{band.name}		
 	.single__details
-		.ribbon__wrapper
-			.ribbon!= h.countryToISO(band.location.address)		
+		- if (h.countryToISO(band.location.address).length > 30)
+			.ribbon__wrapper--long
+				.ribbon.ribbon--long!= h.countryToISO(band.location.address)
+		- else
+			.ribbon__wrapper
+				.ribbon!= h.countryToISO(band.location.address)
 		.band-info
 			.band-info__photo
 				img(src=`/uploads/${band.photos.squareLg || 'Band.jpg' }` alt=`A photo of ${band.name}`)
@@ -35,8 +39,7 @@ block content
 						each tag in band.tags
 							li.tag
 								a.tag__link(href=`/tags/${tag}`)
-									+pick(tag)
-									//-	span.tag__text ##{tag}																	
+									+pick(tag)														
 			.band-info__content
 				p.single__lead= band.description
 				.single__body 
@@ -46,11 +49,6 @@ block content
 
 	if band.vimeoPL || band.youtubePL						
 		.single__fullwidth.single__fullwidth--black
-			//- if band.vimeoPL
-			//- 	.single__video
-			//- 		+youtube()
-			//- 		.single__video-wrapper
-			//- 			iframe(src=band.vimeoPL frameborder="0" allowfullscreen)
 			if band.youtubePL
 				.single__video
 					//- +youtube()
