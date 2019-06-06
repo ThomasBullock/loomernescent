@@ -1,5 +1,8 @@
 .add-band {
   // display: flex;
+  input[type="submit"] {
+    margin-top: $base-spacing;
+  }
 }
 
 input, textarea {
@@ -13,6 +16,7 @@ input, textarea {
     }
   }
 }
+
 
 .half {
   display: inline-block;

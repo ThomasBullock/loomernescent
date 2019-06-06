@@ -31,7 +31,7 @@ mixin bandForm(band = {})
 		label(for="labels") Labels
 		input(type="text" name="labels" placeholder="list labels seperated bt comma" value=(band.labels && band.labels.join(',')) )
 		label(for="youtubePL") Youtube Playlist
-		input(type="text" id="youtubePL" name="youtubePL" value=band.youtubePL)
+		input(type="url" id="youtubePL" name="youtubePL" value=band.youtubePL)
 		label(for="spotifyID") Vimeo Playlist
 		input(type="text" id="vimeoPL" name="vimeoPL" value=band.vimeoPL)
 		label(for="spotifyID") Spotify Id

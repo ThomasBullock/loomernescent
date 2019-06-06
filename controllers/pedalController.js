@@ -126,6 +126,12 @@ exports.createPedal = async(req, res) => {
 	res.redirect(`/pedal/${pedal.slug}`);		
 }
 
+exports.editPedal = async(req, res) => {
+	const pedal = await Pedal.findOne({ _id: req.params.id });
+  console.log(pedal)
+  res.render('editPedal', {title: 'Edit Pedal', pedal: pedal})
+}
+
 
 exports.getPedalBySlug = async(req, res) => {
 	const pedal = await Pedal.findOne({ slug: req.params.slug })

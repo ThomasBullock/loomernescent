@@ -33,20 +33,11 @@ block content
 						!= band.pastPersonnel.join(' | ')	
 				p.single__detail 
 					strong Record Labels: 
-					!= band.labels.join(' | ')
-				if band.tags
-					ul.tags
-						each tag in band.tags
-							li.tag
-								a.tag__link(href=`/tags/${tag}`)
-									+pick(tag)														
+					!= band.labels.join(' | ')											
 			.band-info__content
 				p.single__lead= band.description
 				.single__body 
 					.single__col
-
-
-
 	if band.vimeoPL || band.youtubePL						
 		.single__fullwidth.single__fullwidth--black
 			if band.youtubePL

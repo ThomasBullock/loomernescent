@@ -35,7 +35,8 @@ const pedalSchema = new mongoose.Schema({
 		required: 'You must supply a year!'		
 	}, 			
 	image: String,
-	comments: String	
+  comments: String,
+  youtube: String	
 })
 
 pedalSchema.pre('save', async function(next) {

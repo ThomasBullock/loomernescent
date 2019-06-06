@@ -1,5 +1,5 @@
 mixin pedalForm(pedal = {})
-	- const effectTypes = ['Chorus', 'Delay', 'Distortion', 'Fuzz', 'Phaser', 'Reverb', 'Tremelo']
+	- const effectTypes = ['Chorus', 'Delay', 'Distortion', 'Fuzz', 'Flanger','Phaser', 'Reverb', 'Tremelo']
 	- const effectTypes2 = ['None'].concat(effectTypes)
 	form.add-band(action=`/addpedal/${pedal._id || ''}` method="post" class="card" enctype="multipart/form-data")
 		label(for="brand") Brand
@@ -23,6 +23,8 @@ mixin pedalForm(pedal = {})
 		input(type="text" id="yearsManufactured" name="yearsManufactured" value=(pedal.yearsManufactured && pedal.yearsManufactured.join(',')))
 		label(for="image") Image
 		input(type="file" id="image" name="image" accept="image/png, image/jpeg")
+		label(for="youtube") Youtube Video
+		input(type="url" id="youtube" name="youtube" value=pedal.youtube)
 		input(type="submit" value="Save -<" class="button")
 
 

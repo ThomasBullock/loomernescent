@@ -30,7 +30,7 @@ exports.menu = [
 ];
 
 exports.buildDatesString = (string) => {
-	console.log(string);
+	// console.log(string);
 	const datesString = string.reduce((accum, next, index, arr)=> {
 		if(arr.length === 1 || arr.length === 3 && arr.length - 1 == index) {
 			return accum += exports.moment(next).format('YYYY') + "-present";
@@ -295,10 +295,10 @@ const isoCountries = {
 
 exports.countryToISO = (string) => {
 	let stringArray = string.split(',').map( (item) => item.trim());
-	console.log(stringArray);
+	// console.log(stringArray);
 	const countryISO = isoCountries[stringArray[stringArray.length-1]];
-	console.log(isoCountries[stringArray[stringArray.length-1]]);
+	// console.log(isoCountries[stringArray[stringArray.length-1]]);
 	stringArray[stringArray.length-1] = countryISO;
-	console.log( stringArray.join(', ') )
+	// console.log( stringArray.join(', ') )
 	return stringArray.join(', ');
 }

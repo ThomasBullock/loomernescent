@@ -65,7 +65,7 @@ router.get('/album/:slug', catchErrors(albumController.getAlbumBySlug))
 
 router.get('/pedals', catchErrors(pedalController.getPedals));
 router.get('/pedals/page/:page', catchErrors(pedalController.getPedals));
-
+router.get('/pedals/:id/edit', authController.isLoggedIn, catchErrors(pedalController.editPedal));
 router.get('/addpedal', authController.isLoggedIn, pedalController.addPedal);
 
 router.post('/addpedal', 
