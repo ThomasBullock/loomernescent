@@ -75,6 +75,13 @@ router.post('/addpedal',
 	catchErrors(pedalController.createPedal)
 );
 
+router.post('/addpedal/:id', 
+	pedalController.upload,
+	catchErrors(pedalController.resize),
+	pedalController.processPedalData,  	 
+	catchErrors(pedalController.updatePedal)
+);
+
 router.get('/pedal/:slug', catchErrors(pedalController.getPedalBySlug));
 
 router.get('/tags', catchErrors(bandController.getBandsByTag));

@@ -23,6 +23,8 @@ mixin pedalForm(pedal = {})
 		input(type="text" id="yearsManufactured" name="yearsManufactured" value=(pedal.yearsManufactured && pedal.yearsManufactured.join(',')))
 		label(for="image") Image
 		input(type="file" id="image" name="image" accept="image/png, image/jpeg")
+		label(for="comments") Comments
+		textarea(rows="3" id="comments" name="comments") #{pedal.comments}
 		label(for="youtube") Youtube Video
 		input(type="url" id="youtube" name="youtube" value=pedal.youtube)
 		input(type="submit" value="Save -<" class="button")

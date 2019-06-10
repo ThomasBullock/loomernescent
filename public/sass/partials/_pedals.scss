@@ -30,9 +30,36 @@
   	font-size: 10px;
     svg {
       width: 25px;
-      fill: white
-    }  	 
+      fill: white;
+    } 
+    
+    @include mod('edit') {
+      svg {
+        width: 25px;
+        fill: $iron;
+      }
+      
+      &:hover {
+        svg {
+          fill: $base;
+        }
+      }
+    }
   }
+
+  .heart__button {
+    svg {
+      width: 25px;
+      fill: $iron;
+    }      
+  }
+
+  // .heart__button:hover {
+  //   svg {
+  //     fill: $base;
+  //   }      
+  // }
+
 	
 	@include elem('hero') {
 	  position: relative;

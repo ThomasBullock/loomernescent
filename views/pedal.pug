@@ -31,3 +31,8 @@ block content
 									a(href=`/band/${user.slug}`) (#{user.band})
 				if pedal.comments
 					p.pedal-info__comments #{pedal.comments}
+	if pedal.youtube
+		.single__video
+			//- +youtube()
+			.single__video-wrapper
+				iframe(src=pedal.youtube frameborder="0" allowfullscreen)                    

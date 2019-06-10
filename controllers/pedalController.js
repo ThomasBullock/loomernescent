@@ -132,6 +132,13 @@ exports.editPedal = async(req, res) => {
   res.render('editPedal', {title: 'Edit Pedal', pedal: pedal})
 }
 
+exports.updatePedal = async(req, res) => {
+  const pedal = await Pedal.findOneAndUpdate({ _id: req.params.id}, req.body, {
+    runValidators: true
+  }).exec()
+  req.flash('success', `Successfully updated <strong>${pedal.name}</strong>. <a href="/pedal/${pedal.slug}">View Pedal</a>`)
+  res.redirect(`/pedals/${pedal._id}/edit`);
+}
 
 exports.getPedalBySlug = async(req, res) => {
 	const pedal = await Pedal.findOne({ slug: req.params.slug })
