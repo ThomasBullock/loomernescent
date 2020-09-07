@@ -4,22 +4,14 @@ html {
 
 body {
   background: $purple;
-  background:#efefef;
+  background: #efefef;
   &:before {
-    content: '';
+    content: "";
     display: block;
-    // background: $grad;
-    // background: rgba(17, 17, 17, .5);
     height: 10px;
     width: 100%;
   }
 }
-
-// .content {
-//   margin-top: -1px;
-//   display: flex;
-//   flex-direction: column;
-// }
 
 .fullwidth {
   position: relative;
@@ -28,37 +20,30 @@ body {
 
 .inner {
   position: relative;
-  max-width:900px;
+  max-width: 900px;
   margin: 0 auto;
 }
 
 .outer {
   position: relative;
-  max-width:1200px;
-  margin: 0 auto;  
+  max-width: 1200px;
+  margin: 0 auto;
 }
-
 
 /* ================================= 
   MOBILE
 ==================================== */
 @media all and (max-width: 767px) {
-
 }
 
 /* ================================= 
   TABLET
 ==================================== */
-@media all and (min-width : 768px) and (max-width : 1024px) {  
-
+@media all and (min-width: 768px) and (max-width: 1024px) {
 }
 
 /* ================================= 
   DESKTOP
 ==================================== */
-@media all and (min-width : 1025px) { 
-
+@media all and (min-width: 1025px) {
 }
-
-
-

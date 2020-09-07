@@ -1,14 +1,14 @@
 .add-band {
-  // display: flex;
   input[type="submit"] {
     margin-top: $base-spacing;
   }
 }
 
-input, textarea {
-  width:100%;
+input,
+textarea {
+  width: 100%;
   flex: 1 1 100%;
-  padding:10px;
+  padding: 10px;
   border: 1px solid $grey;
   &.input {
     &--error {
@@ -16,7 +16,6 @@ input, textarea {
     }
   }
 }
-
 
 .half {
   display: inline-block;
@@ -41,7 +40,7 @@ fieldset {
     width: 100%;
   }
 }
- 
+
 label {
   padding: 10px 0;
   display: block;
