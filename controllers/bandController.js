@@ -81,9 +81,6 @@ exports.processPhotos = (req, res, next) => {
     return;
   }
   console.log("we process files");
-  req.files.forEach((file) => {
-    console.log(file);
-  });
   next();
 };
 
@@ -119,8 +116,6 @@ exports.resize = async (req, res, next) => {
     // check if photo is square
     const checkDimensions = await jimp.read(req.files[i].buffer);
     if (checkDimensions.bitmap.width === checkDimensions.bitmap.height) {
-      console.log("Its square!");
-
       const uniqueID = uuid.v4();
       req.body.photos.squareLg = `${bandIn}-${uniqueID}_Lg.${extension}`;
       const photoLarge = await jimp.read(req.files[i].buffer);

@@ -71,7 +71,7 @@ exports.upload = multer(multerOptions).single("cover");
 exports.resize = async (req, res, next) => {
   // check if there is no new file to resize (no new file in form means multer will not pass us anything)
   if (!req.file) {
-    console.log("no new file @ resize");
+    // console.log("no new file @ resize");
     next();
     return;
   }
@@ -148,7 +148,6 @@ exports.getSpotifyData = async (req, res, next) => {
           req.body.spotifyURL = album.external_urls.spotify;
           req.body.spotifyAlbumID = album.id;
 
-          console.log("making tracks request");
           var options = spotifyOptions(
             `albums/${req.body.spotifyAlbumID}/tracks`,
             token
@@ -202,7 +201,6 @@ exports.editAlbum = async (req, res) => {
 };
 
 exports.getAlbumBySlug = async (req, res) => {
-  // console.log(req.params.slug)
   const album = await Album.findOne({ slug: req.params.slug });
   const band = await Band.findOne({ _id: album.bandID });
 
@@ -215,7 +213,6 @@ exports.updateAlbum = async (req, res) => {
     new: true,
     runValidators: true,
   }).exec();
-  // console.log(album);
   req.flash(
     "success",
     `Successfully updated <strong>${album.title}</strong>. <a href="/album/${album.slug}">View Album</a>`

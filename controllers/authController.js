@@ -43,7 +43,6 @@ exports.forgot = async (req, res) => {
   await user.save();
   // 3. Send them an email with the token
   const resetURL = `http://${req.headers.host}/account/reset/${user.resetPasswordToken}`;
-  // console.log(req.body)
   await mail.send({
     user: user,
     filename: "password-reset", // the name of the pug file to render
