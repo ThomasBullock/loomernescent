@@ -4,6 +4,10 @@ include icons/_bandcamp
 include icons/_spotify
 include icons/_cross
 
+block meta 
+	meta(name="description" content=`Find album information, credits and streaming services for ${album.title} - ${album.artist} on Loomernescent - ${h.moment(album.releaseDate).year()}`)
+	meta(name="keywords" content=`${album.title}, ${album.tracks.join(", ")}, shoegaze, guitar, fx, pedals, effects, noise, dreampop, loomernescent, indie`)
+
 block content
 	//- pre= h.dump(band)
 	.single

@@ -327,7 +327,6 @@ exports.getBandsByTag = async (req, res) => {
   const bandPromise = Band.find({ tags: tagQuery });
   // wait for multiple promises to come back
   const [tags, bands] = await Promise.all([tagsPromise, bandPromise]);
-  // console.log(Object.keys(tag))
   res.render("tags", { tags: tags, title: "Tags", tag: tag, bands: bands });
 };
 
