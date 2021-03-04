@@ -21,7 +21,7 @@
     position: relative;
     z-index: 2;
     display: flex;
-    color: white;
+    color: $white;
     align-items: center;
     justify-content: space-around;
   }
@@ -30,7 +30,7 @@
     font-size: 10px;
     svg {
       width: 25px;
-      fill: white;
+      fill: $white;
     }
 
     @include mod("edit") {
@@ -111,13 +111,6 @@
     img {
       @include img-responsive();
     }
-
-    /* ================================= 
-		  MOBILE
-		==================================== */
-    @media all and (max-width: 767px) {
-      // width: 80%;
-    }
   }
 
   @include elem("content") {
@@ -134,11 +127,6 @@
     margin-right: $base-spacing;
     span.pedal-info__user ~ span.pedal-info__user {
       margin-left: $base-spacing / 2;
-    }
-  }
-
-  @include elem("user") {
-    &:not(:first-child) {
     }
   }
 

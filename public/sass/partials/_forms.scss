@@ -47,7 +47,7 @@ label {
 }
 
 .form {
-  background: white;
+  background: $white;
   padding: 2rem;
   box-shadow: $grad;
   & + .form {

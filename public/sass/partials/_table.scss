@@ -4,13 +4,13 @@
     padding: 5px;
   }
   tr:nth-child(even) {
-    background: white;
+    background: $white;
   }
   tr:nth-child(odd):not(:first-child) {
     background: #f7f7f7;
   }
   thead tr {
     background: $black;
-    color: white;
+    color: $white;
   }
 }
