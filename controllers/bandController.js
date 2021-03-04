@@ -416,7 +416,7 @@ exports.mapAllBands = async (req, res) => {
 };
 
 exports.mapPage = (req, res) => {
-  res.render("map", { title: "Map" });
+  res.render("map", { title: "Map", path: req.path });
 };
 
 exports.loveBand = async (req, res) => {

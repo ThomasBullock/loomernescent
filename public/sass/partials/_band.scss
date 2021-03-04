@@ -5,7 +5,7 @@
 }
 
 .band {
-  background: white;
+  background: $white;
   margin: $base-spacing / 2 0;
   width: 30%;
   @include mod("edit") {
@@ -37,7 +37,7 @@
     padding-top: 10px;
     padding-bottom: 20px;
     display: flex;
-    color: white;
+    color: $white;
     align-items: center;
     justify-content: space-around;
   }
@@ -46,7 +46,7 @@
     font-size: 10px;
     svg {
       width: 25px;
-      fill: white;
+      fill: $white;
     }
 
     @include mod("edit") {
@@ -95,7 +95,6 @@
     flex-direction: column;
     flex: 0 1 100%;
     justify-content: space-around;
-    // align-items: center;
     margin-top: $base-spacing;
 
     @media all and (min-width: 768px) and (max-width: 1024px) {

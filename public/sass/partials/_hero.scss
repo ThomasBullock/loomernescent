@@ -39,7 +39,7 @@
       position: relative;
       z-index: 5;
       filter: grayscale(100%);
-      transition: all 0.5s;
+      transition: opacity 0.5s, filter 0.5s;
       opacity: 0.15;
 
       &:hover {
@@ -59,7 +59,6 @@
 
   @include elem("layer") {
     @include mod("left") {
-      // position: absolute;
       min-height: 100%;
       z-index: 0;
       flex: 1 1 33%;

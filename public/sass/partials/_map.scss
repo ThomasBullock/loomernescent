@@ -1,6 +1,5 @@
 .map {
-  // padding: 20px;
-  background: white;
+  background: $white;
   box-shadow: $shad;
 }
 #map {
@@ -12,7 +11,5 @@
   text-align: center;
   img {
     width: 100%;
-    // max-width: 100px;
-    // height: auto;
   }
 }

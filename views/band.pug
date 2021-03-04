@@ -7,7 +7,8 @@ include icons/_pick
 block meta 
 	meta(name="description" content=`Find albums, videos and history for ${band.name} on Loomernescent`)
 	meta(name="keywords" content=`${band.name}, ${albums.map(v => v.title).join(", ")}, ${band.personnel.join(", ")}, ${band.tags.join(", ")}, shoegaze, guitar, dreampop, loomernescent, indie`)
-
+	meta(property="og:url" content=`http://loomernescent.com/band/${band.slug}`)
+	
 block content
 	//- pre= h.dump(albums)
 	.single
