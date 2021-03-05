@@ -14,7 +14,7 @@ block content
 	.single
 		.single__hero
 			img.single__image(src=`/uploads/${band.photos.galleryThumbs[0] || 'Band.jpg' }` srcset=`/uploads/${band.photos.galleryThumbs[0]} 767w, /uploads/${band.photos.gallery[0]} 1000w` alt=`A photo of ${band.name}`)
-			h2.title.title--single #{band.name}		
+			h2.title.title--single #{band.name}
 	.single__details
 		- if (h.countryToISO(band.location.address).length > 30)
 			.ribbon__wrapper--long
@@ -52,7 +52,7 @@ block content
 						iframe(src=band.youtubePL frameborder="0" allowfullscreen)
 	if albums.length
 		.single__fullwidth.single__fullwidth
-			h2.modal__title Albums by #{band.name}
+			h2.section-heading Albums by #{band.name}
 			.single__albums
 				each album in albums
 					.single__album
@@ -67,7 +67,7 @@ block content
 	#galleryModal.modal
 		.modal__container
 			.modal__header
-				h3.modal__title
+				h3.modal__title #{band.name}
 				span.modal__close
 					+cross() 
 			.modal__body
