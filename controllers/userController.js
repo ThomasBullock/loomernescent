@@ -56,6 +56,9 @@ exports.validateRegister = (req, res, next) => {
 };
 
 exports.register = async (req, res, next) => {
+  if (req.body.stratosphere) {
+    res.status(500).send({ error: "Endut Hoch Hech!" });
+  }
   const user = new User({ email: req.body.email, name: req.body.name });
   const register = promisify(User.register, User); // see userSchema.plugin in User model for register comes from
   await register(user, req.body.password);

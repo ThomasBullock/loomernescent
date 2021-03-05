@@ -61,4 +61,12 @@ label {
     margin-bottom: 2rem;
     border-bottom: 1px solid $grey;
   }
+
+  input[name="stratosphere"] {
+    display: none;
+  }
+
+  input[name="commandant"] {
+    display: none;
+  }
 }

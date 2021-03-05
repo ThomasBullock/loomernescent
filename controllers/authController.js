@@ -31,7 +31,11 @@ exports.isLoggedIn = (req, res, next) => {
 };
 
 exports.forgot = async (req, res) => {
-  // 1. See a user waith that email exists
+  if (req.body.commandant) {
+    res.status(500).send({ error: "Endut Hoch Hech!" });
+  }
+
+  // 1. See a user with that email exists
   const user = await User.findOne({ email: req.body.email });
   if (!user) {
     req.flash("error", "Sorry no account found with that email");
