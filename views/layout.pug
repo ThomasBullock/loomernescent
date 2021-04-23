@@ -62,6 +62,6 @@ html(lang="en")
 			block content
 
 		block scripts
-			if path === "/map"
+			if path === "/map" || path === "/addBand" || path === "/bands/[id]/edit"
 				script(src=`https://maps.googleapis.com/maps/api/js?key=${process.env.MAP_KEY}&libraries=places`)
 			script(src="/dist/App.bundle.js")

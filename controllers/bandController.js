@@ -70,7 +70,7 @@ exports.add = (req, res) => {
 };
 
 exports.addBand = (req, res) => {
-  res.render("editBand", { title: "Add Band" });
+  res.render("editBand", { title: "Add Band", path: req.path });
 };
 
 exports.upload = multer(multerOptions).array("photos", 4);
@@ -284,12 +284,21 @@ const confirmOwner = (store, user) => {
 };
 
 exports.editBand = async (req, res) => {
+  console.log(req.path);
+  let path = req.path.split("/");
+  path[2] = "[id]";
+  path = path.join("/");
+  console.log(path);
   // 1. Find the store given the ID (params)
   const band = await Band.findOne({ _id: req.params.id });
   // 2. confirm they are the owner of the store
   confirmOwner(band, req.user);
   // 3. Render out the edit form so the user can update their store
-  res.render("editBand", { title: `Edit ${band.name}`, band: band });
+  res.render("editBand", {
+    title: `Edit ${band.name}`,
+    band: band,
+    path: path,
+  });
 };
 
 exports.updateBand = async (req, res) => {
